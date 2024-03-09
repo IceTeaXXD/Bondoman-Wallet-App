@@ -26,4 +26,8 @@
         android:icon="@drawable/ic_nav_settings"
         android:title="@string/title_settings"/>
 
+    <item
+        android:id="@+id/navigation_graph"
+        android:icon="@drawable/graph"
+        android:title="@string/title_graph"/>
 </menu>
