@@ -10,4 +10,8 @@
     <color name="white">#F4F4F4</color>
     <color name="gold">#D7A84D</color>
     <color name="cream">#F2E5CC</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
 </resources>
