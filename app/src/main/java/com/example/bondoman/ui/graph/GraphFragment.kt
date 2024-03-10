@@ -1,16 +1,15 @@
 package com.example.bondoman.ui.graph
 
-import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.bondoman.R
 import androidx.databinding.DataBindingUtil
-import com.db.williamchart.data.configuration.DonutChartConfiguration
-import com.db.williamchart.view.DonutChartView
 import com.example.bondoman.databinding.FragmentGraphBinding
 
 class GraphFragment : Fragment() {
@@ -22,9 +21,16 @@ class GraphFragment : Fragment() {
             80f,
             100f
         )
+        private val horizontalBarSet = listOf(
+            "PORRO" to 5F,
+            "FUSCE" to 6.4F,
+            "EGET" to 3F
+        )
+
     }
 
     private lateinit var viewModel: GraphViewModel
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +44,27 @@ class GraphFragment : Fragment() {
         )
         binding.donutChart.animation.duration = 1000
         binding.donutChart.animate(donutSet)
+        binding.barChartHorizontal.barsColor = requireContext().getColor(R.color.cream)
+        binding.barChartHorizontal.animation.duration = 1000
+        binding.barChartHorizontal.animate(horizontalBarSet)
+        val category = resources.getStringArray(R.array.income_outcome_options)
+        val adapter: ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            category
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.categorySpinner.adapter = adapter
+        binding.categorySpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Your selection handling code here
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Your code here
+            }
+        }
         return binding.root
     }
 
