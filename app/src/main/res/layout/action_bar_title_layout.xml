@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/caruban"/>
 
 </LinearLayout>
