@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pagecover"
-    tools:context=".ui.login.Login">
+    tools:context=".ui.login.LoginActivity">
 
     <TextView
         android:id="@+id/textView"
