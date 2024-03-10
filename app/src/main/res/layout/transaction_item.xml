@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:layout_marginBottom="20dp"
+    android:background="@color/cream">
+
+    <TextView
+        android:id="@+id/tvTransactionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dd/mm/yyyy"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvKategori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:text="@string/kategori"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvTransaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/caruban"
+        android:textColor="@color/black"
+        android:text="@string/app_name"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginTop="70dp"
+        android:text="IDR 15000"/>
+
+    <ImageView
+        android:id="@+id/locationSymbol"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/map_marker"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="70dp"
+        />
+
+    <TextView
+        android:id="@+id/Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Lokasi"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="250dp" />
+
+</FrameLayout>
