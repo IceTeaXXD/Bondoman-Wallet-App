@@ -9,6 +9,12 @@
     <string name="title_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="donut_chart">Donut Chart</string>
+    <string name="barchart">barChart</string>
+    <string name="income">income</string>
+    <string-array name="income_outcome_options">
+        <item>Income</item>
+        <item>Outcome</item>
+    </string-array>
 	<string name="welcome">Sugeng Rawuh</string>
     <string name="login_name">Mlebet</string>
 </resources>
