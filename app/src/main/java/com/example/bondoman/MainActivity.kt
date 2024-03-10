@@ -1,5 +1,6 @@
 package com.example.bondoman
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +11,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.ActionBar
 import com.example.bondoman.databinding.ActivityMainBinding
+import com.example.bondoman.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
 private lateinit var binding: ActivityMainBinding
+private var authenticated: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        authenticated = intent.getBooleanExtra("authenticated", false)
          binding = ActivityMainBinding.inflate(layoutInflater)
          setContentView(binding.root)
 
@@ -54,6 +58,22 @@ private lateinit var binding: ActivityMainBinding
                 else -> "Bondoman"
             }
             actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text = title
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // TODO: Validate if Key is Still valid
+        if(!authenticated){
+            authenticated = true
+            val intent = Intent(
+                this,
+                LoginActivity::class.java
+            )
+
+            startActivity(intent)
+            finish()
         }
     }
 }
