@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_marginTop="70dp"
-        android:text="IDR 15000"/>
+        android:text="@string/nominal"/>
 
     <ImageView
         android:id="@+id/locationSymbol"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Lokasi"
+        android:text="@string/location_name"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="250dp" />
 

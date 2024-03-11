@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bondoman.R
 import com.example.bondoman.databinding.FragmentTransactionsBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TransactionsFragment : Fragment() {
 
@@ -16,6 +18,7 @@ class TransactionsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var rv: RecyclerView
+    private lateinit var addTransactionButton: FloatingActionButton
 
     private val listOfTransaction: MutableList<Transaction> = mutableListOf()
 
@@ -34,6 +37,21 @@ class TransactionsFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = TransactionAdapter(listOfTransaction)
 
+        addTransactionButton = binding.fabAddTransaction
+        addTransactionButton.setOnClickListener{
+            val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionAdd()
+            findNavController().navigate(action)
+        }
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
