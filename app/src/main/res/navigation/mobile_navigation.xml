@@ -15,7 +15,11 @@
         android:id="@+id/navigation_transactions"
         android:name="com.example.bondoman.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_navigation_transactions_to_transactionAdd"
+            app:destination="@id/transactionAdd" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_scan"
@@ -34,5 +38,14 @@
         android:name="com.example.bondoman.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/transactionAdd"
+        android:name="com.example.bondoman.ui.transactions.TransactionAdd"
+        android:label="TransactionAdd"
+        tools:layout="@layout/fragment_add_transaction">
+        <action
+            android:id="@+id/action_transactionAdd_to_navigation_transactions"
+            app:destination="@id/navigation_transactions" />
+    </fragment>
 
 </navigation>

@@ -16,5 +16,13 @@
         <item>Outcome</item>
     </string-array>
 	<string name="welcome">Sugeng Rawuh</string>
+    <string name="camera_btn">Camera</string>
+    <string name="media_btn">Media</string>
+    <string name="placeholder">placeholder</string>
     <string name="login_name">Mlebet</string>
+    <string name="kategori">Kategori</string>
+    <string name="nominal">Nominal</string>
+    <string name="location_name">Location</string>
+    <string name="title_name">Judul</string>
+    <string name="save_name">Save</string>
 </resources>
