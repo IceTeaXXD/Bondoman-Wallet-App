@@ -25,4 +25,7 @@
     <string name="location_name">Location</string>
     <string name="title_name">Judul</string>
     <string name="save_name">Save</string>
+    <string name="simpan_transaksi">Simpan Transaksi</string>
+    <string name="kirim_transaksi">Kirim Transaksi</string>
+    <string name="metu">metu</string>
 </resources>

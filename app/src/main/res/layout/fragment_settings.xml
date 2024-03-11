@@ -7,18 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title_settings"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="262dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_bias="0.062">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/download_transaction_button"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:backgroundTint="#D7A84D"
+                android:drawableTop="@drawable/ic_download"
+                android:gravity="center"
+                android:text="@string/simpan_transaksi"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/mail_transaction_button"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:backgroundTint="#D7A84D"
+                android:drawableTop="@drawable/ic_mail"
+                android:text="@string/kirim_transaksi"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="#D7A84D"
+            android:fontFamily="@font/caruban"
+            android:text="@string/metu"
+            android:textColor="#CE0000"
+            android:textSize="25sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
