@@ -55,7 +55,6 @@
                 android:id="@+id/barChartHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginStart="70dp"
                 android:layout_marginEnd="20dp"
                 app:chart_axis="x"
                 app:chart_barsColor="#fff"
