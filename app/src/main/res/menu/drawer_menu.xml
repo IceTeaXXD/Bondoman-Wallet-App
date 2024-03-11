@@ -1,0 +1,29 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            tools:ignore="MenuTitle" />
+
+        <item
+            android:id="@+id/navigation_transactions"
+            android:icon="@drawable/ic_nav_transactions"
+            tools:ignore="MenuTitle" />
+
+        <item
+            android:id="@+id/navigation_scan"
+            android:icon="@drawable/ic_nav_scan"
+            tools:ignore="MenuTitle" />
+
+        <item
+            android:id="@+id/navigation_graph"
+            android:icon="@drawable/ic_nav_graph"
+            tools:ignore="MenuTitle" />
+
+        <item
+            android:id="@+id/navigation_settings"
+            android:icon="@drawable/ic_nav_settings"
+            tools:ignore="MenuTitle" />
+    </group>
+</menu>
