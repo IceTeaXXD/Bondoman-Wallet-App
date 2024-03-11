@@ -2,7 +2,6 @@ package com.example.bondoman
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
@@ -25,9 +24,9 @@ private var authenticated: Boolean = false
          binding = ActivityMainBinding.inflate(layoutInflater)
          setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        binding.navView?.setupWithNavController(navController)
+        binding.navViewDrawer?.setupWithNavController(navController)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -40,8 +39,6 @@ private var authenticated: Boolean = false
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
         // Set custom action bar
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayShowCustomEnabled(true)
