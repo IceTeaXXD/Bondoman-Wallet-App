@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.bondoman"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 29
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
