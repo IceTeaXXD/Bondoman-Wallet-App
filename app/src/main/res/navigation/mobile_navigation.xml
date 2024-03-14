@@ -47,5 +47,10 @@
             android:id="@+id/action_transactionAdd_to_navigation_transactions"
             app:destination="@id/navigation_transactions" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_twibbon"
+        android:name="com.example.bondoman.ui.twibbon.TwibbonFragment"
+        android:label="@string/title_twibbon"
+        tools:layout="@layout/fragment_twibbon" />
 
 </navigation>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home"/>
+<!--    <item-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:icon="@drawable/ic_home_black_24dp"-->
+<!--        android:title="@string/title_home"/>-->
 
     <item
         android:id="@+id/navigation_transactions"
@@ -25,4 +25,9 @@
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_nav_settings"
         android:title="@string/title_settings"/>
+
+    <item
+        android:id="@+id/navigation_twibbon"
+        android:icon="@drawable/upload_sign"
+        android:title="@string/title_twibbon"/>
 </menu>
