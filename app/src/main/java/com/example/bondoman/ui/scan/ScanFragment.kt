@@ -101,12 +101,14 @@ class ScanFragment : Fragment() {
             try {
                 val imageBitmap = data?.extras?.get("data") as Bitmap
                 binding.imageCapture.setImageBitmap(imageBitmap)
+                binding.uploadButton.visibility = View.VISIBLE
             } catch (e: Exception) {
                 Log.d("ScanFragment", "Error taking picture")
             }
         } else if (requestCode == IMAGE_REQUEST_CODE && resultCode == -1) {
             try {
                 binding.imageCapture.setImageURI(data?.data)
+                binding.uploadButton.visibility = View.VISIBLE
             } catch (e: Exception) {
                 Log.d("ScanFragment", "Error selecting image")
             }

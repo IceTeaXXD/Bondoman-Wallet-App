@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.twibbon.TwibbonFragment">
+
+        <ImageButton
+            android:id="@+id/twibbonChangeCameraBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Switch Camera Button"
+            android:src="@drawable/ic_camera_switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.114"
+            app:tint="?attr/colorPrimary"
+            tools:visibility="visible" />
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/cameraView"
+            android:layout_width="0dp"
+            android:layout_height="347dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:implementationMode="compatible"
+            app:layout_constraintBottom_toTopOf="@+id/captureBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/twibbonChangeCameraBtn">
+
+            <ImageView
+                android:id="@+id/twibbonView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Twibbon Image Description"
+                android:scaleType="centerCrop"
+                android:src="@drawable/twibbon" />
+        </androidx.camera.view.PreviewView>
+
+        <Button
+            android:id="@+id/captureBtn"
+            android:layout_width="132dp"
+            android:layout_height="57dp"
+            android:text="@string/capture_btn_take"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.677"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
