@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.example.bondoman.MainActivity
 import com.example.bondoman.api.BackendService
 import com.example.bondoman.api.LoginBody
 import com.example.bondoman.api.ServiceFactory
+import com.example.bondoman.database.AppDatabase
+import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.ActivityLoginBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
