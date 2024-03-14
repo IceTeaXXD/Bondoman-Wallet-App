@@ -1,4 +1,4 @@
-package com.example.bondoman.api
+package com.example.bondoman.models
 
 data class LoginBody(
     val email: String,

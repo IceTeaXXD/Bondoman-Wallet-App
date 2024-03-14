@@ -11,13 +11,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:textSize="40sp"
+        android:layout_marginTop="64dp"
         android:fontFamily="@font/caruban"
-        android:textColor="@color/black"
         android:text="@string/welcome"
+        android:textColor="@color/black"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,14 +24,14 @@
         android:id="@+id/etEmail"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/gray_400"
         android:ems="10"
-        android:padding="10dp"
         android:hint="Email"
         android:inputType="text"
-        android:background="@color/gray_400"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -40,22 +39,23 @@
         android:id="@+id/etPassword"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:padding="10dp"
-        android:inputType="textPassword"
-        android:hint="Sandi"
+        android:layout_marginTop="36dp"
         android:background="@color/gray_400"
+        android:ems="10"
+        android:hint="Sandi"
+        android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:fontFamily="@font/caruban"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:backgroundTint="@color/gold"
+        android:fontFamily="@font/caruban"
         android:text="@string/login_name"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,5 +63,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.071" />
 </androidx.constraintlayout.widget.ConstraintLayout>
