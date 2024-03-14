@@ -1,16 +1,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.scan.ScanFragment">
+        tools:context=".ui.scan.ScanFragment"
+        android:background="@drawable/glow_effect">
 
         <ImageButton
             android:id="@+id/camera_button"
             android:layout_width="64dp"
-            android:layout_height="58dp"
+            android:layout_height="64dp"
             android:backgroundTint="#00FFFFFF"
             android:contentDescription="@string/camera_btn"
             android:src="@drawable/ic_camera"
@@ -24,7 +26,7 @@
         <ImageButton
             android:id="@+id/media_button"
             android:layout_width="64dp"
-            android:layout_height="58dp"
+            android:layout_height="64dp"
             android:backgroundTint="#00FFFFFF"
             android:contentDescription="@string/media_btn"
             android:src="@drawable/ic_media"
@@ -49,14 +51,15 @@
         <ImageButton
             android:id="@+id/upload_button"
             android:layout_width="64dp"
-            android:layout_height="58dp"
+            android:layout_height="64dp"
+            android:backgroundTint="#00000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/camera_button"
             app:layout_constraintHorizontal_bias="0.587"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.839"
-            app:srcCompat="@android:drawable/checkbox_on_background" />
+            app:srcCompat="@drawable/upload_sign" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
