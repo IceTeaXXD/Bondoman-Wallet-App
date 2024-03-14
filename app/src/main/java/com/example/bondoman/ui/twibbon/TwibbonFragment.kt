@@ -67,6 +67,7 @@ class TwibbonFragment : Fragment() {
                 cameraUtil.stopCamera()
                 captureBtn.text = "Retake"
                 captureBtn.setOnClickListener {
+                    captureBtn.text = "Take"
                     setCaptureButton(cameraUtil)
                 }
             }
