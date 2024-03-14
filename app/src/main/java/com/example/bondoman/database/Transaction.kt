@@ -12,6 +12,7 @@ data class Transaction(
     @PrimaryKey(autoGenerate = true) val transaction_id: Int?,
     @ColumnInfo(name="transaction_owner") val transaction_owner: String,
     @ColumnInfo(name="transaction_name") val transaction_name: String,
+    @ColumnInfo(name="transaction_date") val transaction_date: String,
     @ColumnInfo(name="transaction_price") val transaction_price: Int,
     @ColumnInfo(name="transaction_category") val transaction_category: String,
     @ColumnInfo(name="transaction_location") val transaction_location: String
