@@ -46,5 +46,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@color/gray_600" />
 
+        <ImageButton
+            android:id="@+id/upload_button"
+            android:layout_width="64dp"
+            android:layout_height="58dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/camera_button"
+            app:layout_constraintHorizontal_bias="0.587"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.839"
+            app:srcCompat="@android:drawable/checkbox_on_background" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
