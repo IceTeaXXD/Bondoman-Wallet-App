@@ -38,13 +38,14 @@ class GraphFragment : Fragment() {
         val binding: FragmentGraphBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_graph, container, false)
         binding.donutTitle.text = "Income vs Outcome"
         binding.donutChart.donutColors = intArrayOf(
-            requireContext().getColor(R.color.cream),
-            requireContext().getColor(R.color.gold),
-            requireContext().getColor(R.color.green)
+            requireContext().getColor(R.color.neon_yellow),
+            requireContext().getColor(R.color.neon_red),
+            requireContext().getColor(R.color.white)
         )
         binding.donutChart.animation.duration = 1000
         binding.donutChart.animate(donutSet)
-        binding.barChartHorizontal.barsColor = requireContext().getColor(R.color.cream)
+        binding.barChartHorizontal.barsColor = requireContext().getColor(R.color.neon_yellow)
+        binding.barChartHorizontal.labelsColor = requireContext().getColor(R.color.white)
         binding.barChartHorizontal.animation.duration = 1000
         binding.barChartHorizontal.animate(horizontalBarSet)
         val category = resources.getStringArray(R.array.income_outcome_options)

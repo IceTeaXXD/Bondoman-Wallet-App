@@ -60,7 +60,7 @@
 
     <Button
         android:id="@+id/button"
-        android:fontFamily="@font/caruban"
+        android:fontFamily="@font/syne_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_name"
