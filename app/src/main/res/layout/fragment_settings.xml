@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/glow_effect"
     tools:context=".ui.settings.SettingsFragment">
 
     <LinearLayout
@@ -33,9 +34,10 @@
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight="1"
-                android:backgroundTint="#D7A84D"
+                android:background="@drawable/rounded_item_setting"
                 android:drawableTop="@drawable/ic_download"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/simpan_transaksi"
                 android:textColor="#FFFFFF" />
 
@@ -48,8 +50,9 @@
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight="1"
-                android:backgroundTint="#D7A84D"
+                android:background="@drawable/rounded_item_setting"
                 android:drawableTop="@drawable/ic_mail"
+                android:padding="10dp"
                 android:text="@string/kirim_transaksi"
                 android:textColor="#FFFFFF" />
 
