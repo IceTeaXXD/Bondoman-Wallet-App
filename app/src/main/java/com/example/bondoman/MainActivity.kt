@@ -1,5 +1,6 @@
 package com.example.bondoman
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,18 +10,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bondoman.databinding.ActivityMainBinding
+import com.example.bondoman.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityMainBinding
-private var authenticated: Boolean = false
+    private lateinit var binding: ActivityMainBinding
+    private var authenticated: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         authenticated = intent.getBooleanExtra("authenticated", false)
-         binding = ActivityMainBinding.inflate(layoutInflater)
-         setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView?.setupWithNavController(navController)
@@ -60,15 +62,15 @@ private var authenticated: Boolean = false
         super.onStart()
 
         // TODO: Validate if Key is Still valid
-//        if(!authenticated){
-//            authenticated = true
-//            val intent = Intent(
-//                this,
-//                LoginActivity::class.java
-//            )
-//
-//            startActivity(intent)
-//            finish()
-//        }
+        if(!authenticated){
+            authenticated = true
+            val intent = Intent(
+                this,
+                LoginActivity::class.java
+            )
+
+            startActivity(intent)
+            finish()
+        }
     }
 }
