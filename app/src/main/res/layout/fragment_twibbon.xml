@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="Twibbon Image Description"
                 android:scaleType="centerCrop"
-                android:src="@drawable/twibbon" />
+                android:src="@drawable/jason" />
         </androidx.camera.view.PreviewView>
 
         <Button
