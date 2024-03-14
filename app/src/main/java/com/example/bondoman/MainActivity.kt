@@ -1,16 +1,14 @@
 package com.example.bondoman
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.appcompat.app.ActionBar
 import com.example.bondoman.databinding.ActivityMainBinding
-import com.example.bondoman.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,15 +60,15 @@ private var authenticated: Boolean = false
         super.onStart()
 
         // TODO: Validate if Key is Still valid
-        if(!authenticated){
-            authenticated = true
-            val intent = Intent(
-                this,
-                LoginActivity::class.java
-            )
-
-            startActivity(intent)
-            finish()
-        }
+//        if(!authenticated){
+//            authenticated = true
+//            val intent = Intent(
+//                this,
+//                LoginActivity::class.java
+//            )
+//
+//            startActivity(intent)
+//            finish()
+//        }
     }
 }

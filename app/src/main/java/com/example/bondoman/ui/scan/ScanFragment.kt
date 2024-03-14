@@ -12,7 +12,15 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.bondoman.R
+import com.example.bondoman.api.BondomanApi
 import com.example.bondoman.databinding.FragmentScanBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ScanFragment : Fragment() {
 
@@ -35,6 +43,9 @@ class ScanFragment : Fragment() {
         binding.mediaButton.setOnClickListener {
             selectImage()
         }
+        binding.uploadButton.setOnClickListener {
+            uploadImage()
+        }
         return binding.root
     }
 
@@ -48,13 +59,34 @@ class ScanFragment : Fragment() {
     }
 
     private fun selectImage() {
-        val selectImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val selectImageIntent =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         try {
             startActivityForResult(selectImageIntent, IMAGE_REQUEST_CODE)
         } catch (e: Exception) {
             Toast.makeText(context, "Error selecting image", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun uploadImage() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val file = binding.imageCapture.drawable
+                // TODO: Get token from storage
+                val token = "Bearer xxx"
+                val requestFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), file.toString())
+                val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
+                val response = BondomanApi.getInstance().uploadBill(token, body)
+                Log.i("Upload", "Response: ${response}")
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("Upload Error", "Error: ${e.message}")
+                    Toast.makeText(context, "Error uploading image", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == -1) {
