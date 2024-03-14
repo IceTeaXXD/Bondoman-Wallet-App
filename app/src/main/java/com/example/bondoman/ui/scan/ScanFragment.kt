@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.bondoman.R
 import com.example.bondoman.api.BondomanApi
+import com.example.bondoman.api.KeyStoreManager
 import com.example.bondoman.databinding.FragmentScanBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -72,11 +73,18 @@ class ScanFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val file = binding.imageCapture.drawable
-                // TODO: Get token from storage
-                val token = "Bearer xxx"
+                val keyStoreManager = KeyStoreManager(requireContext())
+                val token = keyStoreManager.getToken("token")
+                // TODO check if token not found or expired
+                if (token == null) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Token not found", Toast.LENGTH_SHORT).show()
+                    }
+                    return@launch
+                }
                 val requestFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), file.toString())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
-                val response = BondomanApi.getInstance().uploadBill(token, body)
+                val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
                 Log.i("Upload", "Response: ${response}")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bondoman.MainActivity
 import com.example.bondoman.api.BondomanApi
+import com.example.bondoman.api.KeyStoreManager
 import com.example.bondoman.databinding.ActivityLoginBinding
 import com.example.bondoman.models.LoginBody
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +43,9 @@ class LoginActivity : AppCompatActivity() {
                 val response = BondomanApi.getInstance().login(loginBody)
                 if (response.token.isNotEmpty()) {
                     Log.i("Login", "TOKEN: ${response.token}")
+                    val keyStoreManager = KeyStoreManager(this@LoginActivity)
+                    keyStoreManager.createNewKeys("token")
+                    keyStoreManager.saveToken("token", response.token)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                         .putExtra("authenticated", true))
                     finish()
