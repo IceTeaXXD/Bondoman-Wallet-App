@@ -1,7 +1,10 @@
 package com.example.bondoman
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -44,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         actionBar?.setDisplayShowCustomEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
         actionBar?.setCustomView(R.layout.action_bar_title_layout)
+        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val title = when (destination.id) {

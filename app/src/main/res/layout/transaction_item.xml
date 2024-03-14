@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="dd/mm/yyyy"
-        android:textColor="@color/black"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/tvKategori"
@@ -21,14 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="250dp"
         android:text="@string/kategori"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tvTransaksi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/syne_bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="@string/app_name"
         android:layout_marginTop="30dp"
         android:textSize="25sp"/>
@@ -37,7 +37,7 @@
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:layout_marginTop="70dp"
         android:text="@string/nominal"/>
 
@@ -55,7 +55,7 @@
         android:id="@+id/Location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="@string/location_name"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="250dp" />
