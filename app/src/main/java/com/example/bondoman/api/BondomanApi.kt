@@ -24,7 +24,13 @@ interface BondomanApi {
     ): ItemsResponse
 
     companion object {
-        private val ins = RetrofitClient.getInstance().create(BondomanApi::class.java)
-        fun getInstance(): BondomanApi { return ins }
+        @Volatile
+        private var ins: BondomanApi? = null
+        fun getInstance(): BondomanApi {
+            if(ins == null){
+                ins = RetrofitClient.getInstance().create(BondomanApi::class.java)
+            }
+            return ins!!
+        }
     }
 }
