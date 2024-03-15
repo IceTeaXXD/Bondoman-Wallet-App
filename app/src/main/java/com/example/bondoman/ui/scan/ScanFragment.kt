@@ -2,6 +2,7 @@ package com.example.bondoman.ui.scan
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -9,12 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.view.PreviewView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.bondoman.R
+import com.example.bondoman.databinding.FragmentScanBinding
+
 import com.example.bondoman.api.BondomanApi
 import com.example.bondoman.api.KeyStoreManager
-import com.example.bondoman.databinding.FragmentScanBinding
+import com.example.bondoman.utils.CameraUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,34 +36,64 @@ class ScanFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentScanBinding
-    private val REQUEST_IMAGE_CAPTURE = 100
     private val IMAGE_REQUEST_CODE = 101
+    private lateinit var cameraUtil: CameraUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scan, container, false)
-        binding.cameraButton.setOnClickListener {
-            takePicture()
+        with (binding) {
+            CameraUtil(cameraView).setup(this@ScanFragment) {
+                cameraUtil = it
+                switchButton.setOnClickListener(changeCamera)
+                it.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+                setCaptureButton(it)
+            }
+            binding.mediaButton.setOnClickListener {
+                selectImage()
+            }
+            binding.uploadButton.setOnClickListener {
+                uploadImage()
+            }
+            return root
         }
-        binding.mediaButton.setOnClickListener {
-            selectImage()
-        }
-        binding.uploadButton.setOnClickListener {
-            uploadImage()
-        }
-        return binding.root
     }
 
-    private fun takePicture() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        } catch (e: Exception) {
-            Toast.makeText(context, "Error taking picture", Toast.LENGTH_SHORT).show()
+    private fun setCaptureButton(cameraUtil: CameraUtil) {
+        with(binding) {
+            cameraUtil.startCamera()
+            imageView.setImageURI(null)
+            imageView.visibility = View.GONE
+            cameraView.visibility = View.VISIBLE
+            uploadButton.visibility = View.GONE
+            switchButton.visibility = View.VISIBLE
+            cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_camera))
+            Log.i("Camera", "Camera started")
+            cameraButton.setOnClickListener {
+                cameraUtil.stopCamera()
+                uploadButton.visibility = View.VISIBLE
+                switchButton.visibility = View.GONE
+                imageView.setImageDrawable(cameraUtil.getBitmap()?.toDrawable(resources))
+                cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_x))
+                cameraButton.setOnClickListener {
+                    setCaptureButton(cameraUtil)
+                }
+            }
         }
     }
+
+    private val changeCamera = View.OnClickListener {
+        cameraUtil.stopCamera()
+        cameraUtil.cameraSelector = if (cameraUtil.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+            CameraSelector.DEFAULT_FRONT_CAMERA
+        } else {
+            CameraSelector.DEFAULT_BACK_CAMERA
+        }
+        cameraUtil.startCamera()
+    }
+
 
     private fun selectImage() {
         val selectImageIntent =
@@ -72,7 +108,7 @@ class ScanFragment : Fragment() {
     private fun uploadImage() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val file = binding.imageCapture.drawable
+                val file = binding.imageView.drawable
                 val keyStoreManager = KeyStoreManager(requireContext())
                 val token = keyStoreManager.getToken("token")
                 // TODO check if token not found or expired
@@ -97,18 +133,17 @@ class ScanFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == -1) {
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == -1) {
             try {
-                val imageBitmap = data?.extras?.get("data") as Bitmap
-                binding.imageCapture.setImageBitmap(imageBitmap)
+                binding.imageView.setImageDrawable(data?.data?.let { requireContext().contentResolver.openInputStream(it)?.let { it1 -> Bitmap.createBitmap(
+                    BitmapFactory.decodeStream(it1)) } }?.toDrawable(resources))
+                binding.imageView.visibility = View.VISIBLE
+                binding.cameraView.visibility = View.GONE
                 binding.uploadButton.visibility = View.VISIBLE
-            } catch (e: Exception) {
-                Log.d("ScanFragment", "Error taking picture")
-            }
-        } else if (requestCode == IMAGE_REQUEST_CODE && resultCode == -1) {
-            try {
-                binding.imageCapture.setImageURI(data?.data)
-                binding.uploadButton.visibility = View.VISIBLE
+                binding.switchButton.visibility = View.GONE
+                binding.cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_x))
+                binding.cameraButton.setOnClickListener { setCaptureButton(cameraUtil) }
+                Log.d("ScanFragment", "Image selected")
             } catch (e: Exception) {
                 Log.d("ScanFragment", "Error selecting image")
             }
