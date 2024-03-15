@@ -45,7 +45,7 @@
         android:id="@+id/locationSymbol"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/map_marker"
+        android:src="@drawable/ic_map_marker"
         android:layout_marginLeft="300dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="70dp"
