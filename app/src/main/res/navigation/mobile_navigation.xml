@@ -5,22 +5,28 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_transactions">
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_home"-->
-<!--        android:name="com.example.bondoman.ui.home.HomeFragment"-->
-<!--        android:label="@string/title_home"-->
-<!--        tools:layout="@layout/fragment_home" />-->
-
     <fragment
         android:id="@+id/navigation_transactions"
         android:name="com.example.bondoman.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
+            android:id="@+id/action_navigation_transactions_to_transactionUpdate"
+            app:destination="@id/transaction_update" />
+        <action
             android:id="@+id/action_navigation_transactions_to_transactionAdd"
-            app:destination="@id/transactionAdd" />
+            app:destination="@id/transactionAdd"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/transaction_update"
+        android:name="com.example.bondoman.ui.transactions.TransactionUpdate"
+        android:label="Update Transaction"
+        tools:layout="@layout/fragment_transaction_update">
+        <argument
+            android:name="transactionId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_graph"
         android:name="com.example.bondoman.ui.graph.GraphFragment"

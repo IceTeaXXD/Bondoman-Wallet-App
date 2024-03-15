@@ -36,11 +36,13 @@ class TransactionsFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(requireContext())
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
-            val transactions = transactionDao.index("13521007@std.stei.itb.ac.id")
-
-            listOfTransaction = transactions.toMutableList()
-            rv.adapter = TransactionAdapter(listOfTransaction)
+            val transactions = AppDatabase.getInstance(requireContext()).transactionDao().index("13521007@std.stei.itb.ac.id")
+            val transactionAdapter = TransactionAdapter(transactions) { transactionId ->
+                val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionUpdate(transactionId)
+                findNavController().navigate(action)
+            }
+            binding.rvTransaction.adapter = transactionAdapter
+            binding.rvTransaction.layoutManager = LinearLayoutManager(requireContext())
         }
 
         addTransactionButton = binding.fabAddTransaction
@@ -48,7 +50,6 @@ class TransactionsFragment : Fragment() {
             val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionAdd()
             findNavController().navigate(action)
         }
-
         return binding.root
     }
 
