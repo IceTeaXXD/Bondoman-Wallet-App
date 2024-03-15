@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     Log.e("Login", "Error: ${e.message}")
                     Toast.makeText(this@LoginActivity, "User not found, please try again", Toast.LENGTH_SHORT).show()
-                    binding.etPassword.text.clear()
+                    binding.etPassword.text?.clear()
                 }
             }
         }
