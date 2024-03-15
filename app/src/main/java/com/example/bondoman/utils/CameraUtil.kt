@@ -3,6 +3,7 @@ package com.example.bondoman.utils
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -101,6 +102,10 @@ class CameraUtil(
     fun stopCamera() {
         cameraProvider.unbindAll()
         executor?.shutdown()
+    }
+
+    fun getBitmap(): Bitmap? {
+        return view.bitmap
     }
 
     companion object {
