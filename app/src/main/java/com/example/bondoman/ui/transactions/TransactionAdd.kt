@@ -14,6 +14,7 @@ import com.example.bondoman.R
 import com.example.bondoman.database.AppDatabase
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentAddTransactionBinding
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -21,10 +22,10 @@ class TransactionAdd : Fragment() {
     private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var etTitle: EditText
-    private lateinit var etNominal: EditText
+    private lateinit var etTitle: TextInputEditText
+    private lateinit var etNominal: TextInputEditText
     private lateinit var etKategori: Spinner
-    private lateinit var etLocation: EditText
+    private lateinit var etLocation: TextInputEditText
     private lateinit var addButton: Button
 
     override fun onCreateView(
