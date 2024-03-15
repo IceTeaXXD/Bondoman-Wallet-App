@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bondoman.R
+import com.example.bondoman.database.AppDatabase
+import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentTransactionsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 
 class TransactionsFragment : Fragment() {
 
@@ -20,22 +23,25 @@ class TransactionsFragment : Fragment() {
     private lateinit var rv: RecyclerView
     private lateinit var addTransactionButton: FloatingActionButton
 
-    private val listOfTransaction: MutableList<Transaction> = mutableListOf()
+    private var listOfTransaction: MutableList<Transaction> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        listOfTransaction.add(Transaction("2024-03-10", "Store A", "City X", "$10.00", "Groceries"))
-        listOfTransaction.add(Transaction("2024-03-09", "Restaurant B", "City Y", "$25.00", "Dining"))
-
         _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
 
         rv = binding.rvTransaction
         rv.layoutManager = LinearLayoutManager(requireContext())
-        rv.adapter = TransactionAdapter(listOfTransaction)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
+            val transactions = transactionDao.index("13521007@std.stei.itb.ac.id")
+
+            listOfTransaction = transactions.toMutableList()
+            rv.adapter = TransactionAdapter(listOfTransaction)
+        }
 
         addTransactionButton = binding.fabAddTransaction
         addTransactionButton.setOnClickListener{
