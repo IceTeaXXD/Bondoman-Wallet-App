@@ -21,8 +21,8 @@ data class Transaction(
 @Dao
 interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE transaction_owner = :email")
-    fun index(email: String): List<Transaction>
+    suspend fun index(email: String): List<Transaction>
 
     @Insert
-    fun store(vararg transaction: Transaction)
+    suspend fun store(vararg transaction: Transaction)
 }
