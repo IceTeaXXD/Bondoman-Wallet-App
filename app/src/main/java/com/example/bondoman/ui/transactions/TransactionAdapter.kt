@@ -3,6 +3,7 @@ package com.example.bondoman.ui.transactions
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.TransactionItemBinding
 
 class TransactionAdapter(private val data: List<Transaction>):
@@ -26,11 +27,11 @@ class TransactionAdapter(private val data: List<Transaction>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.transaction_name.text = data[position].name.toString()
-        holder.transaction_date.text = data[position].date.toString()
-        holder.transaction_category.text = data[position].category.toString()
-        holder.transaction_location.text = data[position].location.toString()
-        holder.transaction_price.text = data[position].price.toString()
+        holder.transaction_name.text = data[position].transaction_name.toString()
+        holder.transaction_date.text = data[position].transaction_date.toString()
+        holder.transaction_category.text = data[position].transaction_category.toString()
+        holder.transaction_location.text = data[position].transaction_location.toString()
+        holder.transaction_price.text = data[position].transaction_price.toString()
     }
 
     override fun getItemCount(): Int {
