@@ -2,10 +2,12 @@ package com.example.bondoman.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import androidx.room.Update
 
 @Entity(tableName = "transactions")
 data class Transaction(
@@ -25,4 +27,10 @@ interface TransactionDao {
 
     @Insert
     suspend fun store(vararg transaction: Transaction)
+    @Update
+    suspend fun update(transaction: Transaction)
+    @Query("SELECT * FROM transactions WHERE transaction_id = :transactionId")
+    suspend fun getTransactionById(transactionId : Int) : Transaction?
+    @Delete
+    suspend fun delete(vararg transaction: Transaction)
 }
