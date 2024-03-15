@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-//                R.id.navigation_home,
                 R.id.navigation_transactions,
                 R.id.navigation_scan,
                 R.id.navigation_graph,
@@ -71,6 +70,10 @@ class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
             }
             actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text = title
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onStart() {
