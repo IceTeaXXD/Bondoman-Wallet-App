@@ -44,7 +44,7 @@ class TransactionsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             val transactions = AppDatabase.getInstance(requireContext()).transactionDao().index("13521007@std.stei.itb.ac.id")
-            val transactionAdapter = TransactionAdapter(transactions.toMutableList(), requireActivity().supportFragmentManager, viewModel) { transactionId ->
+            val transactionAdapter = TransactionAdapter(requireActivity(), transactions.toMutableList(), requireActivity().supportFragmentManager, viewModel) { transactionId ->
                 val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionUpdate(transactionId)
                 findNavController().navigate(action)
             }

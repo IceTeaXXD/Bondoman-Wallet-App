@@ -65,7 +65,7 @@ class TransactionAdd : Fragment() {
                 transaction_name = etTitle.text.toString(),
                 transaction_price = etNominal.text.toString().toInt(),
                 transaction_category = etKategori.selectedItem.toString(),
-                transaction_location = transactionLocation,
+                transaction_location = etLocation.text.toString(),
                 transaction_date = LocalDate.now().toString()
             )
 
