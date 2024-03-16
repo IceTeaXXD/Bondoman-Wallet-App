@@ -59,11 +59,11 @@ class GraphFragment : Fragment() {
         binding.categorySpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                // Your selection handling code here
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Your code here
+
             }
         }
         return binding.root
