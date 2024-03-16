@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.bondoman.R
@@ -58,19 +59,27 @@ class TransactionAdd : Fragment() {
 
         addButton.setOnClickListener {
             // Save the Items into the Database
-            val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
-            val newTransaction = Transaction(
-                null,
-                "13521007@std.stei.itb.ac.id",
-                transaction_name = etTitle.text.toString(),
-                transaction_price = etNominal.text.toString().toInt(),
-                transaction_category = etKategori.selectedItem.toString(),
-                transaction_location = etLocation.text.toString(),
-                transaction_date = LocalDate.now().toString()
-            )
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                transactionDao.store(newTransaction)
+            // Check if there are any empty
+            if(etTitle.text.toString().isNotEmpty() &&
+                etNominal.text.toString().isNotEmpty() &&
+                etLocation.text.toString().isNotEmpty()) {
+                val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
+                val newTransaction = Transaction(
+                    null,
+                    "13521007@std.stei.itb.ac.id",
+                    transaction_name = etTitle.text.toString(),
+                    transaction_price = etNominal.text.toString().toInt(),
+                    transaction_category = etKategori.selectedItem.toString(),
+                    transaction_location = etLocation.text.toString(),
+                    transaction_date = LocalDate.now().toString()
+                )
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    transactionDao.store(newTransaction)
+                }
+            } else {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -79,9 +88,13 @@ class TransactionAdd : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        gpsService.getLocation { location ->
-            transactionLocation = gpsService.transformToReadable(location)
-            etLocation.setText(transactionLocation)
+        try {
+            gpsService.getLocation { location ->
+                transactionLocation = gpsService.transformToReadable(location)
+                etLocation.setText(transactionLocation)
+            }
+        } catch (e: Exception){
+            Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
         }
     }
 }
