@@ -15,6 +15,15 @@
         android:text="dd/mm/yyyy"
         android:textColor="@color/white"/>
 
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="end|center_vertical"
+        android:background="@android:color/transparent"
+        android:contentDescription="Delete"
+        android:src="@drawable/ic_trash" />
+
     <TextView
         android:id="@+id/tvKategori"
         android:layout_width="wrap_content"
@@ -48,8 +57,7 @@
         android:src="@drawable/ic_map_marker"
         android:layout_marginLeft="300dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="70dp"
-        />
+        android:layout_marginTop="70dp" />
 
     <TextView
         android:id="@+id/Location"
