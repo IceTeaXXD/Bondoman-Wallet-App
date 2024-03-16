@@ -19,6 +19,11 @@ class TransactionsViewModel(private val repository: TransactionRepository) : Vie
             _transaction.postValue(result)
         }
     }
+    fun updateTransaction(updatedTransaction: Transaction) {
+        viewModelScope.launch {
+            repository.updateTransaction(updatedTransaction)
+        }
+    }
 }
 
 class TransactionsViewModelFactory(private val repository: TransactionRepository) : ViewModelProvider.Factory {
