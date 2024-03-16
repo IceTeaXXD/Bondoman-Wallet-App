@@ -3,8 +3,11 @@ package com.example.bondoman
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -13,12 +16,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bondoman.databinding.ActivityMainBinding
+import com.example.bondoman.network.NetworkProctor
 import com.example.bondoman.ui.login.LoginActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
 
     private lateinit var binding: ActivityMainBinding
     private var authenticated: Boolean = false
+
+    private lateinit var networkProctor: NetworkProctor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         authenticated = intent.getBooleanExtra("authenticated", false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        networkProctor = NetworkProctor.getInstance(applicationContext)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView?.setupWithNavController(navController)
@@ -78,6 +86,21 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
             finish()
+        }else{
+            networkProctor.subscribe(this)
         }
+    }
+
+    override fun onNetworkAvailable() {
+        Toast.makeText(applicationContext, "Network Connection Restored", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNetworkLost() {
+        Toast.makeText(applicationContext, "Network Connection Lost", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        networkProctor.unsubscribe(this)
     }
 }

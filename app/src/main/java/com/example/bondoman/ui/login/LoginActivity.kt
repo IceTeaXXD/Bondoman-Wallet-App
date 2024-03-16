@@ -1,39 +1,61 @@
 package com.example.bondoman.ui.login
 
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bondoman.MainActivity
 import com.example.bondoman.api.BondomanApi
 import com.example.bondoman.api.KeyStoreManager
 import com.example.bondoman.databinding.ActivityLoginBinding
+import com.example.bondoman.databinding.NoNetworkLayoutBinding
 import com.example.bondoman.models.LoginBody
+import com.example.bondoman.network.NetworkProctor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var noNetworkBinding: NoNetworkLayoutBinding
+    private lateinit var networkProctor: NetworkProctor
+    private lateinit var backButton: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        networkProctor = NetworkProctor(applicationContext)
+        networkProctor.subscribe(this)
         supportActionBar?.hide()
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        if(networkProctor.isNetworkConnected()) {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        val email = binding.etEmail
-        val password = binding.etPassword
-        val buttonLogin = binding.btnLogin
+            val email = binding.etEmail
+            val password = binding.etPassword
+            val buttonLogin = binding.btnLogin
 
-        buttonLogin.setOnClickListener{
-            if(email.text.toString().isNotEmpty() && password.text.toString().isNotEmpty()) {
-                login(email.text.toString(), password.text.toString())
-            }else{
-                Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+            buttonLogin.setOnClickListener {
+                if (email.text.toString().isNotEmpty() && password.text.toString().isNotEmpty()) {
+                    login(email.text.toString(), password.text.toString())
+                } else {
+                    Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }else{
+            noNetworkBinding = NoNetworkLayoutBinding.inflate(layoutInflater)
+            setContentView(noNetworkBinding.root)
+
+            backButton = noNetworkBinding.backButton
+            backButton.setOnClickListener {
+                super.onBackPressed()
             }
         }
     }
@@ -61,5 +83,36 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onNetworkAvailable() {
+        runOnUiThread {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            val email = binding.etEmail
+            val password = binding.etPassword
+            val buttonLogin = binding.btnLogin
+
+            buttonLogin.setOnClickListener {
+                if (email.text.toString().isNotEmpty() && password.text.toString().isNotEmpty()) {
+                    login(email.text.toString(), password.text.toString())
+                } else {
+                    Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    override fun onNetworkLost() {
+        runOnUiThread {
+            noNetworkBinding = NoNetworkLayoutBinding.inflate(layoutInflater)
+            setContentView(noNetworkBinding.root)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        networkProctor.unsubscribe(this)
     }
 }
