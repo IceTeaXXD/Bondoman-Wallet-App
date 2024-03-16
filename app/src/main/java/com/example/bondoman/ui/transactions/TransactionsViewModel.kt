@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.bondoman.BondomanApp
 import com.example.bondoman.database.Transaction
-import com.example.bondoman.repository.TransactionRepository
+import com.example.bondoman.repository.AppRepository
 import kotlinx.coroutines.launch
 
-class TransactionsViewModel(private val repository: TransactionRepository) : ViewModel() {
+class TransactionsViewModel(private val repository: AppRepository) : ViewModel() {
     private val _transaction = MutableLiveData<Transaction?>()
     val transaction: LiveData<Transaction?> = _transaction
 
