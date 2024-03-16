@@ -7,19 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.bondoman.R
-import com.example.bondoman.database.AppDatabase
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentTransactionUpdateBinding
-import com.example.bondoman.repository.TransactionRepository
 
 class TransactionUpdate : Fragment() {
     private var _binding: FragmentTransactionUpdateBinding? = null
     private var currentTransaction: Transaction? = null
+    private lateinit var viewModel : TransactionsViewModel
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            TransactionsViewModel.FACTORY
+        )[TransactionsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -27,9 +30,6 @@ class TransactionUpdate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTransactionUpdateBinding.inflate(inflater, container, false)
-        val transactionsViewModel: TransactionsViewModel by viewModels {
-            TransactionsViewModelFactory(TransactionRepository(AppDatabase.getInstance(requireContext())))
-        }
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.income_outcome_options,
@@ -39,8 +39,8 @@ class TransactionUpdate : Fragment() {
             binding.etKategori.adapter = adapter
         }
         val transactionId = TransactionUpdateArgs.fromBundle(requireArguments()).transactionId
-        transactionsViewModel.getTransactionById(transactionId)
-        transactionsViewModel.transaction.observe(viewLifecycleOwner) { transaction ->
+        viewModel.getTransactionById(transactionId)
+        viewModel.transaction.observe(viewLifecycleOwner) { transaction ->
             currentTransaction = transaction
             binding.etTitle.setText(transaction!!.transaction_name.toString())
             binding.etKategori.setSelection(
@@ -57,7 +57,7 @@ class TransactionUpdate : Fragment() {
                     transaction_price = binding.etNominal.text.toString().toIntOrNull() ?: 0,
                     transaction_location = binding.etLokasi.text.toString()
                 )
-                transactionsViewModel.updateTransaction(updatedTransaction)
+                viewModel.updateTransaction(updatedTransaction)
                 Toast.makeText(requireContext(), "Transaction updated successfully", Toast.LENGTH_SHORT).show()
             }
         }
