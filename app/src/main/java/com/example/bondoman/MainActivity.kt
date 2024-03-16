@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,13 +19,12 @@ import com.example.bondoman.databinding.ActivityMainBinding
 import com.example.bondoman.network.NetworkProctor
 import com.example.bondoman.ui.login.LoginActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
 
     private lateinit var binding: ActivityMainBinding
     private var authenticated: Boolean = false
 
     private lateinit var networkProctor: NetworkProctor
-    private lateinit var networkRequest: NetworkRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         authenticated = intent.getBooleanExtra("authenticated", false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        networkProctor = NetworkProctor.getInstance(applicationContext)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView?.setupWithNavController(navController)
@@ -69,12 +71,6 @@ class MainActivity : AppCompatActivity() {
             }
             actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text = title
         }
-
-        // For Network sensing
-        networkProctor = NetworkProctor.getInstance(applicationContext)
-        networkRequest = networkProctor.networkRequest
-        val connectivityManager = getSystemService(ConnectivityManager::class.java) as ConnectivityManager
-        connectivityManager.requestNetwork(networkRequest, networkProctor.networkCallback)
     }
 
     override fun onStart() {
@@ -90,6 +86,21 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
             finish()
+        }else{
+            networkProctor.subscribe(this)
         }
+    }
+
+    override fun onNetworkAvailable() {
+        Toast.makeText(applicationContext, "Network Connection Restored", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNetworkLost() {
+        Toast.makeText(applicationContext, "Network Connection Lost", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        networkProctor.unsubscribe(this)
     }
 }

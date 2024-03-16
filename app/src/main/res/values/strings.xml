@@ -30,4 +30,5 @@
     <string name="kirim_transaksi">Kirim Transaksi</string>
     <string name="metu">metu</string>
     <string name="capture_btn_take">Take</string>
+    <string name="connection_lost">Connection Lost</string>
 </resources>
