@@ -17,4 +17,6 @@
     <color name="dark_purple">#151427</color>
     <color name="neon_red">#712832</color>
     <color name="neon_yellow">#E3B53C</color>
+    <color name="dark_blue">#141326</color>
+    <color name="transparent">#00000000</color>
 </resources>
