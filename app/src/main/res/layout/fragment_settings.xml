@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -59,10 +60,10 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="32dp"
-            android:backgroundTint="#D7A84D"
+            android:backgroundTint="#77712832"
             android:fontFamily="@font/syne_regular"
             android:text="@string/metu"
-            android:textColor="#CE0000"
+            android:textColor="@color/white"
             android:textSize="25sp" />
     </LinearLayout>
 
