@@ -43,24 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/etKategori"
-        android:layout_width="220dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="@string/kategori"
-        android:inputType="text"
-        android:padding="5dp"
-        android:background="@drawable/rounded_item_transaction"
-        android:fontFamily="@font/syne_regular"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:shadowColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNominal" />
-
     <EditText
         android:id="@+id/etLokasi"
         android:layout_width="wrap_content"
@@ -78,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etKategori" />
+        app:layout_constraintTop_toBottomOf="@+id/etNominal" />
 
     <Button
         android:id="@+id/save_button"

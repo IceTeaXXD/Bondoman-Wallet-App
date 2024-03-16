@@ -30,22 +30,11 @@ class TransactionUpdate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTransactionUpdateBinding.inflate(inflater, container, false)
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.income_outcome_options,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.etKategori.adapter = adapter
-        }
         val transactionId = TransactionUpdateArgs.fromBundle(requireArguments()).transactionId
         viewModel.getTransactionById(transactionId)
         viewModel.transaction.observe(viewLifecycleOwner) { transaction ->
             currentTransaction = transaction
             binding.etTitle.setText(transaction!!.transaction_name.toString())
-            binding.etKategori.setSelection(
-                if (transaction.transaction_category == "Income") 0 else 1
-            )
             binding.etNominal.setText(transaction.transaction_price.toString())
             binding.etLokasi.setText(transaction.transaction_location.toString())
         }
@@ -53,7 +42,6 @@ class TransactionUpdate : Fragment() {
             currentTransaction?.let { transaction ->
                 val updatedTransaction = transaction.copy(
                     transaction_name = binding.etTitle.text.toString(),
-                    transaction_category = if (binding.etKategori.selectedItemPosition == 0) "Income" else "Outcome",
                     transaction_price = binding.etNominal.text.toString().toIntOrNull() ?: 0,
                     transaction_location = binding.etLokasi.text.toString()
                 )
