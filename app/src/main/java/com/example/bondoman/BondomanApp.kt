@@ -2,18 +2,18 @@ package com.example.bondoman
 
 import android.app.Application
 import com.example.bondoman.database.AppDatabase
-import com.example.bondoman.repository.TransactionRepository
+import com.example.bondoman.repository.AppRepository
 
 class BondomanApp : Application(){
-    private lateinit var transactionRepository: TransactionRepository
+    private lateinit var appRepository: AppRepository
 
     override fun onCreate(){
         super.onCreate()
-        transactionRepository = TransactionRepository(
+        appRepository = AppRepository(
             AppDatabase.getInstance(applicationContext)
         )
     }
-    fun getRepository(): TransactionRepository {
-        return transactionRepository
+    fun getRepository(): AppRepository {
+        return appRepository
     }
 }
