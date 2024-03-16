@@ -29,7 +29,7 @@ class TransactionAdapter(private val activity: Activity,
             binding.tvTransactionDate.text = transaction.transaction_date
             binding.tvKategori.text = transaction.transaction_category
             binding.Location.text = transaction.transaction_location
-            binding.price.text = transaction.transaction_price.toString()
+            binding.price.text = "Rp " + transaction.transaction_price.toString()
             binding.btnDelete.setOnClickListener {
                 val confirmationDialog = ConfirmationModal()
                 currentItemPosition = adapterPosition
