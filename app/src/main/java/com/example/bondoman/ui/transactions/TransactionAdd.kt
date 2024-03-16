@@ -14,6 +14,7 @@ import com.example.bondoman.R
 import com.example.bondoman.database.AppDatabase
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentAddTransactionBinding
+import com.example.bondoman.gps.BondomanLocationService
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -27,6 +28,8 @@ class TransactionAdd : Fragment() {
     private lateinit var etKategori: Spinner
     private lateinit var etLocation: TextInputEditText
     private lateinit var addButton: Button
+    private lateinit var gpsService: BondomanLocationService
+    private lateinit var transactionLocation: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,8 @@ class TransactionAdd : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
+
+        gpsService = BondomanLocationService.getInstance(requireActivity())
 
         etTitle = binding.etTitle
         etNominal = binding.etNominal
@@ -60,7 +65,7 @@ class TransactionAdd : Fragment() {
                 transaction_name = etTitle.text.toString(),
                 transaction_price = etNominal.text.toString().toInt(),
                 transaction_category = etKategori.selectedItem.toString(),
-                transaction_location = etLocation.text.toString(),
+                transaction_location = transactionLocation,
                 transaction_date = LocalDate.now().toString()
             )
 
@@ -70,5 +75,13 @@ class TransactionAdd : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        gpsService.getLocation { location ->
+            transactionLocation = gpsService.transformToReadable(location)
+            etLocation.setText(transactionLocation)
+        }
     }
 }
