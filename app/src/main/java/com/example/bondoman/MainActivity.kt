@@ -3,6 +3,8 @@ package com.example.bondoman
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
@@ -13,12 +15,16 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bondoman.databinding.ActivityMainBinding
+import com.example.bondoman.network.NetworkProctor
 import com.example.bondoman.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var authenticated: Boolean = false
+
+    private lateinit var networkProctor: NetworkProctor
+    private lateinit var networkRequest: NetworkRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +69,12 @@ class MainActivity : AppCompatActivity() {
             }
             actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text = title
         }
+
+        // For Network sensing
+        networkProctor = NetworkProctor.getInstance(applicationContext)
+        networkRequest = networkProctor.networkRequest
+        val connectivityManager = getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        connectivityManager.requestNetwork(networkRequest, networkProctor.networkCallback)
     }
 
     override fun onStart() {
