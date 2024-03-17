@@ -11,6 +11,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.bondoman.R
 import com.example.bondoman.database.AppDatabase
 import com.example.bondoman.database.Transaction
@@ -59,7 +60,6 @@ class TransactionAdd : Fragment() {
 
         addButton.setOnClickListener {
             // Save the Items into the Database
-
             // Check if there are any empty
             if(etTitle.text.toString().isNotEmpty() &&
                 etNominal.text.toString().isNotEmpty() &&
@@ -69,7 +69,7 @@ class TransactionAdd : Fragment() {
                     null,
                     "13521007@std.stei.itb.ac.id",
                     transaction_name = etTitle.text.toString(),
-                    transaction_price = etNominal.text.toString().toInt(),
+                    transaction_price = etNominal.text.toString().toIntOrNull() ?: 0,
                     transaction_category = etKategori.selectedItem.toString(),
                     transaction_location = etLocation.text.toString(),
                     transaction_date = LocalDate.now().toString()
@@ -78,6 +78,9 @@ class TransactionAdd : Fragment() {
                 viewLifecycleOwner.lifecycleScope.launch {
                     transactionDao.store(newTransaction)
                 }
+                // redirect to the transaction list
+                val action = TransactionAddDirections.actionTransactionAddToNavigationTransactions()
+                requireView().findNavController().navigate(action)
             } else {
                 Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }
