@@ -11,12 +11,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mhn.bondoman.R
-import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.database.TransactionSummary
 import com.mhn.bondoman.databinding.FragmentGraphBinding
 import com.mhn.bondoman.ui.transactions.TransactionsViewModel
@@ -38,7 +36,7 @@ class GraphFragment : Fragment() {
 class GraphFragment : Fragment() {
     private var _binding: FragmentGraphBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel : TransactionsViewModel
+    private lateinit var viewModel: TransactionsViewModel
     private lateinit var lineChart: LineChart
     private lateinit var categorySpinner: Spinner
 
@@ -52,6 +50,7 @@ class GraphFragment : Fragment() {
         viewModel.getLast7Transaction("13521007@std.stei.itb.ac.id", "Income")
         viewModel.getLast7Transaction("13521007@std.stei.itb.ac.id", "Outcome")
     }
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,24 +77,40 @@ class GraphFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         categorySpinner.adapter = adapter
-        viewModel.incomeSumamry.observe(viewLifecycleOwner, Observer {
-            transactionsSummary ->
-            transactionsSummary.let{
-                for (transactionSummary in transactionsSummary){
+        viewModel.incomeSumamry.observe(viewLifecycleOwner, Observer { transactionsSummary ->
+            transactionsSummary.let {
+                for (transactionSummary in transactionsSummary) {
                     Log.d("TransactionSummary", transactionSummary.toString())
                 }
                 updateLineChart(viewModel.incomeSumamry.value ?: emptyList(), "Income")
                 categorySpinner.onItemSelectedListener = object :
                     AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
                         val selectedCategory = parent.getItemAtPosition(position).toString()
-                        if (selectedCategory=="Income"){
-                            Log.d("UpdateLineChartSend(INCOME)", viewModel.incomeSumamry.value.toString())
-                            updateLineChart(viewModel.incomeSumamry.value ?: emptyList(), selectedCategory)
+                        if (selectedCategory == "Income") {
+                            Log.d(
+                                "UpdateLineChartSend(INCOME)",
+                                viewModel.incomeSumamry.value.toString()
+                            )
+                            updateLineChart(
+                                viewModel.incomeSumamry.value ?: emptyList(),
+                                selectedCategory
+                            )
 
                         } else {
-                            Log.d("UpdateLineChartSend(OUTCOME)", viewModel.outcomeSummary.value.toString())
-                            updateLineChart(viewModel.outcomeSummary.value ?: emptyList(), selectedCategory)
+                            Log.d(
+                                "UpdateLineChartSend(OUTCOME)",
+                                viewModel.outcomeSummary.value.toString()
+                            )
+                            updateLineChart(
+                                viewModel.outcomeSummary.value ?: emptyList(),
+                                selectedCategory
+                            )
                         }
                     }
 
@@ -105,10 +120,9 @@ class GraphFragment : Fragment() {
                 }
             }
         })
-        viewModel.outcomeSummary.observe(viewLifecycleOwner, Observer {
-                transactionsSummary ->
-            transactionsSummary.let{
-                for (transactionSummary in transactionsSummary){
+        viewModel.outcomeSummary.observe(viewLifecycleOwner, Observer { transactionsSummary ->
+            transactionsSummary.let {
+                for (transactionSummary in transactionsSummary) {
                     Log.d("TransactionSummary2", transactionSummary.toString())
                 }
             }
@@ -131,6 +145,7 @@ class GraphFragment : Fragment() {
         Log.d("YourTag3", "Animate")
         return binding.root
     }
+
     private fun configurePieChart(chart: PieChart) {
         chart.description.isEnabled = false
         chart.isDrawHoleEnabled = true
@@ -169,15 +184,16 @@ class GraphFragment : Fragment() {
         chart.data = data
         chart.invalidate()
     }
+
     private fun updateLineChart(transactions: List<TransactionSummary>, category: String) {
-       val labels = mutableListOf<String>()
-        for (transaction in transactions){
+        val labels = mutableListOf<String>()
+        for (transaction in transactions) {
             Log.d("UpdateLineChart", category + transaction.transaction_date)
             labels.add(transaction.transaction_date)
         }
         val datas = mutableListOf<Entry>()
         var n = 1;
-        for (transaction in transactions){
+        for (transaction in transactions) {
             Log.d("UpdateLineChart", category + transaction.total_price)
             datas.add(Entry(n.toFloat(), transaction.total_price))
             n++
@@ -195,6 +211,5 @@ class GraphFragment : Fragment() {
         lineChart.data = data
         lineChart.invalidate()
     }
-
-
+    }
 }

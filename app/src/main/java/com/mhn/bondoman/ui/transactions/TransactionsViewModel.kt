@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.mhn.bondoman.BondomanApp
 import com.mhn.bondoman.database.Transaction
-import com.example.bondoman.database.TransactionSummary
+import com.mhn.bondoman.database.TransactionSummary
 import com.mhn.bondoman.repository.AppRepository
 import kotlinx.coroutines.launch
 
