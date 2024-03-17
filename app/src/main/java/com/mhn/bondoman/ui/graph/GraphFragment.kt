@@ -32,8 +32,6 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class GraphFragment : Fragment() {
-
-class GraphFragment : Fragment() {
     private var _binding: FragmentGraphBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: TransactionsViewModel
@@ -210,6 +208,5 @@ class GraphFragment : Fragment() {
         val data = LineData(lineData)
         lineChart.data = data
         lineChart.invalidate()
-    }
     }
 }
