@@ -5,8 +5,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.mhn.bondoman.database.AppDatabase
+import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.database.TransactionDao
 import com.mhn.bondoman.utils.ExcelAdapter
@@ -31,10 +31,11 @@ class ExportDialog: DialogFragment() {
 
     private fun export(ext: String) {
         val context = requireContext()
+        val email = KeyStoreManager.getInstance(requireContext()).getEmail() as String
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val transactions: List<Transaction> =
-                    transactionDao.index("13521007@std.stei.itb.ac.id") // TODO: UPDATE THE EMAIL TO GET FROM KEYSTORE
+                    transactionDao.index(email) // TODO: UPDATE THE EMAIL TO GET FROM KEYSTORE
                 exporter = ExcelAdapter(transactions, context)
 
                 if (ext == ".xlsx") {
