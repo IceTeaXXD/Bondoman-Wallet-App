@@ -1,4 +1,4 @@
-package com.example.bondoman.gps
+package com.example.bondoman.utils
 
 import android.app.Activity
 import android.content.Context
@@ -11,11 +11,10 @@ import android.location.LocationManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import org.apache.commons.math3.analysis.function.Add
 import java.io.IOException
 import java.util.Locale
 
-class BondomanLocationService(val activity: Activity) {
+class LocationAdapter(val activity: Activity) {
     private var locationManager: LocationManager
     private var locationListener: LocationListener
     private var locationByGps: Location? = null
@@ -24,11 +23,11 @@ class BondomanLocationService(val activity: Activity) {
 
     companion object {
         @Volatile
-        private var INSTANCE: BondomanLocationService? = null
+        private var INSTANCE: LocationAdapter? = null
 
-        fun getInstance(activity: Activity): BondomanLocationService{
+        fun getInstance(activity: Activity): LocationAdapter {
             if(INSTANCE == null){
-                INSTANCE = BondomanLocationService(activity)
+                INSTANCE = LocationAdapter(activity)
             }
             return INSTANCE!!
         }

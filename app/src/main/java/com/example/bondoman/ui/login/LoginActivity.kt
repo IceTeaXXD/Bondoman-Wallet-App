@@ -13,26 +13,26 @@ import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.databinding.ActivityLoginBinding
 import com.example.bondoman.databinding.NoNetworkLayoutBinding
 import com.example.bondoman.models.LoginBody
-import com.example.bondoman.network.NetworkProctor
+import com.example.bondoman.utils.NetworkAdapter
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
+class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var noNetworkBinding: NoNetworkLayoutBinding
-    private lateinit var networkProctor: NetworkProctor
+    private lateinit var networkAdapter: NetworkAdapter
     private lateinit var backButton: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        networkProctor = NetworkProctor(applicationContext)
-        networkProctor.subscribe(this)
+        networkAdapter = NetworkAdapter(applicationContext)
+        networkAdapter.subscribe(this)
         supportActionBar?.hide()
 
-        if(networkProctor.isNetworkConnected()) {
+        if(networkAdapter.isNetworkConnected()) {
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -114,6 +114,6 @@ class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        networkProctor.unsubscribe(this)
+        networkAdapter.unsubscribe(this)
     }
 }

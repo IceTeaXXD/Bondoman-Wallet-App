@@ -3,8 +3,6 @@ package com.example.bondoman
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.ConnectivityManager
-import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
@@ -16,15 +14,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bondoman.databinding.ActivityMainBinding
-import com.example.bondoman.network.NetworkProctor
+import com.example.bondoman.utils.NetworkAdapter
 import com.example.bondoman.ui.login.LoginActivity
 
-class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
+class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
 
     private lateinit var binding: ActivityMainBinding
     private var authenticated: Boolean = false
 
-    private lateinit var networkProctor: NetworkProctor
+    private lateinit var networkAdapter: NetworkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        networkProctor = NetworkProctor.getInstance(applicationContext)
+        networkAdapter = NetworkAdapter.getInstance(applicationContext)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView?.setupWithNavController(navController)
@@ -90,7 +88,7 @@ class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
             startActivity(intent)
             finish()
         }else{
-            networkProctor.subscribe(this)
+            networkAdapter.subscribe(this)
         }
     }
 
@@ -104,6 +102,6 @@ class MainActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        networkProctor.unsubscribe(this)
+        networkAdapter.unsubscribe(this)
     }
 }

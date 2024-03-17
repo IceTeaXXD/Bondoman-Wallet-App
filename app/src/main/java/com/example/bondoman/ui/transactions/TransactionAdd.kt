@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,7 +16,7 @@ import com.example.bondoman.database.AppDatabase
 import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentAddTransactionBinding
-import com.example.bondoman.gps.BondomanLocationService
+import com.example.bondoman.utils.LocationAdapter
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -31,7 +30,7 @@ class TransactionAdd : Fragment() {
     private lateinit var etKategori: Spinner
     private lateinit var etLocation: TextInputEditText
     private lateinit var addButton: Button
-    private lateinit var gpsService: BondomanLocationService
+    private lateinit var gpsService: LocationAdapter
     private lateinit var transactionLocation: String
 
     override fun onCreateView(
@@ -41,7 +40,7 @@ class TransactionAdd : Fragment() {
     ): View? {
         _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
 
-        gpsService = BondomanLocationService.getInstance(requireActivity())
+        gpsService = LocationAdapter.getInstance(requireActivity())
 
         etTitle = binding.etTitle
         etNominal = binding.etNominal

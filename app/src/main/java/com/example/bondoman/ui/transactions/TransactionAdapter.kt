@@ -6,12 +6,11 @@ import android.location.Location
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.TransactionItemBinding
-import com.example.bondoman.gps.BondomanLocationService
+import com.example.bondoman.utils.LocationAdapter
 
 class TransactionAdapter(private val activity: Activity,
                          private val data: MutableList<Transaction>,
@@ -23,7 +22,7 @@ class TransactionAdapter(private val activity: Activity,
     ConfirmationModal.ConfirmationDialogListener{
     private var currentItemPosition: Int? = null
     inner class ViewHolder(private val binding: TransactionItemBinding): RecyclerView.ViewHolder(binding.root) {
-        val locationService = BondomanLocationService.getInstance(activity)
+        val locationService = LocationAdapter.getInstance(activity)
         fun bind(transaction: Transaction) {
             binding.tvTransaksi.text = transaction.transaction_name
             binding.tvTransactionDate.text = transaction.transaction_date

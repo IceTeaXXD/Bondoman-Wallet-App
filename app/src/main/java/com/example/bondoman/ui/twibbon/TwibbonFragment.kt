@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bondoman.R
 import com.example.bondoman.databinding.FragmentTwibbonBinding
-import com.example.bondoman.utils.CameraUtil
+import com.example.bondoman.utils.CameraAdapter
 
 class TwibbonFragment : Fragment() {
 
@@ -21,7 +21,7 @@ class TwibbonFragment : Fragment() {
 
     private val viewModel: TwibbonViewModel by viewModels()
     private lateinit var binding: FragmentTwibbonBinding
-    private lateinit var cameraUtil: CameraUtil
+    private lateinit var cameraAdapter: CameraAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +40,8 @@ class TwibbonFragment : Fragment() {
                     cameraView.overlay.add(twibbonView)
                 }
             }
-            CameraUtil(cameraView).setup(this@TwibbonFragment) {
-                cameraUtil = it
+            CameraAdapter(cameraView).setup(this@TwibbonFragment) {
+                cameraAdapter = it
                 twibbonChangeCameraBtn.setOnClickListener(changeCamera)
                 it.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
                 setCaptureButton(it)
@@ -51,24 +51,24 @@ class TwibbonFragment : Fragment() {
     }
 
     private val changeCamera = View.OnClickListener {
-        cameraUtil.stopCamera()
-        cameraUtil.cameraSelector = if (cameraUtil.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+        cameraAdapter.stopCamera()
+        cameraAdapter.cameraSelector = if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
             CameraSelector.DEFAULT_FRONT_CAMERA
         } else {
             CameraSelector.DEFAULT_BACK_CAMERA
         }
-        cameraUtil.startCamera()
+        cameraAdapter.startCamera()
     }
 
-    private fun setCaptureButton(cameraUtil: CameraUtil) {
+    private fun setCaptureButton(cameraAdapter: CameraAdapter) {
         with(binding) {
-            cameraUtil.startCamera()
+            cameraAdapter.startCamera()
             captureBtn.setOnClickListener {
-                cameraUtil.stopCamera()
+                cameraAdapter.stopCamera()
                 captureBtn.text = "Retake"
                 captureBtn.setOnClickListener {
                     captureBtn.text = "Take"
-                    setCaptureButton(cameraUtil)
+                    setCaptureButton(cameraAdapter)
                 }
             }
         }

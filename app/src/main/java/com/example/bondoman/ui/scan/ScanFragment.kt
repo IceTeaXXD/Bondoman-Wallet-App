@@ -18,7 +18,7 @@ import com.example.bondoman.R
 import com.example.bondoman.databinding.FragmentScanBinding
 import com.example.bondoman.api.BondomanApi
 import com.example.bondoman.database.KeyStoreManager
-import com.example.bondoman.utils.CameraUtil
+import com.example.bondoman.utils.CameraAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class ScanFragment : Fragment() {
 
     private lateinit var binding: FragmentScanBinding
     private val IMAGE_REQUEST_CODE = 101
-    private lateinit var cameraUtil: CameraUtil
+    private lateinit var cameraAdapter: CameraAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +43,8 @@ class ScanFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scan, container, false)
         with (binding) {
-            CameraUtil(cameraView).setup(this@ScanFragment) {
-                cameraUtil = it
+            CameraAdapter(cameraView).setup(this@ScanFragment) {
+                cameraAdapter = it
                 switchButton.setOnClickListener(changeCamera)
                 it.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
                 setCaptureButton(it)
@@ -59,9 +59,9 @@ class ScanFragment : Fragment() {
         }
     }
 
-    private fun setCaptureButton(cameraUtil: CameraUtil) {
+    private fun setCaptureButton(cameraAdapter: CameraAdapter) {
         with(binding) {
-            cameraUtil.startCamera()
+            cameraAdapter.startCamera()
             imageView.setImageURI(null)
             imageView.visibility = View.GONE
             cameraView.visibility = View.VISIBLE
@@ -70,26 +70,26 @@ class ScanFragment : Fragment() {
             cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_camera))
             Log.i("Camera", "Camera started")
             cameraButton.setOnClickListener {
-                cameraUtil.stopCamera()
+                cameraAdapter.stopCamera()
                 uploadButton.visibility = View.VISIBLE
                 switchButton.visibility = View.GONE
-                imageView.setImageDrawable(cameraUtil.getBitmap()?.toDrawable(resources))
+                imageView.setImageDrawable(cameraAdapter.getBitmap()?.toDrawable(resources))
                 cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_x))
                 cameraButton.setOnClickListener {
-                    setCaptureButton(cameraUtil)
+                    setCaptureButton(cameraAdapter)
                 }
             }
         }
     }
 
     private val changeCamera = View.OnClickListener {
-        cameraUtil.stopCamera()
-        cameraUtil.cameraSelector = if (cameraUtil.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+        cameraAdapter.stopCamera()
+        cameraAdapter.cameraSelector = if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
             CameraSelector.DEFAULT_FRONT_CAMERA
         } else {
             CameraSelector.DEFAULT_BACK_CAMERA
         }
-        cameraUtil.startCamera()
+        cameraAdapter.startCamera()
     }
 
 
@@ -140,7 +140,7 @@ class ScanFragment : Fragment() {
                 binding.uploadButton.visibility = View.VISIBLE
                 binding.switchButton.visibility = View.GONE
                 binding.cameraButton.setImageDrawable(resources.getDrawable(R.drawable.ic_x))
-                binding.cameraButton.setOnClickListener { setCaptureButton(cameraUtil) }
+                binding.cameraButton.setOnClickListener { setCaptureButton(cameraAdapter) }
                 Log.d("ScanFragment", "Image selected")
             } catch (e: Exception) {
                 Log.d("ScanFragment", "Error selecting image")

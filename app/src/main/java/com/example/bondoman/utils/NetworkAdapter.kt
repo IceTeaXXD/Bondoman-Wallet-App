@@ -1,13 +1,12 @@
-package com.example.bondoman.network
+package com.example.bondoman.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.widget.Toast
 
-class NetworkProctor(val context: Context) {
+class NetworkAdapter(val context: Context) {
     interface NetworkListener {
         fun onNetworkAvailable()
         fun onNetworkLost()
@@ -16,11 +15,11 @@ class NetworkProctor(val context: Context) {
     private var subscribers = mutableListOf<NetworkListener>()
     companion object {
         @Volatile
-        private var INSTANCE: NetworkProctor? = null
+        private var INSTANCE: NetworkAdapter? = null
 
-        fun getInstance(context: Context): NetworkProctor {
+        fun getInstance(context: Context): NetworkAdapter {
             if(INSTANCE == null) {
-                INSTANCE = NetworkProctor(context)
+                INSTANCE = NetworkAdapter(context)
             }
             return INSTANCE!!
         }

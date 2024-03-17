@@ -10,14 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentTransactionUpdateBinding
-import com.example.bondoman.gps.BondomanLocationService
+import com.example.bondoman.utils.LocationAdapter
 import com.google.android.material.textfield.TextInputEditText
 
 class TransactionUpdate : Fragment() {
     private var _binding: FragmentTransactionUpdateBinding? = null
     private var currentTransaction: Transaction? = null
     private lateinit var viewModel : TransactionsViewModel
-    private lateinit var gpsService: BondomanLocationService
+    private lateinit var gpsService: LocationAdapter
     private lateinit var etTitle: TextInputEditText
     private lateinit var etNominal: TextInputEditText
     private lateinit var etLocation: TextInputEditText
@@ -37,7 +37,7 @@ class TransactionUpdate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTransactionUpdateBinding.inflate(inflater, container, false)
-        gpsService = BondomanLocationService.getInstance(requireActivity())
+        gpsService = LocationAdapter.getInstance(requireActivity())
 
         etTitle = binding.etTitle
         etNominal = binding.etNominal

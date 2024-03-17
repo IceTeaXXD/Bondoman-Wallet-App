@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraUtil(
+class CameraAdapter(
     private val view: PreviewView,
 ) {
     private var activity: AppCompatActivity? = null
@@ -35,7 +35,7 @@ class CameraUtil(
 
     fun setup(
         activity: AppCompatActivity,
-        afterSetup: ((CameraUtil)->Unit)? = null,
+        afterSetup: ((CameraAdapter)->Unit)? = null,
     ) {
         this.activity = activity
         this.context = activity.baseContext
@@ -44,7 +44,7 @@ class CameraUtil(
 
     fun setup(
         fragment: Fragment,
-        afterSetup: ((CameraUtil) -> Unit)? = null,
+        afterSetup: ((CameraAdapter) -> Unit)? = null,
     ) {
         this.fragment = fragment
         this.context = fragment.requireContext()
@@ -52,7 +52,7 @@ class CameraUtil(
     }
 
     private fun setup(
-        afterSetup: ((CameraUtil) -> Unit)? = null,
+        afterSetup: ((CameraAdapter) -> Unit)? = null,
     ) {
         var isGranted = true
         if (!allPermissionsGranted(context)) {
