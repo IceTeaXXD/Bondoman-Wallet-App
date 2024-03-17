@@ -36,6 +36,9 @@ class SettingsFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logout()
         }
+        binding.downloadTransactionButton.setOnClickListener {
+            export()
+        }
 
         return binding.root
     }
@@ -63,6 +66,12 @@ class SettingsFragment : Fragment() {
         val intent = Intent(activity, LoginActivity::class.java)
         startActivity(intent)
         activity?.finish()
+    }
+
+    private fun export() {
+        ExportDialog().show(
+            childFragmentManager, ExportDialog.TAG
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
