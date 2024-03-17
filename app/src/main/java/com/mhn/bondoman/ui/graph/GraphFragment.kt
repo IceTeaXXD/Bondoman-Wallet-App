@@ -14,10 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.mhn.bondoman.R
-import com.mhn.bondoman.database.TransactionSummary
-import com.mhn.bondoman.databinding.FragmentGraphBinding
-import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -30,6 +26,11 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.mhn.bondoman.R
+import com.mhn.bondoman.database.KeyStoreManager
+import com.mhn.bondoman.database.TransactionSummary
+import com.mhn.bondoman.databinding.FragmentGraphBinding
+import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 
 class GraphFragment : Fragment() {
     private var _binding: FragmentGraphBinding? = null
@@ -44,9 +45,10 @@ class GraphFragment : Fragment() {
             requireActivity(),
             TransactionsViewModel.FACTORY
         )[TransactionsViewModel::class.java]
-        viewModel.getTransactionbyEmail("13521007@std.stei.itb.ac.id")
-        viewModel.getLast7Transaction("13521007@std.stei.itb.ac.id", "Income")
-        viewModel.getLast7Transaction("13521007@std.stei.itb.ac.id", "Outcome")
+        val email = KeyStoreManager.getInstance(requireContext()).getEmail() as String
+        viewModel.getTransactionByEmail(email)
+        viewModel.getLast7Transaction(email, "Income")
+        viewModel.getLast7Transaction(email, "Outcome")
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,8 +59,8 @@ class GraphFragment : Fragment() {
         _binding = FragmentGraphBinding.inflate(inflater, container, false)
         categorySpinner = binding.etKategori!!
         lineChart = binding.lineChart!!
-        lineChart.setTouchEnabled(true);
-        lineChart.setPinchZoom(true);
+        lineChart.setTouchEnabled(true)
+        lineChart.setPinchZoom(true)
         lineChart.description.isEnabled = true
         val description = Description()
 
@@ -172,10 +174,10 @@ class GraphFragment : Fragment() {
         dataSet.sliceSpace = 3f
         dataSet.selectionShift = 5f
         dataSet.colors = listOf(
-            ContextCompat.getColor(requireContext(), R.color.neon_yellow),
-            ContextCompat.getColor(requireContext(), R.color.dark_purple)
+            ContextCompat.getColor(requireContext(), R.color.light_green),
+            ContextCompat.getColor(requireContext(), R.color.red)
         )
-        dataSet.valueTextColor = Color.WHITE
+        dataSet.valueTextColor = Color.BLACK
         dataSet.valueTextSize = 10f
 
         val data = PieData(dataSet)
@@ -190,17 +192,17 @@ class GraphFragment : Fragment() {
             labels.add(transaction.transaction_date)
         }
         val datas = mutableListOf<Entry>()
-        var n = 1;
+        var n = 1
         for (transaction in transactions) {
             Log.d("UpdateLineChart", category + transaction.total_price)
             datas.add(Entry(n.toFloat(), transaction.total_price))
             n++
         }
         val xAxis = lineChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM;
-        xAxis.setDrawAxisLine(true);
-        xAxis.setDrawGridLines(false);
-        xAxis.setDrawLabels(true);
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawAxisLine(true)
+        xAxis.setDrawGridLines(false)
+        xAxis.setDrawLabels(true)
         xAxis.labelCount = labels.size
         xAxis.valueFormatter = IndexAxisValueFormatter(labels)
 
