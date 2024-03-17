@@ -19,7 +19,10 @@ data class Transaction(
     @ColumnInfo(name="transaction_category") val transaction_category: String,
     @ColumnInfo(name="transaction_location") val transaction_location: String
 )
-
+data class TransactionSummary(
+    val transaction_date: String,
+    val total_price: Float
+)
 @Dao
 interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE transaction_owner = :email")
@@ -33,4 +36,6 @@ interface TransactionDao {
     suspend fun getTransactionById(transactionId : Int) : Transaction?
     @Delete
     suspend fun delete(vararg transaction: Transaction)
+    @Query("SELECT transaction_date, SUM(transaction_price) AS total_price FROM transactions WHERE transaction_owner = :email AND transaction_category = :category GROUP BY transaction_date ORDER BY transaction_date DESC LIMIT 7")
+    suspend fun getLast7Transaction(email: String, category: String) : List<TransactionSummary>
 }
