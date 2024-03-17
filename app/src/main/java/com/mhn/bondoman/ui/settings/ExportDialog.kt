@@ -15,7 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ExportDialog: DialogFragment() {
+class ExportDialog : DialogFragment() {
     private lateinit var exporter: ExcelAdapter
     private lateinit var transactionDao: TransactionDao
 
@@ -24,7 +24,7 @@ class ExportDialog: DialogFragment() {
 
         return AlertDialog.Builder(requireContext())
             .setMessage("Choose Export type")
-            .setPositiveButton(".xlsx") { _, _ -> export(".xlsx")}
+            .setPositiveButton(".xlsx") { _, _ -> export(".xlsx") }
             .setNegativeButton(".xls") { _, _ -> export(".xls") }
             .create()
     }
@@ -35,7 +35,7 @@ class ExportDialog: DialogFragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val transactions: List<Transaction> =
-                    transactionDao.index(email) // TODO: UPDATE THE EMAIL TO GET FROM KEYSTORE
+                    transactionDao.index(email)
                 exporter = ExcelAdapter(transactions, context)
 
                 if (ext == ".xlsx") {

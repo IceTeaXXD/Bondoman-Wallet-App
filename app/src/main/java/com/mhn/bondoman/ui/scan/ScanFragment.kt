@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class ScanFragment : Fragment() {
@@ -47,7 +46,7 @@ class ScanFragment : Fragment() {
             CameraAdapter(cameraView).setup(this@ScanFragment) {
                 cameraAdapter = it
                 switchButton.setOnClickListener(changeCamera)
-                it.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+                it.cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
                 setCaptureButton(it)
             }
             binding.mediaButton.setOnClickListener {
@@ -86,10 +85,10 @@ class ScanFragment : Fragment() {
     private val changeCamera = View.OnClickListener {
         cameraAdapter.stopCamera()
         cameraAdapter.cameraSelector =
-            if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-                CameraSelector.DEFAULT_FRONT_CAMERA
-            } else {
+            if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA) {
                 CameraSelector.DEFAULT_BACK_CAMERA
+            } else {
+                CameraSelector.DEFAULT_FRONT_CAMERA
             }
         cameraAdapter.startCamera()
     }

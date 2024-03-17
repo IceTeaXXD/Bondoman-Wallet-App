@@ -48,7 +48,7 @@ class SettingsFragment : Fragment() {
         val mIntent = Intent(Intent.ACTION_SEND)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("h.septianradityo@gmail.com"))
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(KeyStoreManager.getInstance(requireContext()).getEmail()))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, "Laporan Keuangan (DD-MM-YYYY)")
         mIntent.putExtra(Intent.EXTRA_TEXT, "{Placeholder}")
         try {

@@ -2,7 +2,6 @@ package com.mhn.bondoman.utils
 
 import android.content.Context
 import android.os.Environment
-import android.widget.Toast
 import com.mhn.bondoman.database.Transaction
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
@@ -64,7 +63,8 @@ class ExcelAdapter(val transactions: List<Transaction>, val context: Context) {
             workbook.write(tempFile.outputStream())
             workbook.close()
 
-            val downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val downloadFolder =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
             val dateSignature = dateFormat.format(Date())
             val fileName = "transactions_${dateSignature}$type"
