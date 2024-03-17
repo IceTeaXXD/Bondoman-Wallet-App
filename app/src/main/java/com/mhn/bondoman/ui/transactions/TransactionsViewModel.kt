@@ -16,37 +16,41 @@ import kotlinx.coroutines.launch
 class TransactionsViewModel(private val repository: AppRepository) : ViewModel() {
     private val _transaction = MutableLiveData<Transaction?>()
     val transaction: LiveData<Transaction?> = _transaction
+
     // Store all of transaction
     private val _allTransactions = MutableLiveData<List<Transaction>>()
     val allTransactions: LiveData<List<Transaction>> = _allTransactions
 
     private val _incomeSummary = MutableLiveData<List<TransactionSummary>>()
-    val incomeSumamry : LiveData<List<TransactionSummary>> = _incomeSummary
+    val incomeSumamry: LiveData<List<TransactionSummary>> = _incomeSummary
 
     private val _outcomeSummary = MutableLiveData<List<TransactionSummary>>()
-    val outcomeSummary : LiveData<List<TransactionSummary>> = _outcomeSummary
+    val outcomeSummary: LiveData<List<TransactionSummary>> = _outcomeSummary
     fun getTransactionById(transactionId: Int) {
         viewModelScope.launch {
             val result = repository.getTransactionById(transactionId)
             _transaction.postValue(result)
         }
     }
-    fun getTransactionbyEmail(email:String) {
+
+    fun getTransactionByEmail(email: String) {
         viewModelScope.launch {
             val result = repository.getTransactionsByEmail(email)
             _allTransactions.postValue(result)
         }
     }
-    fun getLast7Transaction(email: String, category: String){
+
+    fun getLast7Transaction(email: String, category: String) {
         viewModelScope.launch {
             val result = repository.getLast7Transaction(email, category)
-            if (category=="Income"){
+            if (category == "Income") {
                 _incomeSummary.postValue(result)
             } else {
                 _outcomeSummary.postValue(result)
             }
         }
     }
+
     fun updateTransaction(updatedTransaction: Transaction) {
         viewModelScope.launch {
             repository.updateTransaction(updatedTransaction)
