@@ -1,8 +1,6 @@
 package com.example.bondoman.ui.login
 
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,11 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bondoman.MainActivity
 import com.example.bondoman.api.BondomanApi
-import com.example.bondoman.api.KeyStoreManager
+import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.databinding.ActivityLoginBinding
 import com.example.bondoman.databinding.NoNetworkLayoutBinding
 import com.example.bondoman.models.LoginBody
 import com.example.bondoman.network.NetworkProctor
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -60,6 +59,7 @@ class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun login(email: String, password: String){
         val loginBody = LoginBody(email, password)
         GlobalScope.launch(Dispatchers.IO) {
@@ -67,9 +67,8 @@ class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
                 val response = BondomanApi.getInstance().login(loginBody)
                 if (response.token.isNotEmpty()) {
                     Log.i("Login", "TOKEN: ${response.token}")
-                    val keyStoreManager = KeyStoreManager(this@LoginActivity)
-                    keyStoreManager.createNewKeys("token")
-                    keyStoreManager.saveToken("token", response.token)
+                    KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
+                    KeyStoreManager.getInstance(this@LoginActivity).saveToken("token", response.token)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                         .putExtra("authenticated", true))
                     finish()
