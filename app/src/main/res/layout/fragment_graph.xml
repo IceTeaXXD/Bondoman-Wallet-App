@@ -15,7 +15,8 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingBottom="64dp"
-            tools:context=".ui.graph.GraphFragment">
+            tools:context=".ui.graph.GraphFragment"
+            tools:ignore="MissingClass">
 
             <TextView
                 android:id="@+id/donutTitle"
@@ -31,45 +32,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.db.williamchart.view.DonutChartView
-                android:id="@+id/donutChart"
-                android:layout_width="206dp"
-                android:layout_height="200dp"
-                app:chart_donutRoundCorners="true"
-                app:chart_donutThickness="40dp"
-                app:layout_constraintBottom_toTopOf="@+id/categorySpinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/donutTitle"
-                app:layout_constraintVertical_bias="0.0" />
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="300dp"
+                android:layout_height="300dp"/>
 
-            <Spinner
-                android:id="@+id/categorySpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/barChartHorizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/donutChart" />
-
-            <com.db.williamchart.view.HorizontalBarChartView
-                android:id="@+id/barChartHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:chart_axis="x"
-                app:chart_barsColor="#fff"
-                app:chart_barsRadius="4dp"
-                app:chart_labelsColor="#0D47A1"
-                app:chart_labelsSize="10sp"
-                app:chart_spacing="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/etKategori"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/white"
+                android:ems="10"
+                android:fontFamily="@font/syne_regular"
+                android:hint="@string/kategori"
+                android:inputType="text"
+                android:padding="5dp"
+                android:spinnerMode="dropdown"
+                android:layout_marginBottom="10dp"
+                />
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:background="@color/white"
+                android:layout_width="300dp"
+                android:layout_height="300dp" />
         </LinearLayout>
     </ScrollView>
 </layout>
