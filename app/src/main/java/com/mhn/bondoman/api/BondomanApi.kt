@@ -27,7 +27,7 @@ interface BondomanApi {
         @Volatile
         private var ins: BondomanApi? = null
         fun getInstance(): BondomanApi {
-            if(ins == null){
+            if (ins == null) {
                 ins = RetrofitClient.getInstance().create(BondomanApi::class.java)
             }
             return ins!!

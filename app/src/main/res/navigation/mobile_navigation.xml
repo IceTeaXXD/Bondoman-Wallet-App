@@ -15,13 +15,13 @@
         android:id="@+id/navigation_transactions"
         android:name="com.mhn.bondoman.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
-        tools:layout="@layout/fragment_transactions" >
+        tools:layout="@layout/fragment_transactions">
         <action
             android:id="@+id/action_navigation_transactions_to_transactionUpdate"
             app:destination="@id/transaction_update" />
         <action
             android:id="@+id/action_navigation_transactions_to_transactionAdd"
-            app:destination="@id/transactionAdd"/>
+            app:destination="@id/transactionAdd" />
         <action
             android:id="@+id/action_navigation_transactions_to_loginActivity"
             app:destination="@id/navigation_login" />

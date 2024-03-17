@@ -22,16 +22,19 @@ class TransactionsViewModel(private val repository: AppRepository) : ViewModel()
             _transaction.postValue(result)
         }
     }
+
     fun updateTransaction(updatedTransaction: Transaction) {
         viewModelScope.launch {
             repository.updateTransaction(updatedTransaction)
         }
     }
+
     fun deleteTransaction(transaction: Transaction) {
         viewModelScope.launch {
             repository.deleteTransaction(transaction)
         }
     }
+
     companion object {
         @Suppress("UNCHECKED_CAST")
         val FACTORY = object : ViewModelProvider.Factory {

@@ -15,9 +15,9 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mhn.bondoman.R
-import com.mhn.bondoman.databinding.FragmentScanBinding
 import com.mhn.bondoman.api.BondomanApi
 import com.mhn.bondoman.database.KeyStoreManager
+import com.mhn.bondoman.databinding.FragmentScanBinding
 import com.mhn.bondoman.utils.CameraAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,6 +26,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class ScanFragment : Fragment() {
 
@@ -40,9 +41,9 @@ class ScanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scan, container, false)
-        with (binding) {
+        with(binding) {
             CameraAdapter(cameraView).setup(this@ScanFragment) {
                 cameraAdapter = it
                 switchButton.setOnClickListener(changeCamera)
@@ -84,11 +85,12 @@ class ScanFragment : Fragment() {
 
     private val changeCamera = View.OnClickListener {
         cameraAdapter.stopCamera()
-        cameraAdapter.cameraSelector = if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-            CameraSelector.DEFAULT_FRONT_CAMERA
-        } else {
-            CameraSelector.DEFAULT_BACK_CAMERA
-        }
+        cameraAdapter.cameraSelector =
+            if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+                CameraSelector.DEFAULT_FRONT_CAMERA
+            } else {
+                CameraSelector.DEFAULT_BACK_CAMERA
+            }
         cameraAdapter.startCamera()
     }
 
@@ -116,7 +118,8 @@ class ScanFragment : Fragment() {
                     }
                     return@launch
                 }
-                val requestFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), file.toString())
+                val requestFile =
+                    file.toString().toRequestBody("image/jpg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
                 val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
                 Log.i("Upload", "Response: ${response}")
@@ -133,8 +136,13 @@ class ScanFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == -1) {
             try {
-                binding.imageView.setImageDrawable(data?.data?.let { requireContext().contentResolver.openInputStream(it)?.let { it1 -> Bitmap.createBitmap(
-                    BitmapFactory.decodeStream(it1)) } }?.toDrawable(resources))
+                binding.imageView.setImageDrawable(data?.data?.let {
+                    requireContext().contentResolver.openInputStream(it)?.let { it1 ->
+                        Bitmap.createBitmap(
+                            BitmapFactory.decodeStream(it1)
+                        )
+                    }
+                }?.toDrawable(resources))
                 binding.imageView.visibility = View.VISIBLE
                 binding.cameraView.visibility = View.GONE
                 binding.uploadButton.visibility = View.VISIBLE

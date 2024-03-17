@@ -3,14 +3,14 @@ package com.mhn.bondoman.ui.settings
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.mhn.bondoman.R
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.FragmentSettingsBinding
@@ -27,9 +27,10 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding: FragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
-        binding.mailTransactionButton.setOnClickListener{
+    ): View {
+        val binding: FragmentSettingsBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+        binding.mailTransactionButton.setOnClickListener {
             sendEmail()
         }
         binding.logoutButton.setOnClickListener {
@@ -38,8 +39,9 @@ class SettingsFragment : Fragment() {
 
         return binding.root
     }
+
     @SuppressLint("IntentReset")
-    private fun sendEmail(){
+    private fun sendEmail() {
         val mIntent = Intent(Intent.ACTION_SEND)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
@@ -49,8 +51,7 @@ class SettingsFragment : Fragment() {
         try {
             //start email intent
             startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
-        }
-        catch (e: Exception){
+        } catch (e: Exception) {
             //get and show exception message
             Log.e("Email Error", e.message.toString())
         }

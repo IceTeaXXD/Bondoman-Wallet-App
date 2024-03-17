@@ -2,14 +2,14 @@ package com.mhn.bondoman.ui.graph
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.mhn.bondoman.R
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.mhn.bondoman.R
 import com.mhn.bondoman.databinding.FragmentGraphBinding
 
 class GraphFragment : Fragment() {
@@ -30,12 +30,14 @@ class GraphFragment : Fragment() {
     }
 
     private lateinit var viewModel: GraphViewModel
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentGraphBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_graph, container, false)
+        val binding: FragmentGraphBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_graph, container, false)
         binding.donutTitle.text = "Income vs Outcome"
         binding.donutChart.donutColors = intArrayOf(
             requireContext().getColor(R.color.neon_yellow),
@@ -58,7 +60,12 @@ class GraphFragment : Fragment() {
         binding.categorySpinner.adapter = adapter
         binding.categorySpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
 
             }
 

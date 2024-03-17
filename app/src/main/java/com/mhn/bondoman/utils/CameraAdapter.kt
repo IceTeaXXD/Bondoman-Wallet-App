@@ -35,7 +35,7 @@ class CameraAdapter(
 
     fun setup(
         activity: AppCompatActivity,
-        afterSetup: ((CameraAdapter)->Unit)? = null,
+        afterSetup: ((CameraAdapter) -> Unit)? = null,
     ) {
         this.activity = activity
         this.context = activity.baseContext
@@ -94,7 +94,7 @@ class CameraAdapter(
                     *useCases,
                 )
             }
-        } catch(exc: Exception) {
+        } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
         }
     }
@@ -111,12 +111,14 @@ class CameraAdapter(
     companion object {
         const val TAG = "Bondoman"
         val REQUIRED_PERMISSIONS =
-            mutableListOf (
+            mutableListOf(
                 Manifest.permission.CAMERA
             ).toTypedArray()
+
         private fun allPermissionsGranted(context: Context) = REQUIRED_PERMISSIONS.all {
             ContextCompat.checkSelfPermission(
-                context, it) == PackageManager.PERMISSION_GRANTED
+                context, it
+            ) == PackageManager.PERMISSION_GRANTED
         }
     }
 }

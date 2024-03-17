@@ -26,7 +26,7 @@ class LocationAdapter(val activity: Activity) {
         private var INSTANCE: LocationAdapter? = null
 
         fun getInstance(activity: Activity): LocationAdapter {
-            if(INSTANCE == null){
+            if (INSTANCE == null) {
                 INSTANCE = LocationAdapter(activity)
             }
             return INSTANCE!!
@@ -42,6 +42,7 @@ class LocationAdapter(val activity: Activity) {
                 locationListenerCallback?.invoke(location)
                 locationManager.removeUpdates(this)
             }
+
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
             override fun onProviderEnabled(provider: String) {}
             override fun onProviderDisabled(provider: String) {}
@@ -49,21 +50,26 @@ class LocationAdapter(val activity: Activity) {
     }
 
     private fun checkLocationPermission(): Boolean {
-        return if(
+        return if (
             ContextCompat.checkSelfPermission(
                 activity.applicationContext,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(
                 activity.applicationContext,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            ) {
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 activity,
-                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ),
                 1001
             )
             false
-        }else{
+        } else {
             true
         }
     }
@@ -87,7 +93,8 @@ class LocationAdapter(val activity: Activity) {
 
     fun transformToReadable(loc: Location): String {
         try {
-            val addresses: List<Address> = geocoder.getFromLocation(loc.latitude, loc.longitude, 5)!!
+            val addresses: List<Address> =
+                geocoder.getFromLocation(loc.latitude, loc.longitude, 5)!!
 
             return addresses[0].locality
         } catch (e: IOException) {

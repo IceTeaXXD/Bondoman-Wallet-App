@@ -23,18 +23,12 @@ class TwibbonFragment : Fragment() {
     private lateinit var binding: FragmentTwibbonBinding
     private lateinit var cameraAdapter: CameraAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_twibbon, container, false)
-        with (binding) {
+        with(binding) {
             cameraView.previewStreamState.observe(viewLifecycleOwner) {
                 if (it == PreviewView.StreamState.STREAMING) {
                     cameraView.overlay.add(twibbonView)
@@ -52,11 +46,12 @@ class TwibbonFragment : Fragment() {
 
     private val changeCamera = View.OnClickListener {
         cameraAdapter.stopCamera()
-        cameraAdapter.cameraSelector = if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-            CameraSelector.DEFAULT_FRONT_CAMERA
-        } else {
-            CameraSelector.DEFAULT_BACK_CAMERA
-        }
+        cameraAdapter.cameraSelector =
+            if (cameraAdapter.cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+                CameraSelector.DEFAULT_FRONT_CAMERA
+            } else {
+                CameraSelector.DEFAULT_BACK_CAMERA
+            }
         cameraAdapter.startCamera()
     }
 

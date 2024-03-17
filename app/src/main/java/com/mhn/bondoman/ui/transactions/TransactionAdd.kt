@@ -11,13 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.mhn.bondoman.R
 import com.mhn.bondoman.database.AppDatabase
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.databinding.FragmentAddTransactionBinding
 import com.mhn.bondoman.utils.LocationAdapter
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -37,7 +37,7 @@ class TransactionAdd : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
 
         gpsService = LocationAdapter.getInstance(requireActivity())
@@ -65,10 +65,14 @@ class TransactionAdd : Fragment() {
                 Toast.makeText(requireContext(), "Please login first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else if (etNominal.text.toString().toIntOrNull() == null) {
-                Toast.makeText(requireContext(), "Nominal must be a number", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Nominal must be a number", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
-            } else if (etTitle.text.toString().isEmpty() || etNominal.text.toString().isEmpty() || etLocation.text.toString().isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            } else if (etTitle.text.toString().isEmpty() || etNominal.text.toString()
+                    .isEmpty() || etLocation.text.toString().isEmpty()
+            ) {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             } else {
                 val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
@@ -99,7 +103,7 @@ class TransactionAdd : Fragment() {
                 transactionLocation = gpsService.transformToReadable(location)
                 etLocation.setText(transactionLocation)
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
         }
     }

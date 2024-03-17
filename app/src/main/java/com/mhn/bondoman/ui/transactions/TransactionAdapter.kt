@@ -12,16 +12,19 @@ import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.databinding.TransactionItemBinding
 import com.mhn.bondoman.utils.LocationAdapter
 
-class TransactionAdapter(private val activity: Activity,
-                         private val data: MutableList<Transaction>,
-                         private val fragmentManager: FragmentManager,
-                         private val viewModel: TransactionsViewModel,
-                         private val onItemClick: (Int) -> Unit
-                         ):
+class TransactionAdapter(
+    private val activity: Activity,
+    private val data: MutableList<Transaction>,
+    private val fragmentManager: FragmentManager,
+    private val viewModel: TransactionsViewModel,
+    private val onItemClick: (Int) -> Unit
+) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>(),
-    ConfirmationModal.ConfirmationDialogListener{
+    ConfirmationModal.ConfirmationDialogListener {
     private var currentItemPosition: Int? = null
-    inner class ViewHolder(private val binding: TransactionItemBinding): RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder(private val binding: TransactionItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val locationService = LocationAdapter.getInstance(activity)
         fun bind(transaction: Transaction) {
             binding.tvTransaksi.text = transaction.transaction_name
@@ -39,7 +42,8 @@ class TransactionAdapter(private val activity: Activity,
                 onItemClick(transaction.transaction_id ?: 0)
             }
             binding.Location.setOnClickListener {
-                val location: Location? = locationService.transformToCoord(binding.Location.text.toString())
+                val location: Location? =
+                    locationService.transformToCoord(binding.Location.text.toString())
                 val gmmIntentUri = Uri.parse("geo:${location?.latitude},${location?.longitude}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
@@ -62,6 +66,7 @@ class TransactionAdapter(private val activity: Activity,
         val transaction = data[position]
         holder.bind(transaction)
     }
+
     override fun getItemCount(): Int {
         return data.count()
     }

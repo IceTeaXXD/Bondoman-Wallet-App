@@ -3,22 +3,22 @@
     android:height="32dp"
     android:viewportWidth="32"
     android:viewportHeight="32">
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m21,16h2v2h-2z"/>
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m9,16h8v2h-8z"/>
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m21,12h2v2h-2z"/>
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m9,12h8v2h-8z"/>
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m9,8h14v2h-14z"/>
-  <path
-      android:fillColor="@color/white"
-      android:pathData="m25,2h-18a2.002,2.002 0,0 0,-2 2v25a1,1 0,0 0,1 1h1a0.999,0.999 0,0 0,0.8 -0.4l2.2,-2.933 2.2,2.933a1.035,1.035 0,0 0,1.6 0l2.2,-2.933 2.2,2.933a1.035,1.035 0,0 0,1.6 0l2.2,-2.933 2.2,2.933a0.999,0.999 0,0 0,0.8 0.4h1a1,1 0,0 0,1 -1v-25a2.002,2.002 0,0 0,-2 -2zM25,27.333 L22.8,24.4a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933 -2.2,-2.933a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933 -2.2,-2.933a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933v-23.333h18z"/>
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m21,16h2v2h-2z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m9,16h8v2h-8z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m21,12h2v2h-2z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m9,12h8v2h-8z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m9,8h14v2h-14z" />
+    <path
+        android:fillColor="@color/white"
+        android:pathData="m25,2h-18a2.002,2.002 0,0 0,-2 2v25a1,1 0,0 0,1 1h1a0.999,0.999 0,0 0,0.8 -0.4l2.2,-2.933 2.2,2.933a1.035,1.035 0,0 0,1.6 0l2.2,-2.933 2.2,2.933a1.035,1.035 0,0 0,1.6 0l2.2,-2.933 2.2,2.933a0.999,0.999 0,0 0,0.8 0.4h1a1,1 0,0 0,1 -1v-25a2.002,2.002 0,0 0,-2 -2zM25,27.333 L22.8,24.4a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933 -2.2,-2.933a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933 -2.2,-2.933a1.035,1.035 0,0 0,-1.6 0l-2.2,2.933v-23.333h18z" />
 </vector>

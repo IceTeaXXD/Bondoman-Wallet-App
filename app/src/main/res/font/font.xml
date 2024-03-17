@@ -2,14 +2,14 @@
 <font-family xmlns:android="http://schemas.android.com/apk/res/android">
     <font
         android:fontStyle="normal"
-        android:font="@font/syne_regular"/>
+        android:font="@font/syne_regular" />
     <font
         android:fontStyle="normal"
-        android:font="@font/syne_black"/>
+        android:font="@font/syne_black" />
     <font
         android:fontStyle="normal"
-        android:font="@font/syne_medium"/>
+        android:font="@font/syne_medium" />
     <font
         android:fontStyle="normal"
-        android:font="@font/syne_bold"/>
+        android:font="@font/syne_bold" />
 </font-family>

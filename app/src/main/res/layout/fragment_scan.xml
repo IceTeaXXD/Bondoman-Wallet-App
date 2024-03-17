@@ -1,89 +1,87 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.scan.ScanFragment">
 
-            <LinearLayout
-                android:id="@+id/button_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:elevation="1dp"
+            android:layout_marginBottom="110dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="0dp" />
+
+            <ImageButton
+                android:id="@+id/upload_button"
+                android:visibility="gone"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/media_btn"
+                android:src="@drawable/ic_upload"
                 android:elevation="1dp"
-                android:layout_marginBottom="110dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-                <View
-                    android:layout_width="70dp"
-                    android:layout_height="0dp"/>
+                app:tint="@color/black" />
 
-                <ImageButton
-                    android:id="@+id/upload_button"
-                    android:visibility="gone"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/rounded_item_camera"
-                    android:contentDescription="@string/media_btn"
-                    android:src="@drawable/ic_upload"
-                    android:elevation="1dp"
-                    app:tint="@color/black"
-                    />
+            <ImageButton
+                android:id="@+id/switch_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/media_btn"
+                android:src="@drawable/ic_camera_switch"
+                android:elevation="1dp"
+                app:tint="@color/black" />
 
-                <ImageButton
-                    android:id="@+id/switch_button"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/rounded_item_camera"
-                    android:contentDescription="@string/media_btn"
-                    android:src="@drawable/ic_camera_switch"
-                    android:elevation="1dp"
-                    app:tint="@color/black" />
+            <View
+                android:layout_width="30dp"
+                android:layout_height="0dp" />
 
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="0dp"/>
+            <ImageButton
+                android:id="@+id/camera_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/camera_btn"
+                android:src="@drawable/ic_camera"
+                android:elevation="1dp"
+                app:tint="@color/black" />
 
-                <ImageButton
-                    android:id="@+id/camera_button"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/rounded_item_camera"
-                    android:contentDescription="@string/camera_btn"
-                    android:src="@drawable/ic_camera"
-                    android:elevation="1dp"
-                    app:tint="@color/black"
-                    />
+            <View
+                android:layout_width="30dp"
+                android:layout_height="0dp" />
 
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="0dp"/>
+            <ImageButton
+                android:id="@+id/media_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/media_btn"
+                android:src="@drawable/ic_media"
+                android:elevation="1dp"
+                app:tint="@color/black" />
 
-                <ImageButton
-                    android:id="@+id/media_button"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/rounded_item_camera"
-                    android:contentDescription="@string/media_btn"
-                    android:src="@drawable/ic_media"
-                    android:elevation="1dp"
-                    app:tint="@color/black"
-                    />
-                <View
-                    android:layout_width="70dp"
-                    android:layout_height="0dp"/>
+            <View
+                android:layout_width="70dp"
+                android:layout_height="0dp" />
 
-            </LinearLayout>
+        </LinearLayout>
+
         <androidx.camera.view.PreviewView
             android:id="@+id/cameraView"
             android:layout_width="match_parent"
@@ -91,8 +89,8 @@
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </androidx.camera.view.PreviewView>
+            app:layout_constraintTop_toTopOf="parent"></androidx.camera.view.PreviewView>
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"

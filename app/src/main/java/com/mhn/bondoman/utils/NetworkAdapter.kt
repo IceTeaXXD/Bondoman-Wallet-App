@@ -13,12 +13,13 @@ class NetworkAdapter(val context: Context) {
     }
 
     private var subscribers = mutableListOf<NetworkListener>()
+
     companion object {
         @Volatile
         private var INSTANCE: NetworkAdapter? = null
 
         fun getInstance(context: Context): NetworkAdapter {
-            if(INSTANCE == null) {
+            if (INSTANCE == null) {
                 INSTANCE = NetworkAdapter(context)
             }
             return INSTANCE!!
@@ -53,18 +54,20 @@ class NetworkAdapter(val context: Context) {
             }
         }
 
-        val connectivityManager = context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         connectivityManager.requestNetwork(networkRequest, networkCallback)
     }
 
     fun isNetworkConnected(): Boolean {
-        val connectivityManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager: ConnectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork
         val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
         return networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    fun subscribe(listener: NetworkListener){
+    fun subscribe(listener: NetworkListener) {
         subscribers.add(listener)
     }
 

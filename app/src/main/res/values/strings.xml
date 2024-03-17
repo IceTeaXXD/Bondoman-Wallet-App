@@ -16,7 +16,7 @@
         <item>Income</item>
         <item>Outcome</item>
     </string-array>
-	<string name="welcome">Sugeng Rawuh</string>
+    <string name="welcome">Sugeng Rawuh</string>
     <string name="camera_btn">Camera</string>
     <string name="media_btn">Media</string>
     <string name="placeholder">placeholder</string>
@@ -31,5 +31,5 @@
     <string name="metu">metu</string>
     <string name="capture_btn_take">Take</string>
     <string name="connection_lost">Connection Lost</string>
-	<string name="add_transaction">Add Transaction</string>
+    <string name="add_transaction">Add Transaction</string>
 </resources>

@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
         networkAdapter.subscribe(this)
         supportActionBar?.hide()
 
-        if(networkAdapter.isNetworkConnected()) {
+        if (networkAdapter.isNetworkConnected()) {
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
                         .show()
                 }
             }
-        }else{
+        } else {
             noNetworkBinding = NoNetworkLayoutBinding.inflate(layoutInflater)
             setContentView(noNetworkBinding.root)
 
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private fun login(email: String, password: String){
+    private fun login(email: String, password: String) {
         val loginBody = LoginBody(email, password)
         GlobalScope.launch(Dispatchers.IO) {
             try {
@@ -71,14 +71,20 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
                     KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
                     KeyStoreManager.getInstance(this@LoginActivity).setToken(response.token)
                     KeyStoreManager.getInstance(this@LoginActivity).setEmail(email)
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java)
-                        .putExtra("authenticated", true))
+                    startActivity(
+                        Intent(this@LoginActivity, MainActivity::class.java)
+                            .putExtra("authenticated", true)
+                    )
                     finish()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Log.e("Login", "Error: ${e.message}")
-                    Toast.makeText(this@LoginActivity, "User not found, please try again", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "User not found, please try again",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     binding.etPassword.text?.clear()
                     binding.tvError.visibility = View.VISIBLE
                 }

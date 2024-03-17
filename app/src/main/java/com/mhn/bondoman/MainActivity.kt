@@ -14,8 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mhn.bondoman.databinding.ActivityMainBinding
-import com.mhn.bondoman.utils.NetworkAdapter
 import com.mhn.bondoman.ui.login.LoginActivity
+import com.mhn.bondoman.utils.NetworkAdapter
 
 class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
 
@@ -53,7 +53,10 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
         actionBar?.setDisplayShowCustomEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
         actionBar?.setCustomView(R.layout.action_bar_title_layout)
-        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+        )
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -66,9 +69,11 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
                 R.id.navigation_twibbon -> "Twibbon"
                 else -> "Bondoman"
             }
-            actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text = title
+            actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text =
+                title
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp() || super.onSupportNavigateUp()
@@ -78,7 +83,7 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
         super.onStart()
 
         // TODO: Validate if Key is Still valid
-        if(!authenticated){
+        if (!authenticated) {
             authenticated = true
             val intent = Intent(
                 this,
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
 
             startActivity(intent)
             finish()
-        }else{
+        } else {
             networkAdapter.subscribe(this)
         }
     }

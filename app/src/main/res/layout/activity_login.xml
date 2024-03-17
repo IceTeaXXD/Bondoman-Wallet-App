@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_login"
     tools:context=".ui.login.LoginActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dark_purple"
-        android:alpha="0.7"/>
+        android:alpha="0.7" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bondoman"/>
+            android:src="@drawable/ic_bondoman" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +32,7 @@
             android:text="BONDOMAN"
             android:textColor="@color/gold"
             android:textSize="40sp"
-            android:fontFamily="@font/syne_bold"/>
+            android:fontFamily="@font/syne_bold" />
 
     </LinearLayout>
 
@@ -40,14 +42,15 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
         android:id="@+id/card_view"
-        app:cardCornerRadius="28dp"
-        >
+        app:cardCornerRadius="28dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
             android:padding="28dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,35 +58,35 @@
                 android:textColor="@color/gold"
                 android:textSize="35sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/syne_bold"
-                />
+                android:fontFamily="@font/syne_bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Please login to your account"
-                android:alpha="0.7"/>
+                android:alpha="0.7" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Password"
@@ -91,33 +94,37 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:endIconMode="password_toggle">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/tvError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/neon_red"
                 android:visibility="gone"
-                android:text="Invalid credentials. Please try again."/>
+                android:text="Invalid credentials. Please try again." />
+
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Login"
-                app:cornerRadius="32dp"/>
+                app:cornerRadius="32dp" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"/>
+                android:layout_height="100dp" />
 
         </LinearLayout>
 
