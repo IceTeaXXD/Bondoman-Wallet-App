@@ -108,7 +108,7 @@ class ScanFragment : Fragment() {
             try {
                 val file = binding.imageView.drawable
                 val keyStoreManager = KeyStoreManager(requireContext())
-                val token = keyStoreManager.getToken("token")
+                val token = keyStoreManager.getToken()
                 // TODO check if token not found or expired
                 if (token == null) {
                     withContext(Dispatchers.Main) {

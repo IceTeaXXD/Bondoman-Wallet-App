@@ -68,7 +68,9 @@ class LoginActivity : AppCompatActivity(), NetworkProctor.NetworkListener {
                 if (response.token.isNotEmpty()) {
                     Log.i("Login", "TOKEN: ${response.token}")
                     KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
-                    KeyStoreManager.getInstance(this@LoginActivity).saveToken("token", response.token)
+                    KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
+                    KeyStoreManager.getInstance(this@LoginActivity).setToken(response.token)
+                    KeyStoreManager.getInstance(this@LoginActivity).setEmail(email)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                         .putExtra("authenticated", true))
                     finish()

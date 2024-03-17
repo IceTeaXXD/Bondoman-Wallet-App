@@ -38,15 +38,27 @@ class KeyStoreManager(context: Context) {
         keyPairGenerator.generateKeyPair()
     }
 
-    fun getToken(alias: String): String? {
-        return sharedPreferences.getString(alias, null)
+    fun getToken(): String? {
+        return sharedPreferences.getString("token", null)
     }
 
-    fun saveToken(alias: String, token: String) {
-        sharedPreferences.edit().putString(alias, token).apply()
+    fun setToken(token: String) {
+        sharedPreferences.edit().putString("token", token).apply()
     }
 
-    fun removeToken(alias: String) {
-        sharedPreferences.edit().remove(alias).apply()
+    fun removeToken() {
+        sharedPreferences.edit().remove("token").apply()
+    }
+
+    fun getEmail(): String? {
+        return sharedPreferences.getString("email", null)
+    }
+
+    fun setEmail(email: String) {
+        sharedPreferences.edit().putString("email", email).apply()
+    }
+
+    fun removeEmail() {
+        sharedPreferences.edit().remove("email").apply()
     }
 }

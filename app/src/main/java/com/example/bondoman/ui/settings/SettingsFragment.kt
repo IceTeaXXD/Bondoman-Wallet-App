@@ -58,7 +58,8 @@ class SettingsFragment : Fragment() {
     }
 
     private fun logout() {
-        KeyStoreManager.getInstance(requireContext()).removeToken("token")
+        KeyStoreManager.getInstance(requireContext()).removeToken()
+        KeyStoreManager.getInstance(requireContext()).removeEmail()
         val intent = Intent(activity, LoginActivity::class.java)
         startActivity(intent)
         activity?.finish()
