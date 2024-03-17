@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.bondoman.R
 import com.example.bondoman.database.AppDatabase
+import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentAddTransactionBinding
 import com.example.bondoman.gps.BondomanLocationService
@@ -60,32 +61,35 @@ class TransactionAdd : Fragment() {
 
         addButton.setOnClickListener {
             // Save the Items into the Database
-            // Check if there are any empty
-            if(etTitle.text.toString().isNotEmpty() &&
-                etNominal.text.toString().isNotEmpty() &&
-                etLocation.text.toString().isNotEmpty()) {
+            val email = KeyStoreManager.getInstance(requireContext()).getEmail()
+            if (email == null) {
+                Toast.makeText(requireContext(), "Please login first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            } else if (etNominal.text.toString().toIntOrNull() == null) {
+                Toast.makeText(requireContext(), "Nominal must be a number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            } else if (etTitle.text.toString().isEmpty() || etNominal.text.toString().isEmpty() || etLocation.text.toString().isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            } else {
                 val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
                 val newTransaction = Transaction(
                     null,
-                    "13521007@std.stei.itb.ac.id",
+                    email,
                     transaction_name = etTitle.text.toString(),
-                    transaction_price = etNominal.text.toString().toIntOrNull() ?: 0,
+                    transaction_price = etNominal.text.toString().toInt(),
                     transaction_category = etKategori.selectedItem.toString(),
                     transaction_location = etLocation.text.toString(),
                     transaction_date = LocalDate.now().toString()
                 )
-
                 viewLifecycleOwner.lifecycleScope.launch {
                     transactionDao.store(newTransaction)
                 }
                 // redirect to the transaction list
                 val action = TransactionAddDirections.actionTransactionAddToNavigationTransactions()
                 requireView().findNavController().navigate(action)
-            } else {
-                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }
         }
-
         return binding.root
     }
 

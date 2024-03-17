@@ -5,6 +5,12 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_transactions">
 
+    <activity
+        android:id="@+id/navigation_login"
+        android:name="com.example.bondoman.ui.login.LoginActivity"
+        android:label="MainActivity"
+        tools:layout="@layout/activity_login" />
+
     <fragment
         android:id="@+id/navigation_transactions"
         android:name="com.example.bondoman.ui.transactions.TransactionsFragment"
@@ -16,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_transactions_to_transactionAdd"
             app:destination="@id/transactionAdd"/>
+        <action
+            android:id="@+id/action_navigation_transactions_to_loginActivity"
+            app:destination="@id/navigation_login" />
     </fragment>
 
     <fragment

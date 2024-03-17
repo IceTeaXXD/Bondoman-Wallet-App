@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bondoman.database.AppDatabase
+import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentTransactionsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -43,13 +44,18 @@ class TransactionsFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(requireContext())
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val transactions = AppDatabase.getInstance(requireContext()).transactionDao().index("13521007@std.stei.itb.ac.id")
-            val transactionAdapter = TransactionAdapter(requireActivity(), transactions.toMutableList(), requireActivity().supportFragmentManager, viewModel) { transactionId ->
-                val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionUpdate(transactionId)
-                findNavController().navigate(action)
+            val email = KeyStoreManager.getInstance(requireContext()).getEmail()
+            if (email == null) {
+                findNavController().navigate(TransactionsFragmentDirections.actionNavigationTransactionsToLoginActivity())
+            } else {
+                val transactions = AppDatabase.getInstance(requireContext()).transactionDao().index(email)
+                val transactionAdapter = TransactionAdapter(requireActivity(), transactions.toMutableList(), requireActivity().supportFragmentManager, viewModel) { transactionId ->
+                    val action = TransactionsFragmentDirections.actionNavigationTransactionsToTransactionUpdate(transactionId)
+                    findNavController().navigate(action)
+                }
+                binding.rvTransaction.adapter = transactionAdapter
+                binding.rvTransaction.layoutManager = LinearLayoutManager(requireContext())
             }
-            binding.rvTransaction.adapter = transactionAdapter
-            binding.rvTransaction.layoutManager = LinearLayoutManager(requireContext())
         }
         addTransactionButton = binding.fabAddTransaction
         addTransactionButton.setOnClickListener{
