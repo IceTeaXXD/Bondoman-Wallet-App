@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.bondoman.R
+import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.databinding.FragmentSettingsBinding
+import com.example.bondoman.ui.login.LoginActivity
 
 class SettingsFragment : Fragment() {
 
@@ -30,6 +32,9 @@ class SettingsFragment : Fragment() {
         val binding: FragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
         binding.mailTransactionButton.setOnClickListener{
             sendEmail()
+        }
+        binding.logoutButton.setOnClickListener {
+            logout()
         }
 
         return binding.root
@@ -51,6 +56,14 @@ class SettingsFragment : Fragment() {
             Log.e("Email Error", e.message.toString())
         }
     }
+
+    private fun logout() {
+        KeyStoreManager.getInstance(requireContext()).removeToken("token")
+        val intent = Intent(activity, LoginActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
