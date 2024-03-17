@@ -11,15 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
-import androidx.camera.view.PreviewView
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.bondoman.R
 import com.example.bondoman.databinding.FragmentScanBinding
-
 import com.example.bondoman.api.BondomanApi
-import com.example.bondoman.api.KeyStoreManager
+import com.example.bondoman.database.KeyStoreManager
 import com.example.bondoman.utils.CameraUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
