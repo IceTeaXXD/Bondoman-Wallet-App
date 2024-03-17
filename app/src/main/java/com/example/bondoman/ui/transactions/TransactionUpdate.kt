@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.bondoman.database.Transaction
 import com.example.bondoman.databinding.FragmentTransactionUpdateBinding
 import com.example.bondoman.gps.BondomanLocationService
@@ -60,6 +61,8 @@ class TransactionUpdate : Fragment() {
                 )
                 viewModel.updateTransaction(updatedTransaction)
                 Toast.makeText(requireContext(), "Transaction updated successfully", Toast.LENGTH_SHORT).show()
+                val action = TransactionUpdateDirections.actionTransactionUpdateToNavigationTransactions()
+                requireView().findNavController().navigate(action)
             }
         }
 
