@@ -1,0 +1,36 @@
+package com.mhn.bondoman.database
+
+import androidx.room.ColumnInfo
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Entity
+import androidx.room.Insert
+import androidx.room.PrimaryKey
+import androidx.room.Query
+import androidx.room.Update
+
+@Entity(tableName = "transactions")
+data class Transaction(
+    @PrimaryKey(autoGenerate = true) val transaction_id: Int?,
+    @ColumnInfo(name="transaction_owner") val transaction_owner: String,
+    @ColumnInfo(name="transaction_name") val transaction_name: String,
+    @ColumnInfo(name="transaction_date") val transaction_date: String,
+    @ColumnInfo(name="transaction_price") val transaction_price: Int,
+    @ColumnInfo(name="transaction_category") val transaction_category: String,
+    @ColumnInfo(name="transaction_location") val transaction_location: String
+)
+
+@Dao
+interface TransactionDao {
+    @Query("SELECT * FROM transactions WHERE transaction_owner = :email")
+    suspend fun index(email: String): List<Transaction>
+
+    @Insert
+    suspend fun store(vararg transaction: Transaction)
+    @Update
+    suspend fun update(transaction: Transaction)
+    @Query("SELECT * FROM transactions WHERE transaction_id = :transactionId")
+    suspend fun getTransactionById(transactionId : Int) : Transaction?
+    @Delete
+    suspend fun delete(vararg transaction: Transaction)
+}

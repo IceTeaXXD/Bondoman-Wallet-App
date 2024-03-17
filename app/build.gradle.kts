@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bondoman"
+    namespace = "com.mhn.bondoman"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.bondoman"
+        applicationId = "com.mhn.bondoman"
         minSdk = 29
         targetSdk = 34
         versionCode = 1

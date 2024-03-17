@@ -7,13 +7,13 @@
 
     <activity
         android:id="@+id/navigation_login"
-        android:name="com.example.bondoman.ui.login.LoginActivity"
+        android:name="com.mhn.bondoman.ui.login.LoginActivity"
         android:label="MainActivity"
         tools:layout="@layout/activity_login" />
 
     <fragment
         android:id="@+id/navigation_transactions"
-        android:name="com.example.bondoman.ui.transactions.TransactionsFragment"
+        android:name="com.mhn.bondoman.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/transaction_update"
-        android:name="com.example.bondoman.ui.transactions.TransactionUpdate"
+        android:name="com.mhn.bondoman.ui.transactions.TransactionUpdate"
         android:label="Update Transaction"
         tools:layout="@layout/fragment_transaction_update">
         <argument
@@ -41,19 +41,19 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_graph"
-        android:name="com.example.bondoman.ui.graph.GraphFragment"
+        android:name="com.mhn.bondoman.ui.graph.GraphFragment"
         android:label="@string/title_graph"
         tools:layout="@layout/fragment_graph" />
 
     <fragment
         android:id="@+id/navigation_scan"
-        android:name="com.example.bondoman.ui.scan.ScanFragment"
+        android:name="com.mhn.bondoman.ui.scan.ScanFragment"
         android:label="@string/title_scan"
         tools:layout="@layout/fragment_scan" />
 
     <fragment
         android:id="@+id/transactionAdd"
-        android:name="com.example.bondoman.ui.transactions.TransactionAdd"
+        android:name="com.mhn.bondoman.ui.transactions.TransactionAdd"
         android:label="TransactionAdd"
         tools:layout="@layout/fragment_add_transaction">
         <action
@@ -62,13 +62,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_twibbon"
-        android:name="com.example.bondoman.ui.twibbon.TwibbonFragment"
+        android:name="com.mhn.bondoman.ui.twibbon.TwibbonFragment"
         android:label="@string/title_twibbon"
         tools:layout="@layout/fragment_twibbon" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.bondoman.ui.settings.SettingsFragment"
+        android:name="com.mhn.bondoman.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 
