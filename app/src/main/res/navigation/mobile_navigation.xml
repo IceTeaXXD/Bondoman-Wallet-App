@@ -26,6 +26,9 @@
         <argument
             android:name="transactionId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_transactionUpdate_to_navigation_transactions"
+            app:destination="@id/navigation_transactions" />
     </fragment>
     <fragment
         android:id="@+id/navigation_graph"
