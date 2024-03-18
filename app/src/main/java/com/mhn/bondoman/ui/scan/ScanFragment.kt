@@ -123,7 +123,7 @@ class ScanFragment : Fragment() {
                     file.toString().toRequestBody("image/jpg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
                 val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
-                viewModel.addItemFromScanner(response)
+                viewModel.addItemFromScanner(response.body()!!)
                 Log.i("Upload", "Response: $response")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
