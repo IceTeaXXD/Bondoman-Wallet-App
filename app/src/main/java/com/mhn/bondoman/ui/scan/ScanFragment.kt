@@ -108,20 +108,12 @@ class ScanFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val file = binding.imageView.drawable
-                val keyStoreManager = KeyStoreManager(requireContext())
-                val token = keyStoreManager.getToken()
-                // TODO check if token not found or expired
-                if (token == null) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Token not found", Toast.LENGTH_SHORT).show()
-                    }
-                    return@launch
-                }
+                val token = KeyStoreManager.getInstance(requireContext()).getToken()
                 val requestFile =
                     file.toString().toRequestBody("image/jpg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
                 val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
-                Log.i("Upload", "Response: ${response}")
+                Log.i("Upload", "Response: $response")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Log.e("Upload Error", "Error: ${e.message}")

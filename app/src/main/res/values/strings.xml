@@ -23,6 +23,8 @@
     <string name="login_name">Mlebet</string>
     <string name="kategori">Kategori</string>
     <string name="nominal">Nominal</string>
+    <string name="total">Total</string>
+    <string name="qty">qty</string>
     <string name="location_name">Location</string>
     <string name="title_name">Judul</string>
     <string name="save_name">Save</string>
