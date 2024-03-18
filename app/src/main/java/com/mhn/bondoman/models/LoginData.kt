@@ -12,6 +12,6 @@ data class LoginResponse(
 
 data class TokenResponse(
     val nim: Int,
-    val iat: String,
-    val exp: String
+    val iat: Long,
+    val exp: Long
 )

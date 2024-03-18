@@ -2,10 +2,7 @@ package com.mhn.bondoman.ui.settings
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +58,7 @@ class SettingsFragment : Fragment() {
     private fun logout() {
         KeyStoreManager.getInstance(requireContext()).removeToken()
         KeyStoreManager.getInstance(requireContext()).removeEmail()
+        KeyStoreManager.getInstance(requireContext()).removeExpiry()
         val intent = Intent(activity, LoginActivity::class.java)
         startActivity(intent)
         activity?.finish()

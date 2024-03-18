@@ -13,6 +13,7 @@ import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.ActivityLoginBinding
 import com.mhn.bondoman.databinding.NoNetworkLayoutBinding
 import com.mhn.bondoman.models.LoginBody
+import com.mhn.bondoman.utils.JWTAdapter
 import com.mhn.bondoman.utils.NetworkAdapter
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var noNetworkBinding: NoNetworkLayoutBinding
     private lateinit var networkAdapter: NetworkAdapter
+    private lateinit var jwtAdapter: JWTAdapter
     private lateinit var backButton: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +33,16 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
         networkAdapter = NetworkAdapter(applicationContext)
         networkAdapter.subscribe(this)
         supportActionBar?.hide()
+        jwtAdapter = JWTAdapter.getInstance(this)
 
         if (networkAdapter.isNetworkConnected()) {
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
-
+            if (jwtAdapter.isJWTValidated()) {
+                Log.i("Login", "JWT is validated")
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
             val email = binding.etEmail
             val password = binding.etPassword
             val buttonLogin = binding.btnLogin
@@ -67,13 +74,18 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
             val statusCode = response.code()
             if (statusCode == 200) {
                 val token = response.body()!!.token
+                val tokenResponse = BondomanApi.getInstance().token("Bearer $token").body()!!
+                val expiry = tokenResponse.exp
                 Log.i("Login", "TOKEN: $token")
+                Log.i("Login", "EXPIRY: $expiry")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("password")
+                KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("expiry")
                 KeyStoreManager.getInstance(this@LoginActivity).setToken(token)
                 KeyStoreManager.getInstance(this@LoginActivity).setEmail(email)
                 KeyStoreManager.getInstance(this@LoginActivity).setPassword(password)
+                KeyStoreManager.getInstance(this@LoginActivity).setExpiry(expiry*1000)
                 startActivity(
                     Intent(this@LoginActivity, MainActivity::class.java)
                         .putExtra("authenticated", true)

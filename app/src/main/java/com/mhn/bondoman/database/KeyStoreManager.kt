@@ -107,4 +107,16 @@ class KeyStoreManager(context: Context) {
     fun removePassword() {
         sharedPreferences.edit().remove("password").apply()
     }
+
+    fun getExpiry(): Long {
+        return sharedPreferences.getLong("expiry", 0)
+    }
+
+    fun setExpiry(expiry: Long) {
+        sharedPreferences.edit().putLong("expiry", expiry).apply()
+    }
+
+    fun removeExpiry() {
+        sharedPreferences.edit().remove("expiry").apply()
+    }
 }
