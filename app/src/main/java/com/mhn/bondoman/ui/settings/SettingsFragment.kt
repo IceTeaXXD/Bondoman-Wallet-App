@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,25 +40,22 @@ class SettingsFragment : Fragment() {
         binding.downloadTransactionButton.setOnClickListener {
             export()
         }
+        binding.randomizeButton.setOnClickListener {
+            Intent().also {
+                it.setAction("com.mhn.bondoman.RANDOMIZE_TRANSACTION")
+                it.setPackage(requireContext().packageName)
+                requireContext().sendBroadcast(it)
+            }
+        }
 
         return binding.root
     }
 
     @SuppressLint("IntentReset")
     private fun sendEmail() {
-        val mIntent = Intent(Intent.ACTION_SEND)
-        mIntent.data = Uri.parse("mailto:")
-        mIntent.type = "text/plain"
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(KeyStoreManager.getInstance(requireContext()).getEmail()))
-        mIntent.putExtra(Intent.EXTRA_SUBJECT, "Laporan Keuangan (DD-MM-YYYY)")
-        mIntent.putExtra(Intent.EXTRA_TEXT, "{Placeholder}")
-        try {
-            //start email intent
-            startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
-        } catch (e: Exception) {
-            //get and show exception message
-            Log.e("Email Error", e.message.toString())
-        }
+        EmailDialog().show(
+            childFragmentManager, EmailDialog.TAG
+        )
     }
 
     private fun logout() {

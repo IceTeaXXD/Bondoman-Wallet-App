@@ -34,4 +34,5 @@
     <string name="capture_btn_take">Take</string>
     <string name="connection_lost">Connection Lost</string>
     <string name="add_transaction">Add Transaction</string>
+    <string name="randomize_transaction">Randomize Transaction</string>
 </resources>
