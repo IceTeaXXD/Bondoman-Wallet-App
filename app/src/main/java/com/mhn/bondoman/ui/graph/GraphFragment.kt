@@ -38,6 +38,8 @@ class GraphFragment : Fragment() {
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var lineChart: LineChart
     private lateinit var categorySpinner: Spinner
+    private var countIncome = 0.0f
+    private var countOutcome = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,8 +131,6 @@ class GraphFragment : Fragment() {
         })
         viewModel.allTransactions.observe(viewLifecycleOwner, Observer { transactions ->
             transactions?.let {
-                var countIncome = 0.0f
-                var countOutcome = 0.0f
                 for (transaction in transactions) {
                     Log.d("Transactions", transaction.toString())
                     if (transaction.transaction_category == "Income") {
@@ -155,7 +155,6 @@ class GraphFragment : Fragment() {
         chart.legend.isEnabled = false
 
         chart.setDrawCenterText(true)
-        chart.centerText = "Total\n"
         chart.setCenterTextSize(16f)
         chart.setCenterTextColor(Color.GRAY)
 
@@ -174,12 +173,13 @@ class GraphFragment : Fragment() {
         dataSet.sliceSpace = 3f
         dataSet.selectionShift = 5f
         dataSet.colors = listOf(
-            ContextCompat.getColor(requireContext(), R.color.light_green),
-            ContextCompat.getColor(requireContext(), R.color.red)
+            ContextCompat.getColor(requireContext(), R.color.neon_red),
+            ContextCompat.getColor(requireContext(), R.color.neon_yellow)
         )
         dataSet.valueTextColor = Color.BLACK
         dataSet.valueTextSize = 10f
-
+        val difference = countIncome - countOutcome
+        chart.centerText = "CashFlow\n%.2f".format(difference)
         val data = PieData(dataSet)
         chart.data = data
         chart.invalidate()
@@ -199,16 +199,40 @@ class GraphFragment : Fragment() {
             n++
         }
         val xAxis = lineChart.xAxis
+        lineChart.setDrawBorders(false)
+        xAxis.textColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+        val leftAxis = lineChart.axisLeft
+        leftAxis.setDrawGridLines(false)
+        leftAxis.textColor = ContextCompat.getColor(requireContext(), R.color.white)
+//        leftAxis.isEnabled = false
+
+        val rightAxis = lineChart.axisRight
+        rightAxis.setDrawGridLines(false)
+        rightAxis.isEnabled = false
+
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setDrawAxisLine(true)
         xAxis.setDrawGridLines(false)
         xAxis.setDrawLabels(true)
+        xAxis.isEnabled = true
         xAxis.labelCount = labels.size
         xAxis.valueFormatter = IndexAxisValueFormatter(labels)
 
         val lineData = LineDataSet(datas, category)
+        lineData.color = ContextCompat.getColor(requireContext(), R.color.neon_yellow)
+        lineData.lineWidth = 3f
+        lineData.setDrawFilled(true)
+        lineData.valueTextColor = ContextCompat.getColor(requireContext(), R.color.white)
+        lineData.valueTextSize = 0f
+        lineData.setCircleColor(Color.WHITE)
+        lineData.isDrawCircleHoleEnabled
+        lineData.fillColor = ContextCompat.getColor(requireContext(), R.color.neon_yellow)
         val data = LineData(lineData)
         lineChart.data = data
+        lineChart.legend.isEnabled = false
+        lineChart.description.isEnabled = false
+
         lineChart.invalidate()
     }
 }
