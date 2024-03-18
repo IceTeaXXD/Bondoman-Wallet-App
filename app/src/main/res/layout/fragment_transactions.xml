@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
     android:background="@drawable/glow_effect"
-    tools:context=".ui.transactions.TransactionsFragment">
+    tools:context=".ui.transactions.TransactionsFragment"
+    android:paddingBottom="30dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTransaction"
