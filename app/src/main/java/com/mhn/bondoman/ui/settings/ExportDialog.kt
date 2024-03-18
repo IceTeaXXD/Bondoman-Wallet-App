@@ -39,9 +39,9 @@ class ExportDialog : DialogFragment() {
                 exporter = ExcelAdapter(transactions, context)
 
                 if (ext == ".xlsx") {
-                    exporter.convert(".xlsx")
+                    exporter.convert(".xlsx", 1)
                 } else if (ext == ".xls") {
-                    exporter.convert(".xls")
+                    exporter.convert(".xls",1)
                 }
 
                 withContext(Dispatchers.Main) {
