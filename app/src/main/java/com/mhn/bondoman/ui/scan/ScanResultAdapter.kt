@@ -13,8 +13,8 @@ class ScanResultAdapter(private val activity: Activity,
         RecyclerView.ViewHolder(binding.root) {
             fun bind(transaction: Item){
                 binding.tvTransaksi.text = transaction.name
-                binding.price.text = transaction.price.toString()
-                binding.qty.text = transaction.qty.toString()
+                binding.price.text = "Price: Rp" + transaction.price.toString()
+                binding.qty.text = "Qty: " + transaction.qty.toString()
             }
         }
     override fun onCreateViewHolder(
