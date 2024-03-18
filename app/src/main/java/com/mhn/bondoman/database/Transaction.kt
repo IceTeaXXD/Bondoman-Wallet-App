@@ -27,7 +27,7 @@ data class TransactionSummary(
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * FROM transactions WHERE transaction_owner = :email")
+    @Query("SELECT * FROM transactions WHERE transaction_owner = :email ORDER BY transaction_date DESC")
     suspend fun index(email: String): List<Transaction>
 
     @Insert
