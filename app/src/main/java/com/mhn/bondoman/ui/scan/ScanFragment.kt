@@ -14,10 +14,14 @@ import androidx.camera.core.CameraSelector
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.mhn.bondoman.R
 import com.mhn.bondoman.api.BondomanApi
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.FragmentScanBinding
+import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 import com.mhn.bondoman.utils.CameraAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,11 +36,17 @@ class ScanFragment : Fragment() {
     companion object {
         fun newInstance() = ScanFragment()
     }
-
+    private lateinit var viewModel: TransactionsViewModel
     private lateinit var binding: FragmentScanBinding
     private val IMAGE_REQUEST_CODE = 101
     private lateinit var cameraAdapter: CameraAdapter
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            TransactionsViewModel.FACTORY
+        )[TransactionsViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -108,20 +118,13 @@ class ScanFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val file = binding.imageView.drawable
-                val keyStoreManager = KeyStoreManager(requireContext())
-                val token = keyStoreManager.getToken()
-                // TODO check if token not found or expired
-                if (token == null) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Token not found", Toast.LENGTH_SHORT).show()
-                    }
-                    return@launch
-                }
+                val token = KeyStoreManager.getInstance(requireContext()).getToken()
                 val requestFile =
                     file.toString().toRequestBody("image/jpg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
                 val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
-                Log.i("Upload", "Response: ${response}")
+                viewModel.addItemFromScanner(response)
+                Log.i("Upload", "Response: $response")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Log.e("Upload Error", "Error: ${e.message}")
@@ -129,6 +132,8 @@ class ScanFragment : Fragment() {
                 }
             }
         }
+        val action = ScanFragmentDirections.actionScanToNavigationScanResult()
+        findNavController().navigate(action)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

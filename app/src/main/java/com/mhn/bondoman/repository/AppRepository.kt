@@ -20,6 +20,11 @@ class AppRepository(private val appDatabase: AppDatabase) {
             appDatabase.transactionDao().update(transaction)
         }
     }
+    suspend fun addTransaction(transaction: Transaction){
+        withContext(Dispatchers.IO){
+            appDatabase.transactionDao().store(transaction)
+        }
+    }
 
     suspend fun getLast7Transaction(email: String, category: String): List<TransactionSummary> {
         return appDatabase.transactionDao().getLast7Transaction(email, category)
