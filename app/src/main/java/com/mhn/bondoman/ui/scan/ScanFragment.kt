@@ -14,10 +14,13 @@ import androidx.camera.core.CameraSelector
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.mhn.bondoman.R
 import com.mhn.bondoman.api.BondomanApi
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.FragmentScanBinding
+import com.mhn.bondoman.ui.transactions.TransactionsFragmentDirections
 import com.mhn.bondoman.utils.CameraAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -121,6 +124,8 @@ class ScanFragment : Fragment() {
                 }
             }
         }
+        val action = ScanFragmentDirections.actionScanToNavigationScanResult()
+        findNavController().navigate(action)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -49,7 +49,17 @@
         android:id="@+id/navigation_scan"
         android:name="com.mhn.bondoman.ui.scan.ScanFragment"
         android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_scan_to_navigation_scanResult"
+            app:destination="@+id/navigation_scanResult"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_scanResult"
+        android:name="com.mhn.bondoman.ui.scan.ScanResult"
+        android:label="ScanResult"
+        tools:layout="@layout/fragment_scan_result"/>
 
     <fragment
         android:id="@+id/transactionAdd"
