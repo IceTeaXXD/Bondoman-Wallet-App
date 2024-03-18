@@ -15,14 +15,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mhn.bondoman.databinding.ActivityMainBinding
 import com.mhn.bondoman.ui.login.LoginActivity
+import com.mhn.bondoman.utils.JWTAdapter
 import com.mhn.bondoman.utils.NetworkAdapter
 
-class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
+class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAdapter.JWTListener {
 
     private lateinit var binding: ActivityMainBinding
     private var authenticated: Boolean = false
 
     private lateinit var networkAdapter: NetworkAdapter
+    private lateinit var jwtAdapter: JWTAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
         setContentView(binding.root)
 
         networkAdapter = NetworkAdapter.getInstance(applicationContext)
+        jwtAdapter = JWTAdapter.getInstance(this)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView?.setupWithNavController(navController)
@@ -81,19 +84,17 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
 
     override fun onStart() {
         super.onStart()
-
-        // TODO: Validate if Key is Still valid
-        if (!authenticated) {
+        if (!authenticated && !jwtAdapter.isJWTValidated()) {
             authenticated = true
             val intent = Intent(
                 this,
                 LoginActivity::class.java
             )
-
             startActivity(intent)
             finish()
         } else {
             networkAdapter.subscribe(this)
+            jwtAdapter.subscribe(this)
         }
     }
 
@@ -108,5 +109,22 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
     override fun onDestroy() {
         super.onDestroy()
         networkAdapter.unsubscribe(this)
+        jwtAdapter.unsubscribe(this)
+    }
+
+    override fun onJWTValid() {
+        // Do nothing
+    }
+
+    override fun onJWTInvalid() {
+        authenticated = false
+        Toast.makeText(applicationContext, "Session expired, please re-login.", Toast.LENGTH_SHORT)
+            .show()
+        val intent = Intent(
+            this,
+            LoginActivity::class.java
+        )
+        startActivity(intent)
+        finish()
     }
 }
