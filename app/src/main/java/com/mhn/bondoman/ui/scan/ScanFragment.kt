@@ -14,13 +14,14 @@ import androidx.camera.core.CameraSelector
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.mhn.bondoman.R
 import com.mhn.bondoman.api.BondomanApi
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.FragmentScanBinding
-import com.mhn.bondoman.ui.transactions.TransactionsFragmentDirections
+import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 import com.mhn.bondoman.utils.CameraAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,11 +36,17 @@ class ScanFragment : Fragment() {
     companion object {
         fun newInstance() = ScanFragment()
     }
-
+    private lateinit var viewModel: TransactionsViewModel
     private lateinit var binding: FragmentScanBinding
     private val IMAGE_REQUEST_CODE = 101
     private lateinit var cameraAdapter: CameraAdapter
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            TransactionsViewModel.FACTORY
+        )[TransactionsViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -116,6 +123,7 @@ class ScanFragment : Fragment() {
                     file.toString().toRequestBody("image/jpg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", "image.jpg", requestFile)
                 val response = BondomanApi.getInstance().uploadBill("Bearer $token", body)
+                viewModel.addItemFromScanner(response)
                 Log.i("Upload", "Response: $response")
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

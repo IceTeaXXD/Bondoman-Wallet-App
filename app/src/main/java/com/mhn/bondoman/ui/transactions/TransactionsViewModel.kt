@@ -1,5 +1,6 @@
 package com.mhn.bondoman.ui.transactions
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.mhn.bondoman.BondomanApp
 import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.database.TransactionSummary
+import com.mhn.bondoman.models.ItemsResponse
 import com.mhn.bondoman.repository.AppRepository
 import kotlinx.coroutines.launch
 
@@ -26,6 +28,10 @@ class TransactionsViewModel(private val repository: AppRepository) : ViewModel()
 
     private val _outcomeSummary = MutableLiveData<List<TransactionSummary>>()
     val outcomeSummary: LiveData<List<TransactionSummary>> = _outcomeSummary
+
+    private val _scanResultData = MutableLiveData<ItemsResponse>()
+    val scanResultData: LiveData<ItemsResponse> = _scanResultData
+
     fun getTransactionById(transactionId: Int) {
         viewModelScope.launch {
             val result = repository.getTransactionById(transactionId)
@@ -60,6 +66,19 @@ class TransactionsViewModel(private val repository: AppRepository) : ViewModel()
     fun deleteTransaction(transaction: Transaction) {
         viewModelScope.launch {
             repository.deleteTransaction(transaction)
+        }
+    }
+
+    fun addItemFromScanner(list: ItemsResponse){
+        viewModelScope.launch {
+            Log.d("View Model", list.toString())
+            _scanResultData.postValue(list)
+        }
+    }
+
+    fun addTransaction(transaction: Transaction){
+        viewModelScope.launch {
+            repository.addTransaction(transaction)
         }
     }
 

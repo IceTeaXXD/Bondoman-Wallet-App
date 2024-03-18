@@ -59,7 +59,11 @@
         android:id="@+id/navigation_scanResult"
         android:name="com.mhn.bondoman.ui.scan.ScanResult"
         android:label="ScanResult"
-        tools:layout="@layout/fragment_scan_result"/>
+        tools:layout="@layout/fragment_scan_result">
+        <action
+            android:id="@+id/action_navigation_scanResult_to_navigation_transactions"
+            app:destination="@id/navigation_transactions" />
+    </fragment>
 
     <fragment
         android:id="@+id/transactionAdd"

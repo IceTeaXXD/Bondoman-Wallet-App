@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mhn.bondoman.databinding.ScanResponseItemBinding
+import com.mhn.bondoman.models.Item
 
 class ScanResultAdapter(private val activity: Activity,
-                        private val data: MutableList<ScanResultData>) : RecyclerView.Adapter<ScanResultAdapter.ViewHolder>(){
+                        private val data: MutableList<Item>) : RecyclerView.Adapter<ScanResultAdapter.ViewHolder>(){
     inner class ViewHolder(private val binding: ScanResponseItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(transaction: ScanResultData){
-                binding.tvTransaksi.text = transaction.title
+            fun bind(transaction: Item){
+                binding.tvTransaksi.text = transaction.name
                 binding.price.text = transaction.price.toString()
                 binding.qty.text = transaction.qty.toString()
             }
