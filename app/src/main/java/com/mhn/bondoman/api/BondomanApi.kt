@@ -3,7 +3,9 @@ package com.mhn.bondoman.api
 import com.mhn.bondoman.models.ItemsResponse
 import com.mhn.bondoman.models.LoginBody
 import com.mhn.bondoman.models.LoginResponse
+import com.mhn.bondoman.models.TokenResponse
 import okhttp3.MultipartBody
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.Multipart
@@ -14,14 +16,19 @@ interface BondomanApi {
     @POST("api/auth/login")
     suspend fun login(
         @Body loginBody: LoginBody
-    ): LoginResponse
+    ): Response<LoginResponse>
+
+    @POST("api/auth/token")
+    suspend fun token(
+        @Header("Authorization") userToken: String
+    ): Response<TokenResponse>
 
     @Multipart
     @POST("api/bill/upload")
     suspend fun uploadBill(
         @Header("Authorization") userToken: String,
         @Part file: MultipartBody.Part
-    ): ItemsResponse
+    ): Response<ItemsResponse>
 
     companion object {
         @Volatile

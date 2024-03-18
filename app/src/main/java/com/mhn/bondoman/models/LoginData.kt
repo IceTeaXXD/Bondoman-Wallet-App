@@ -9,3 +9,9 @@ data class LoginResponse(
     val status: Int,
     val token: String
 )
+
+data class TokenResponse(
+    val nim: Int,
+    val iat: String,
+    val exp: String
+)

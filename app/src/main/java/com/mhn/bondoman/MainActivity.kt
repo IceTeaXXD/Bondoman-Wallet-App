@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -13,9 +14,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.mhn.bondoman.databinding.ActivityMainBinding
 import com.mhn.bondoman.ui.login.LoginActivity
+import com.mhn.bondoman.utils.JWTCheckWorker
 import com.mhn.bondoman.utils.NetworkAdapter
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
 
@@ -94,6 +100,7 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
             finish()
         } else {
             networkAdapter.subscribe(this)
+
         }
     }
 

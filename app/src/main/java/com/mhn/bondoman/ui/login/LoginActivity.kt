@@ -63,23 +63,24 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
     private fun login(email: String, password: String) {
         val loginBody = LoginBody(email, password)
         GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val response = BondomanApi.getInstance().login(loginBody)
-                if (response.token.isNotEmpty()) {
-                    Log.i("Login", "TOKEN: ${response.token}")
-                    KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
-                    KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
-                    KeyStoreManager.getInstance(this@LoginActivity).setToken(response.token)
-                    KeyStoreManager.getInstance(this@LoginActivity).setEmail(email)
-                    startActivity(
-                        Intent(this@LoginActivity, MainActivity::class.java)
-                            .putExtra("authenticated", true)
-                    )
-                    finish()
-                }
-            } catch (e: Exception) {
+            val response = BondomanApi.getInstance().login(loginBody)
+            val statusCode = response.code()
+            if (statusCode == 200) {
+                val token = response.body()!!.token
+                Log.i("Login", "TOKEN: $token")
+                KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
+                KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
+                KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("password")
+                KeyStoreManager.getInstance(this@LoginActivity).setToken(token)
+                KeyStoreManager.getInstance(this@LoginActivity).setEmail(email)
+                KeyStoreManager.getInstance(this@LoginActivity).setPassword(password)
+                startActivity(
+                    Intent(this@LoginActivity, MainActivity::class.java)
+                        .putExtra("authenticated", true)
+                )
+                finish()
+            } else {
                 withContext(Dispatchers.Main) {
-                    Log.e("Login", "Error: ${e.message}")
                     Toast.makeText(
                         this@LoginActivity,
                         "User not found, please try again",
