@@ -39,6 +39,13 @@ class SettingsFragment : Fragment() {
         binding.downloadTransactionButton.setOnClickListener {
             export()
         }
+        binding.randomizeButton.setOnClickListener {
+            Intent().also {
+                it.setAction("com.mhn.bondoman.RANDOMIZE_TRANSACTION")
+                it.setPackage(requireContext().packageName)
+                requireContext().sendBroadcast(it)
+            }
+        }
 
         return binding.root
     }

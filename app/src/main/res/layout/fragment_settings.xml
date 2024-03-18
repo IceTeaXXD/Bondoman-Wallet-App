@@ -55,6 +55,18 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/randomize_button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="#77712832"
+            android:fontFamily="@font/syne_regular"
+            android:text="@string/randomize_transaction"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <Button
             android:id="@+id/logout_button"
             android:layout_width="match_parent"
             android:layout_height="55dp"
