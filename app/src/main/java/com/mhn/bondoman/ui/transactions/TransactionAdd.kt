@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
@@ -37,6 +38,15 @@ class TransactionAdd : Fragment() {
     private lateinit var gpsService: LocationAdapter
     private lateinit var transactionLocation: String
     private lateinit var broadcastReceiver: RandomizeReceiver
+    private lateinit var viewModel: TransactionsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            TransactionsViewModel.FACTORY
+        )[TransactionsViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +92,6 @@ class TransactionAdd : Fragment() {
                     .show()
                 return@setOnClickListener
             } else {
-                val transactionDao = AppDatabase.getInstance(requireContext()).transactionDao()
                 val newTransaction = Transaction(
                     null,
                     email,
@@ -92,9 +101,7 @@ class TransactionAdd : Fragment() {
                     transaction_location = etLocation.text.toString(),
                     transaction_date = LocalDate.now().toString()
                 )
-                viewLifecycleOwner.lifecycleScope.launch {
-                    transactionDao.store(newTransaction)
-                }
+                viewModel.addTransaction(newTransaction)
                 // redirect to the transaction list
                 val action = TransactionAddDirections.actionTransactionAddToNavigationTransactions()
                 requireView().findNavController().navigate(action)
