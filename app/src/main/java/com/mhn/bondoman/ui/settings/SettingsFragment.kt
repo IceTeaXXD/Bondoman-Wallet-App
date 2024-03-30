@@ -21,6 +21,18 @@ class SettingsFragment : Fragment() {
     }
 
     private lateinit var viewModel: SettingsViewModel
+    private val titles: MutableList<String> = mutableListOf()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        titles.apply {
+            add("Food")
+            add("Drink")
+            add("Apparel")
+            add("Candi Prambanan")
+            add("Sepuh WBD")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +53,7 @@ class SettingsFragment : Fragment() {
             Intent().also {
                 it.setAction("com.mhn.bondoman.RANDOMIZE_TRANSACTION")
                 it.setPackage(requireContext().packageName)
+                it.putExtra("selectedTitle", titles.random())
                 requireContext().sendBroadcast(it)
             }
         }
