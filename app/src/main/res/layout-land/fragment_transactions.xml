@@ -6,19 +6,17 @@
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
     android:background="@drawable/glow_effect"
-    tools:context=".ui.transactions.TransactionsFragment"
-    android:paddingBottom="30dp">
+    tools:context=".ui.transactions.TransactionsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTransaction"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingTop="80dp"
-        android:layout_marginBottom="30dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,13 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gold"
+        android:contentDescription="@string/add_transaction_button"
         android:src="@drawable/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82"
-        android:contentDescription="@string/add_transaction_button" />
+        app:layout_constraintVertical_bias="0.82" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
