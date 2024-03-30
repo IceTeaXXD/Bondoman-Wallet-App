@@ -1,8 +1,11 @@
 package com.mhn.bondoman.ui.transactions
 
 import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +16,13 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.mhn.bondoman.R
-import com.mhn.bondoman.database.AppDatabase
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.databinding.FragmentAddTransactionBinding
 import com.mhn.bondoman.utils.LocationAdapter
-import com.mhn.bondoman.utils.RandomizeReceiver
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class TransactionAdd : Fragment() {
@@ -37,8 +36,9 @@ class TransactionAdd : Fragment() {
     private lateinit var addButton: Button
     private lateinit var gpsService: LocationAdapter
     private lateinit var transactionLocation: String
-    private lateinit var broadcastReceiver: RandomizeReceiver
+    private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var viewModel: TransactionsViewModel
+    private lateinit var taViewModel: TransactionAddViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,8 @@ class TransactionAdd : Fragment() {
             requireActivity(),
             TransactionsViewModel.FACTORY
         )[TransactionsViewModel::class.java]
+
+        taViewModel = ViewModelProvider(requireActivity())[TransactionAddViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -54,8 +56,6 @@ class TransactionAdd : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
-
-        broadcastReceiver = RandomizeReceiver.getInstance()
 
         gpsService = LocationAdapter.getInstance(requireActivity())
 
@@ -117,7 +117,7 @@ class TransactionAdd : Fragment() {
                 transactionLocation = gpsService.transformToReadable(location)
                 etLocation.setText(transactionLocation)
             }
-            binding.etTitle.setText(broadcastReceiver.selectedTitle)
+            etTitle.setText(taViewModel.getTitle())
         } catch (e: Exception) {
             Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
         }
@@ -125,7 +125,13 @@ class TransactionAdd : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        broadcastReceiver = RandomizeReceiver.getInstance()
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val selectedTitle = intent?.getStringExtra("selectedTitle")
+                taViewModel.setTitle(selectedTitle!!)
+                Log.d("RANDOMIZE", taViewModel.getTitle())
+            }
+        }
         val filter = IntentFilter("com.mhn.bondoman.RANDOMIZE_TRANSACTION")
         val listenToBroadcastsFromOtherApps = false
         val receiverFlags = if (listenToBroadcastsFromOtherApps) {
@@ -134,5 +140,10 @@ class TransactionAdd : Fragment() {
             ContextCompat.RECEIVER_NOT_EXPORTED
         }
         ContextCompat.registerReceiver(requireContext(), broadcastReceiver, filter, receiverFlags)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        taViewModel.setTitle("")
     }
 }
