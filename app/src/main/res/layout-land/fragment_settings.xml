@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@drawable/glow_effect">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.12">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="32dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/download_transaction_button"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_item_setting"
+                    android:drawableTop="@drawable/ic_download"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/simpan_transaksi"
+                    android:textColor="#FFFFFF" />
+
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/mail_transaction_button"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_item_setting"
+                    android:drawableTop="@drawable/ic_mail"
+                    android:padding="10dp"
+                    android:text="@string/kirim_transaksi"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/randomize_button"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="32dp"
+                android:backgroundTint="#77712832"
+                android:fontFamily="@font/syne_regular"
+                android:text="@string/randomize_transaction"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="32dp"
+                android:backgroundTint="#77712832"
+                android:fontFamily="@font/syne_regular"
+                android:text="@string/metu"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>
