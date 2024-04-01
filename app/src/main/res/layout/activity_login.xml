@@ -10,15 +10,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_purple"
-        android:alpha="0.7" />
+        android:alpha="0.7"
+        android:background="@color/dark_purple" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_above="@id/card_view"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="28dp">
 
         <ImageView
@@ -29,42 +29,44 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BONDOMAN"
+            android:fontFamily="@font/syne_bold"
+            android:text="@string/app_name"
+            android:textAllCaps="true"
             android:textColor="@color/gold"
-            android:textSize="40sp"
-            android:fontFamily="@font/syne_bold" />
+            android:textSize="40sp" />
 
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
-        android:id="@+id/card_view"
         app:cardCornerRadius="28dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="28dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/syne_bold"
                 android:text="@string/welcome"
                 android:textColor="@color/gold"
                 android:textSize="35sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/syne_bold" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please login to your account"
-                android:alpha="0.7" />
+                android:alpha="0.7"
+                android:text="@string/login_alert"
+                android:textColor="@color/dark_gray" />
 
             <View
                 android:layout_width="wrap_content"
@@ -72,15 +74,17 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                android:textColorHint="@color/black"
+                app:boxStrokeColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email_field"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,16 +94,18 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/black"
+                app:boxStrokeColor="@color/black"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password_field"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,9 +113,9 @@
                 android:id="@+id/tvError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/invalid_credentials"
                 android:textColor="@color/neon_red"
-                android:visibility="gone"
-                android:text="Invalid credentials. Please try again." />
+                android:visibility="gone" />
 
             <View
                 android:layout_width="wrap_content"
@@ -118,8 +124,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Login"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text="@string/login"
+                android:textSize="17sp"
                 app:cornerRadius="32dp" />
 
             <View
