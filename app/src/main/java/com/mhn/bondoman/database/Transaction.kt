@@ -17,7 +17,9 @@ data class Transaction(
     @ColumnInfo(name = "transaction_date") val transaction_date: String,
     @ColumnInfo(name = "transaction_price") val transaction_price: Int,
     @ColumnInfo(name = "transaction_category") val transaction_category: String,
-    @ColumnInfo(name = "transaction_location") val transaction_location: String
+    @ColumnInfo(name = "transaction_location") val transaction_location: String,
+//    @ColumnInfo(name = "transaction_latitude") val transaction_latitude: Double,
+//    @ColumnInfo(name = "transaction_longitude") val transaction_longitude: Double
 )
 
 data class TransactionSummary(

@@ -17,6 +17,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputEditText
 import com.mhn.bondoman.R
 import com.mhn.bondoman.database.KeyStoreManager
@@ -25,7 +30,7 @@ import com.mhn.bondoman.databinding.FragmentAddTransactionBinding
 import com.mhn.bondoman.utils.LocationAdapter
 import java.time.LocalDate
 
-class TransactionAdd : Fragment() {
+class TransactionAdd : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
 
@@ -39,6 +44,7 @@ class TransactionAdd : Fragment() {
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var taViewModel: TransactionAddViewModel
+    private lateinit var gMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +80,15 @@ class TransactionAdd : Fragment() {
 
         etLocation = binding.etLokasi
         addButton = binding.saveButton
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        val locationGet = gpsService.getLocation {
+            val location = LatLng(it.latitude, it.longitude)
+            gMap.addMarker(
+                MarkerOptions().position(location).title("Your Location")
+            )
+            gMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLng(location))
+        }
 
         addButton.setOnClickListener {
             // Save the Items into the Database
@@ -100,6 +115,8 @@ class TransactionAdd : Fragment() {
                     transaction_category = etKategori.selectedItem.toString(),
                     transaction_location = etLocation.text.toString(),
                     transaction_date = LocalDate.now().toString()
+//                    transaction_latitude = 0.0,
+//                    transaction_longitude = 0.0
                 )
                 viewModel.addTransaction(newTransaction)
                 // redirect to the transaction list
@@ -145,5 +162,9 @@ class TransactionAdd : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         taViewModel.setTitle("")
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        gMap = p0
     }
 }

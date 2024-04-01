@@ -75,6 +75,16 @@
                     android:hint="@string/location_name" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                class ="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewLoc" />
+
             <Button
                 android:id="@+id/save_button"
                 android:layout_width="match_parent"

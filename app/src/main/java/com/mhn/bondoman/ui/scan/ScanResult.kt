@@ -76,7 +76,9 @@ class ScanResult : Fragment() {
                             transaction_price = (item.price * item.qty).toInt(),
                             transaction_category = "Outcome",
                             transaction_date= LocalDate.now().toString(),
-                            transaction_location = transactionLocation
+                            transaction_location = transactionLocation,
+//                            transaction_latitude = 0.0,
+//                            transaction_longitude = 0.0
                         )
                         viewModel.addTransaction(_transaction)
                     }
