@@ -45,4 +45,5 @@
     <string name="add_transaction_button">Add Transaction</string>
     <string name="switch_camera_button">Switch Camera</string>
     <string name="twibbon_image">Twibbon Image</string>
+    <string name="floating_add_transaction_button">Floating Add Transaction</string>
 </resources>
