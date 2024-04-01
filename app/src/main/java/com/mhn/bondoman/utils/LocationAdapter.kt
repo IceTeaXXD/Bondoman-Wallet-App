@@ -14,8 +14,8 @@ import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.util.Locale
 
-class LocationAdapter(val activity: Activity) {
-    private var locationManager: LocationManager
+class LocationAdapter(private val activity: Activity) {
+    private var locationManager: LocationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     private var locationListener: LocationListener
     private var locationByGps: Location? = null
     private var locationListenerCallback: ((Location) -> Unit)? = null
@@ -34,7 +34,6 @@ class LocationAdapter(val activity: Activity) {
     }
 
     init {
-        locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         locationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
@@ -117,5 +116,12 @@ class LocationAdapter(val activity: Activity) {
             e.printStackTrace()
         }
         return null
+    }
+
+    fun getCurrentCoordinates(): Location? {
+        val location = Location("")
+        location.latitude = locationByGps?.latitude ?: 6.9280835
+        location.longitude = locationByGps?.longitude ?: 107.7690498
+        return location
     }
 }

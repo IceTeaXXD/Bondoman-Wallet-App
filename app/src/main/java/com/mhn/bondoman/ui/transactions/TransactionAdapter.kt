@@ -2,7 +2,6 @@ package com.mhn.bondoman.ui.transactions
 
 import android.app.Activity
 import android.content.Intent
-import android.location.Location
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -42,11 +41,9 @@ class TransactionAdapter(
                 onItemClick(transaction.transaction_id ?: 0)
             }
             binding.Location.setOnClickListener {
-                val location: Location? =
-                    locationService.transformToCoord(binding.Location.text.toString())
-                val gmmIntentUri = Uri.parse("geo:${location?.latitude},${location?.longitude}")
+                val gmmIntentUri =
+                    Uri.parse("geo:0,0?q=${transaction.transaction_latitude},${transaction.transaction_longitude}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
                 activity.startActivity(mapIntent)
             }
         }
