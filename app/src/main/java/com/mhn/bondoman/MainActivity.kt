@@ -3,11 +3,13 @@ package com.mhn.bondoman
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -60,16 +62,15 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAda
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
         )
-        actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        actionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.app_background))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val title = when (destination.id) {
-//                R.id.navigation_home -> "Home"
-                R.id.navigation_transactions -> "Transactions"
-                R.id.navigation_scan -> "Scan"
-                R.id.navigation_graph -> "Graph"
-                R.id.navigation_settings -> "Settings"
-                R.id.navigation_twibbon -> "Twibbon"
+                R.id.navigation_transactions -> getString(R.string.title_transactions)
+                R.id.navigation_scan -> getString(R.string.title_scan)
+                R.id.navigation_graph -> getString(R.string.title_graph)
+                R.id.navigation_settings -> getString(R.string.title_settings)
+                R.id.navigation_twibbon -> getString(R.string.title_twibbon)
                 else -> "Bondoman"
             }
             actionBar?.customView?.findViewById<android.widget.TextView>(R.id.action_bar_title)?.text =
