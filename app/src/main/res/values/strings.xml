@@ -36,5 +36,7 @@
     <string name="add_transaction">Add Transaction</string>
     <string name="randomize_transaction">Randomize Transaction</string>
     <string name="currency">Rp</string>
-    <string name="add_transaction_button">Add Transaction Button</string>
+    <string name="add_transaction_button">Add Transaction</string>
+    <string name="switch_camera_button">Switch Camera</string>
+    <string name="twibbon_image">Twibbon Image</string>
 </resources>
