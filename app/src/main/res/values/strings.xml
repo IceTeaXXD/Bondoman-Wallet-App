@@ -16,7 +16,13 @@
         <item>Income</item>
         <item>Outcome</item>
     </string-array>
+    <!--  LOGIN   -->
     <string name="welcome">Sugeng Rawuh</string>
+    <string name="login">Login</string>
+    <string name="login_alert">Please login to your account</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
+    <string name="invalid_credentials">Invalid credentials. Please try again.</string>
     <string name="camera_btn">Camera</string>
     <string name="media_btn">Media</string>
     <string name="placeholder">placeholder</string>
