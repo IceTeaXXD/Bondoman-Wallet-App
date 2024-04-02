@@ -38,8 +38,15 @@ class JWTAdapter(val context: Context) {
             } else {
                 GlobalScope.launch(Dispatchers.IO) {
                     Log.d("JWTAdapter", "------Refreshing token------")
-                    val email = KeyStoreManager.getInstance(context).getEmail()
-                    val password = KeyStoreManager.getInstance(context).getPassword()
+                    val email: String?
+                    val password: String?
+                    try {
+                        email = KeyStoreManager.getInstance(context).getEmail()
+                        password = KeyStoreManager.getInstance(context).getPassword()
+                    } catch (e: Exception) {
+                        notifyJWTInvalid()
+                        return@launch
+                    }
                     if (email == null || password == null) {
                         notifyJWTInvalid()
                         return@launch

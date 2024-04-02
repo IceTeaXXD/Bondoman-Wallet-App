@@ -17,6 +17,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputEditText
 import com.mhn.bondoman.R
 import com.mhn.bondoman.database.KeyStoreManager
@@ -25,7 +30,7 @@ import com.mhn.bondoman.databinding.FragmentAddTransactionBinding
 import com.mhn.bondoman.utils.LocationAdapter
 import java.time.LocalDate
 
-class TransactionAdd : Fragment() {
+class TransactionAdd : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
 
@@ -39,6 +44,8 @@ class TransactionAdd : Fragment() {
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var taViewModel: TransactionAddViewModel
+    private lateinit var gMap: GoogleMap
+    private lateinit var transactionCoordinate: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +81,9 @@ class TransactionAdd : Fragment() {
 
         etLocation = binding.etLokasi
         addButton = binding.saveButton
-
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        getLocation()
         addButton.setOnClickListener {
             // Save the Items into the Database
             val email = KeyStoreManager.getInstance(requireContext()).getEmail()
@@ -99,7 +108,9 @@ class TransactionAdd : Fragment() {
                     transaction_price = etNominal.text.toString().toInt(),
                     transaction_category = etKategori.selectedItem.toString(),
                     transaction_location = etLocation.text.toString(),
-                    transaction_date = LocalDate.now().toString()
+                    transaction_date = LocalDate.now().toString(),
+                    transaction_latitude = transactionCoordinate.latitude,
+                    transaction_longitude = transactionCoordinate.longitude
                 )
                 viewModel.addTransaction(newTransaction)
                 // redirect to the transaction list
@@ -108,19 +119,6 @@ class TransactionAdd : Fragment() {
             }
         }
         return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-        try {
-            gpsService.getLocation { location ->
-                transactionLocation = gpsService.transformToReadable(location)
-                etLocation.setText(transactionLocation)
-            }
-            etTitle.setText(taViewModel.getTitle())
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onResume() {
@@ -145,5 +143,26 @@ class TransactionAdd : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         taViewModel.setTitle("")
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        gMap = p0
+    }
+
+    private fun getLocation() {
+        addButton.visibility = View.GONE
+        try {
+            gpsService.getLocation { location ->
+                transactionLocation = gpsService.transformToReadable(location)
+                etLocation.setText(transactionLocation)
+                val loc = gpsService.getCurrentCoordinates()!!
+                transactionCoordinate = LatLng(loc.latitude, loc.longitude)
+                gMap.addMarker(MarkerOptions().position(transactionCoordinate).title("Transaction Location"))
+                gMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(transactionCoordinate, 15f))
+                addButton.visibility = View.VISIBLE
+            }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
+        }
     }
 }

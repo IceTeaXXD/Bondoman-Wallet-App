@@ -1,23 +1,20 @@
 package com.mhn.bondoman.ui.scan
 
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.database.Transaction
 import com.mhn.bondoman.databinding.FragmentScanResultBinding
-import com.mhn.bondoman.models.Item
-import com.mhn.bondoman.models.Items
-import com.mhn.bondoman.ui.transactions.TransactionUpdateDirections
 import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 import com.mhn.bondoman.utils.LocationAdapter
 import java.time.LocalDate
@@ -29,6 +26,7 @@ class ScanResult : Fragment() {
     private lateinit var adapter: ScanResultAdapter
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var transactionLocation: String
+    private lateinit var transactionCoordinate: Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +74,9 @@ class ScanResult : Fragment() {
                             transaction_price = (item.price * item.qty).toInt(),
                             transaction_category = "Outcome",
                             transaction_date= LocalDate.now().toString(),
-                            transaction_location = transactionLocation
+                            transaction_location = transactionLocation,
+                            transaction_latitude = transactionCoordinate.latitude,
+                            transaction_longitude = transactionCoordinate.longitude
                         )
                         viewModel.addTransaction(_transaction)
                     }
@@ -91,6 +91,7 @@ class ScanResult : Fragment() {
         try {
             gpsService.getLocation { location ->
                 transactionLocation = gpsService.transformToReadable(location)
+                transactionCoordinate = gpsService.getCurrentCoordinates()!!
                 binding.fabAddTransaction.visibility = View.VISIBLE
             }
         } catch (e: Exception) {
