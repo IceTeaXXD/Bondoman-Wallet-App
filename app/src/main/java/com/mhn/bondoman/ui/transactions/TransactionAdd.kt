@@ -121,6 +121,11 @@ class TransactionAdd : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        etTitle.setText(taViewModel.getTitle())
+    }
+
     override fun onResume() {
         super.onResume()
         broadcastReceiver = object : BroadcastReceiver() {
