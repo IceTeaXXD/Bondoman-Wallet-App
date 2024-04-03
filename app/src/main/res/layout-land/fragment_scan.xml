@@ -8,6 +8,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.scan.ScanFragment">
 
+        <include
+            android:id="@+id/noNetwork"
+            layout="@layout/no_network_layout"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_marginTop="20dp"/>
+
         <LinearLayout
             android:id="@+id/button_container"
             android:layout_width="wrap_content"

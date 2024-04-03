@@ -9,12 +9,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
+import androidx.camera.view.PreviewView
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.mhn.bondoman.R
@@ -23,6 +25,7 @@ import com.mhn.bondoman.database.KeyStoreManager
 import com.mhn.bondoman.databinding.FragmentScanBinding
 import com.mhn.bondoman.ui.transactions.TransactionsViewModel
 import com.mhn.bondoman.utils.CameraAdapter
+import com.mhn.bondoman.utils.NetworkAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,42 +34,59 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class ScanFragment : Fragment() {
-
+class ScanFragment : Fragment(), NetworkAdapter.NetworkListener {
     companion object {
         fun newInstance() = ScanFragment()
     }
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var binding: FragmentScanBinding
+    private lateinit var cameraView: PreviewView
+    private lateinit var switchButton: ImageButton
+    private lateinit var buttonContainer: LinearLayout
     private val IMAGE_REQUEST_CODE = 101
     private lateinit var cameraAdapter: CameraAdapter
+    private lateinit var networkAdapter: NetworkAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(
             requireActivity(),
             TransactionsViewModel.FACTORY
         )[TransactionsViewModel::class.java]
+        networkAdapter = NetworkAdapter.getInstance(requireContext())
+        networkAdapter.subscribe(this)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scan, container, false)
-        with(binding) {
-            CameraAdapter(cameraView).setup(this@ScanFragment) {
-                cameraAdapter = it
-                switchButton.setOnClickListener(changeCamera)
-                it.cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-                setCaptureButton(it)
+        if(networkAdapter.isNetworkConnected()) {
+            with(binding) {
+                CameraAdapter(cameraView).setup(this@ScanFragment) {
+                    cameraAdapter = it
+                    switchButton.setOnClickListener(changeCamera)
+                    it.cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                    setCaptureButton(it)
+                }
+                binding.mediaButton.setOnClickListener {
+                    selectImage()
+                }
+                binding.uploadButton.setOnClickListener {
+                    uploadImage()
+                }
             }
-            binding.mediaButton.setOnClickListener {
-                selectImage()
+        }else{
+            binding.cameraView.visibility = View.INVISIBLE
+            binding.buttonContainer.visibility = View.INVISIBLE
+            binding.noNetwork?.backButton?.setOnClickListener {
+                findNavController().navigateUp()
             }
-            binding.uploadButton.setOnClickListener {
-                uploadImage()
-            }
-            return root
         }
+
+        cameraView = binding.cameraView
+        buttonContainer = binding.buttonContainer
+        switchButton = binding.switchButton
+        return binding.root
     }
 
     private fun setCaptureButton(cameraAdapter: CameraAdapter) {
@@ -159,6 +179,34 @@ class ScanFragment : Fragment() {
             }
         } else {
             Log.d("ScanFragment", "Error activity result")
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        networkAdapter.unsubscribe(this)
+    }
+
+    override fun onNetworkAvailable() {
+        requireActivity().runOnUiThread {
+            cameraView.visibility = View.VISIBLE
+            buttonContainer.visibility = View.VISIBLE
+            CameraAdapter(cameraView).setup(this@ScanFragment) {
+                cameraAdapter = it
+                switchButton.setOnClickListener(changeCamera)
+                it.cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                setCaptureButton(it)
+            }
+        }
+    }
+
+    override fun onNetworkLost() {
+        requireActivity().runOnUiThread {
+            cameraView.visibility = View.INVISIBLE
+            buttonContainer.visibility = View.INVISIBLE
+            binding.noNetwork?.backButton?.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 }
