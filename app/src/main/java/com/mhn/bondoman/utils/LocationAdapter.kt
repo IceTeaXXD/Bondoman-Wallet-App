@@ -74,14 +74,20 @@ class LocationAdapter(private val activity: Activity) {
     }
 
     private fun requestLocation() {
-        checkLocationPermission()
-
-        locationManager.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            5000,
-            10f,
-            locationListener
-        )
+        if(checkLocationPermission()) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                5000,
+                10f,
+                locationListener
+            )
+        }else{
+            // Default Coordinates
+            locationListenerCallback?.invoke(Location("").also {
+                it.latitude = -6.89122
+                it.longitude = 107.61114
+            })
+        }
 
     }
 
@@ -91,37 +97,25 @@ class LocationAdapter(private val activity: Activity) {
     }
 
     fun transformToReadable(loc: Location): String {
-        try {
+        return try {
             val addresses: List<Address> =
                 geocoder.getFromLocation(loc.latitude, loc.longitude, 5)!!
 
-            return addresses[0].locality
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return "Earth"
-    }
-
-    fun transformToCoord(locationName: String): Location? {
-        try {
-            val addresses: List<Address> = geocoder.getFromLocationName(locationName, 5)!!
-            if (addresses.isNotEmpty()) {
-                val address = addresses[0]
-                val location = Location("")
-                location.latitude = address.latitude
-                location.longitude = address.longitude
-                return location
+            if(addresses.isNotEmpty() && addresses[0].locality != null){
+                addresses[0].locality
+            }else {
+                "Institut Teknologi Bandung"
             }
         } catch (e: IOException) {
             e.printStackTrace()
+            "Institut Teknologi Bandung"
         }
-        return null
     }
 
     fun getCurrentCoordinates(): Location? {
         val location = Location("")
-        location.latitude = locationByGps?.latitude ?: 6.9280835
-        location.longitude = locationByGps?.longitude ?: 107.7690498
+        location.latitude = locationByGps?.latitude ?: -6.89122
+        location.longitude = locationByGps?.longitude ?: 107.61114
         return location
     }
 }

@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,8 +46,9 @@ class TransactionAdd : Fragment(), OnMapReadyCallback {
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var viewModel: TransactionsViewModel
     private lateinit var taViewModel: TransactionAddViewModel
-    private lateinit var gMap: GoogleMap
+    private var gMap: GoogleMap? = null
     private lateinit var transactionCoordinate: LatLng
+    private var onMapReadyCallback: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,22 +155,38 @@ class TransactionAdd : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         gMap = p0
+        onMapReadyCallback?.invoke()
     }
 
     private fun getLocation() {
         addButton.visibility = View.GONE
-        try {
-            gpsService.getLocation { location ->
-                transactionLocation = gpsService.transformToReadable(location)
-                etLocation.setText(transactionLocation)
-                val loc = gpsService.getCurrentCoordinates()!!
-                transactionCoordinate = LatLng(loc.latitude, loc.longitude)
-                gMap.addMarker(MarkerOptions().position(transactionCoordinate).title("Transaction Location"))
-                gMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(transactionCoordinate, 15f))
-                addButton.visibility = View.VISIBLE
+        if(gMap == null){
+            onMapReadyCallback = {
+                onMapReadyCallback = null
+                getLocation()
             }
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
+        } else {
+            try {
+                gpsService.getLocation { location ->
+                    transactionLocation = gpsService.transformToReadable(location)
+                    etLocation.setText(transactionLocation)
+                    val loc = gpsService.getCurrentCoordinates()!!
+                    transactionCoordinate = LatLng(loc.latitude, loc.longitude)
+                    gMap?.addMarker(
+                        MarkerOptions().position(transactionCoordinate)
+                            .title("Transaction Location")
+                    )
+                    gMap?.moveCamera(
+                        com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(
+                            transactionCoordinate,
+                            15f
+                        )
+                    )
+                    addButton.visibility = View.VISIBLE
+                }
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Please allow location", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
