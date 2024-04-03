@@ -8,6 +8,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.scan.ScanFragment">
 
+        <include
+            android:id="@+id/noNetwork"
+            layout="@layout/no_network_layout"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"/>
+
         <LinearLayout
             android:id="@+id/button_container"
             android:layout_width="wrap_content"
@@ -89,8 +98,7 @@
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.camera.view.PreviewView>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
