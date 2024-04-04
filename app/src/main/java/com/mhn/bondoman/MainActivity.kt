@@ -23,7 +23,6 @@ import com.mhn.bondoman.utils.NetworkAdapter
 class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAdapter.JWTListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var authenticated: Boolean = false
 
     private lateinit var networkAdapter: NetworkAdapter
     private lateinit var jwtAdapter: JWTAdapter
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAda
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        authenticated = intent.getBooleanExtra("authenticated", false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -85,8 +83,7 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAda
 
     override fun onStart() {
         super.onStart()
-        if (!authenticated && !jwtAdapter.isJWTValidated()) {
-            authenticated = true
+        if (!jwtAdapter.isJWTValidated()) {
             val intent = Intent(
                 this,
                 LoginActivity::class.java
@@ -118,7 +115,6 @@ class MainActivity : AppCompatActivity(), NetworkAdapter.NetworkListener, JWTAda
     }
 
     override fun onJWTInvalid() {
-        authenticated = false
         Toast.makeText(applicationContext, "Session expired, please re-login.", Toast.LENGTH_SHORT)
             .show()
         val intent = Intent(

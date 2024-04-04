@@ -76,8 +76,6 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
                 val token = response.body()!!.token
                 val tokenResponse = BondomanApi.getInstance().token("Bearer $token").body()!!
                 val expiry = tokenResponse.exp
-                Log.i("Login", "TOKEN: $token")
-                Log.i("Login", "EXPIRY: $expiry")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("token")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("email")
                 KeyStoreManager.getInstance(this@LoginActivity).createNewKeys("password")
@@ -88,7 +86,6 @@ class LoginActivity : AppCompatActivity(), NetworkAdapter.NetworkListener {
                 KeyStoreManager.getInstance(this@LoginActivity).setExpiry(expiry*1000)
                 startActivity(
                     Intent(this@LoginActivity, MainActivity::class.java)
-                        .putExtra("authenticated", true)
                 )
                 finish()
             } else {

@@ -77,8 +77,6 @@ class JWTAdapter(val context: Context) {
 
     fun isJWTValidated(): Boolean {
         val expiry = KeyStoreManager.getInstance(context).getExpiry()
-        Log.d("JWTAdapter", "Expiry: $expiry")
-        Log.d("JWTAdapter", "Current time: ${System.currentTimeMillis()}")
         return expiry > System.currentTimeMillis()
     }
 
