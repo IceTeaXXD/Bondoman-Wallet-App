@@ -30,7 +30,7 @@ class TransactionAdapter(
             binding.tvTransactionDate.text = transaction.transaction_date
             binding.tvKategori.text = transaction.transaction_category
             binding.Location.text = transaction.transaction_location
-            binding.price.text = "Rp " + transaction.transaction_price.toString()
+            binding.price.text = "Rp ${transaction.transaction_price}"
             binding.btnDelete.setOnClickListener {
                 val confirmationDialog = ConfirmationModal()
                 currentItemPosition = adapterPosition
@@ -44,6 +44,7 @@ class TransactionAdapter(
                 val gmmIntentUri =
                     Uri.parse("geo:0,0?q=${transaction.transaction_latitude},${transaction.transaction_longitude}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
                 activity.startActivity(mapIntent)
             }
         }
