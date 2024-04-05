@@ -1,11 +1,12 @@
 # Tugas Besar Android - IF3210
-
 ## Kelompok
 | NIM | Nama |
 | --- | ---- |
 | 13521004 | Henry Anand Septian Radityo |
 | 13521007 | Matthew Mahendra |
 | 13521024 | Ahmad Nadil |
+## Deskripsi Aplikasi
+Bondoman adalah aplikasi berbasis mobile yang digunakan untuk mencatat pengeluaran dan pemasukan. Setiap pencatatan dapat divisualisasi dalam sebuah Pie Chart dan Line Chart. Lalu, dapat melakukan Scan sebuah nota untuk dilakukan pencatatan pengeluaran. Terdapat juga fitur untuk membuat Twibbon dari jepretan kamera. Setiap pencatatan juga dapat didownload menjadi XLSX dan XLS dan juga dapat dikirimkan melalui E-Mail.
 
 ## Fitur Aplikasi Bondoman
 ### Login
@@ -164,66 +165,77 @@ Setelah dilakukan accessability testing, didapatkan hasil sebagai berikut untuk 
 ### Suggestion Login
 Sebagian besar mempermasalahkan text contrast dari elemen-elemen yang ada pada halaman Login
 
-<img src="./docs/loginacc.png" width="50%" height="50%">
-
-### Perbaikan Login
 Perbaikan dari login sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
-
-<img src="./docs/loginpage.png" width="50%" height="50%"> 
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/loginacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/login.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/login_ns.png" width="32%" style="max-width:100%;" />
+</div>
 ### Suggestion Add Transaction
 Dipermasalahkan ukuran input yang statik dari teks dan elemen.
-
-<img src="./docs/addtranacc.png" width="50%" height="50%">
-
+Perbaikan dari Add Transaction sudah memberikan no suggestion selain pada elemen Google Maps yang tidak bisa diganti. Tampilan layar yang diperbaiki sebagai berikut.
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/addtranacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/addTransaction.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/addTransaction_ns.png" width="32%" style="max-width:100%;" />
+</div>
 
 ### Suggestion Scan Result
 Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda.
+Perbaikan dari Scan Result sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/scanresacc.png" width="50%" height="50%">
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/scanresacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/scanresult.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/scanresult_ns.jpg" width="32%" style="max-width:100%;" />
+</div>
 ### Suggestion Update Transaction
-Dipermasalahkan touch size yang terlalu kecil untuk elemen yang ada dalam layar.
-
-<img src="./docs/updateacc.png" width="50%" height="50%">
-
+Dipermasalahkan touch size yang terlalu kecil untuk elemen yang ada dalam layar. Perbaikan dari Update Transaction sudah memberikan no suggestion selain pada elemen Google Maps yang tidak bisa diganti. Tampilan layar yang diperbaiki sebagai berikut.
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/updateacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/updateTransaction.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/updateTransaction_ns.png" width="32%" style="max-width:100%;" />
+</div>>
 ### Suggestion Graph
-Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama.
+Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama. Perbaikan dari Graph sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/graphacc.png" width="50%" height="50%">
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/graphacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/graph.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/graph_ns.jpg" width="32%" style="max-width:100%;" />
+</div>
 ### Suggestion Scan
-Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama. Terdapat juga masalah kontras pada judul layar.
+Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama. Terdapat juga masalah kontras pada judul layar. Perbaikan dari Scan  sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/scanacc.png" width="50%" height="50%">
-
-### Perbaikan Scan
-Diperbaiki halaman hingga tidak ada suggestion sebagai berikut
-
-<img src="./docs/scanfix.jpg" width="50%" height="50%">
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/scanacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/scan.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/scan_ns.jpg" width="32%" style="max-width:100%;" />
+</div>
 ### Suggestion Twibbon
-Dipermasalahkan elemen yang ukurannya statik, kontras warna, dan id elemen yang sama untuk beberapa elemen lainnya.
+Dipermasalahkan elemen yang ukurannya statik, kontras warna, dan id elemen yang sama untuk beberapa elemen lainnya. Perbaikan dari Twibbon sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/twibbonacc.png" width="50%" height="50%">
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/twibbonacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/twibbon.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/twibbon_ns.jpg" width="32%" style="max-width:100%;" />
+</div>>
 ### Suggestion Setting
-Pada umumnya dipermasalahkan elemen yang ukurannya statik sehingga tidak dapat dilakukan scaling pada layar dengan ukuran yang bermacam-macam.
+Pada umumnya dipermasalahkan elemen yang ukurannya statik sehingga tidak dapat dilakukan scaling pada layar dengan ukuran yang bermacam-macam. Perbaikan dari Setting sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/settingacc.png" width="50%" height="50%">
-
-### Perbaikan Setting
-Diperbaiki halaman setting hingga tidak ada suggestion
-
-<img src="./docs/settingfix.jpg" width="50%" height="50%">
-
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/settingacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/setting.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/setting_ns.jpg" width="32%" style="max-width:100%;" />
+</div>
 ### Suggestion Transaction
-Dipermasalahkan ukuran touch target, tidak adanya alt-text pada tombol delete, value yang sama untuk beberapa elemen lainnya, dan kontras warna.
+Dipermasalahkan ukuran touch target, tidak adanya alt-text pada tombol delete, value yang sama untuk beberapa elemen lainnya, dan kontras warna. Perbaikan dari Transaction sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
-<img src="./docs/tranacc.png" width="50%" height="50%">
-
-### Perbaikan Transaction
-Diperbaiki halaman transaction hingga tidak ada suggestion
+<div align="center" style="display: flex; justify-content: center;">
+    <img src="./docs/tranacc.png" width="32%" style="max-width:100%;" />
+    <img src="./docs/transaction.jpg" width="32%" style="max-width:100%;" />
+    <img src="./docs/transaction_ns.jpg" width="32%" style="max-width:100%;" />
+</div>
 
 
 ## Alokasi Waktu
