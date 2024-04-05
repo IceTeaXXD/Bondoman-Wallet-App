@@ -28,19 +28,34 @@ class TransactionAdapter(
         fun bind(transaction: Transaction) {
             binding.tvTransaksi.text = transaction.transaction_name
             binding.tvTransactionDate.text = transaction.transaction_date
-            binding.tvKategori.text = transaction.transaction_category
             binding.Location.text = transaction.transaction_location
-            binding.price.text = "Rp ${transaction.transaction_price}"
+            binding.Location.contentDescription = "View location of ${transaction.transaction_name}"
+            if (transaction.transaction_category == "Income") {
+                binding.price.text = "+ Rp ${transaction.transaction_price}"
+            } else {
+                binding.price.text = "- Rp ${transaction.transaction_price}"
+            }
+            binding.price.setTextColor(
+                if (transaction.transaction_category == "Income") {
+                    activity.getColor(android.R.color.holo_green_light)
+                } else {
+                    activity.getColor(android.R.color.holo_red_light)
+                }
+            )
             binding.btnDelete.setOnClickListener {
                 val confirmationDialog = ConfirmationModal()
                 currentItemPosition = adapterPosition
                 confirmationDialog.setConfirmationDialogListener(this@TransactionAdapter)
                 confirmationDialog.show(fragmentManager, "ConfirmationDialog")
             }
+            binding.btnDelete.contentDescription = "Delete ${transaction.transaction_name}"
             itemView.setOnClickListener {
                 onItemClick(transaction.transaction_id ?: 0)
             }
-            binding.Location.setOnClickListener {
+            binding.Location.contentDescription = "View location of ${transaction.transaction_name}"
+            binding.locationSymbol.contentDescription =
+                "View location symbol of ${transaction.transaction_name}"
+            binding.locationSymbol.setOnClickListener {
                 val gmmIntentUri =
                     Uri.parse("geo:0,0?q=${transaction.transaction_latitude},${transaction.transaction_longitude}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)

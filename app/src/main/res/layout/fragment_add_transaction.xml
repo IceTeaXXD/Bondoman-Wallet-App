@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/glow_effect">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,9 +13,9 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="100dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginBottom="100dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,16 +35,18 @@
                     android:id="@+id/titleLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp"
                         android:layout_marginTop="100dp"
                         android:hint="@string/title_name"
                         android:inputType="text"
+                        android:minHeight="48dp"
                         android:padding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,17 +56,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black"
                     app:layout_constraintTop_toBottomOf="@+id/titleLayout">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNominal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp"
                         android:layout_marginTop="60dp"
                         android:ems="10"
                         android:hint="@string/nominal"
                         android:inputType="number"
+                        android:minHeight="48dp"
                         android:padding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,13 +76,13 @@
                     android:id="@+id/etKategori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/spinnerborder"
                     android:ems="10"
                     android:fontFamily="@font/syne_regular"
                     android:hint="@string/kategori"
                     android:inputType="text"
+                    android:minHeight="48dp"
                     android:padding="10dp"
                     android:spinnerMode="dropdown" />
 
@@ -85,18 +90,20 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
                     android:minHeight="48dp"
-                    android:layout_marginTop="30dp">
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLokasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp"
                         android:layout_marginTop="20dp"
                         android:ems="10"
                         android:hint="@string/location_name"
                         android:inputType="text"
+                        android:minHeight="48dp"
                         android:padding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
