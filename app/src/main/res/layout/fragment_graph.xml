@@ -1,0 +1,62 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/glow_effect">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingTop="70dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="64dp"
+            tools:context=".ui.graph.GraphFragment"
+            tools:ignore="MissingClass">
+
+            <TextView
+                android:id="@+id/donutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/syne_bold"
+                android:text="@string/donut_chart"
+                android:textSize="20sp"
+                android:textColor="@color/neon_yellow"
+                app:layout_constraintBottom_toTopOf="@+id/donutChart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="300dp"
+                android:layout_height="300dp"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/etKategori"
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/white"
+                android:ems="10"
+                android:fontFamily="@font/syne_regular"
+                android:hint="@string/kategori"
+                android:inputType="text"
+                android:paddingVertical="15dp"
+                android:spinnerMode="dropdown"
+                android:layout_marginBottom="10dp"
+                />
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_marginBottom="50dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

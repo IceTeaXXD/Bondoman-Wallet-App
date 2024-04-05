@@ -3,4 +3,50 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_transactions">Transactions</string>
+    <string name="title_scan">Scan</string>
+    <string name="title_graph">Graph</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_twibbon">Twibbon</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="donut_chart">Donut Chart</string>
+    <string name="barchart">barChart</string>
+    <string name="income">income</string>
+    <string-array name="income_outcome_options">
+        <item>Income</item>
+        <item>Outcome</item>
+    </string-array>
+    <!--  LOGIN   -->
+    <string name="welcome">Sugeng Rawuh</string>
+    <string name="login">Login</string>
+    <string name="login_alert">Please login to your account</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
+    <string name="invalid_credentials">Invalid credentials. Please try again.</string>
+    <string name="camera_btn">Camera</string>
+    <string name="media_btn">Media</string>
+    <string name="placeholder">placeholder</string>
+    <string name="login_name">Mlebet</string>
+    <string name="kategori">Kategori</string>
+    <string name="nominal">Nominal</string>
+    <string name="total">Total</string>
+    <string name="qty">qty</string>
+    <string name="location_name">Location</string>
+    <string name="title_name">Judul</string>
+    <string name="save_name">Save</string>
+    <string name="simpan_transaksi">Simpan Transaksi</string>
+    <string name="kirim_transaksi">Kirim Transaksi</string>
+    <string name="metu">metu</string>
+    <string name="capture_btn_take">Take</string>
+    <string name="connection_lost">Connection Lost</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="randomize_transaction">Randomize Transaction</string>
+    <string name="currency">Rp</string>
+    <string name="add_transaction_button">Add Transaction</string>
+    <string name="switch_camera_button">Switch Camera</string>
+    <string name="twibbon_image">Twibbon Image</string>
+    <string name="floating_add_transaction_button">Floating Add Transaction</string>
+    <string name="delete_button">Delete Button</string>
+    <string name="location_symbol">Location Symbol</string>
+    <string name="update_location">Update Location</string>
 </resources>

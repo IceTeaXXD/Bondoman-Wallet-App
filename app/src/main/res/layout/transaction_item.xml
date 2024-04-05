@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/rounded_item_transaction"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTransactionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="dd/mm/yyyy"
+        android:textColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|center_vertical"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/delete_button"
+        android:src="@drawable/ic_trash" />
+
+    <TextView
+        android:id="@+id/tvTransaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/syne_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/neon_yellow"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/nominal"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/locationSymbol"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/btnDelete"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/location_symbol"
+        android:src="@drawable/ic_map_marker2" />
+
+    <TextView
+        android:id="@+id/Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/locationSymbol"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/locationSymbol"
+        android:text="@string/location_name"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:ellipsize="none"
+        android:singleLine="false"
+        android:textAlignment="textEnd"
+        />
+
+</RelativeLayout>
+
+

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.scan.ScanFragment">
+
+        <include
+            android:id="@+id/noNetwork"
+            layout="@layout/no_network_layout"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"/>
+
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:elevation="1dp"
+            android:layout_marginBottom="110dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="0dp" />
+
+            <ImageButton
+                android:id="@+id/upload_button"
+                android:visibility="gone"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/media_btn"
+                android:src="@drawable/ic_upload"
+                android:elevation="1dp"
+                app:tint="@color/black" />
+
+            <ImageButton
+                android:id="@+id/switch_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/switch_camera_button"
+                android:src="@drawable/ic_camera_switch"
+                android:elevation="1dp"
+                app:tint="@color/black" />
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="0dp" />
+
+            <ImageButton
+                android:id="@+id/camera_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/camera_btn"
+                android:src="@drawable/ic_camera"
+                android:elevation="1dp"
+                app:tint="@color/black" />
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="0dp" />
+
+            <ImageButton
+                android:id="@+id/media_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_item_camera"
+                android:contentDescription="@string/media_btn"
+                android:src="@drawable/ic_media"
+                android:elevation="1dp"
+                app:tint="@color/black" />
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/cameraView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Placeholder"
+            android:elevation="0.5dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
