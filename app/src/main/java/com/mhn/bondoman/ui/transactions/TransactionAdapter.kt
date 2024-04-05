@@ -52,7 +52,6 @@ class TransactionAdapter(
             itemView.setOnClickListener {
                 onItemClick(transaction.transaction_id ?: 0)
             }
-            binding.Location.contentDescription = "View location of ${transaction.transaction_name}"
             binding.locationSymbol.contentDescription =
                 "View location symbol of ${transaction.transaction_name}"
             binding.locationSymbol.setOnClickListener {

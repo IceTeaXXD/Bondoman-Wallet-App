@@ -75,20 +75,27 @@ class LocationAdapter(private val activity: Activity) {
 
     private fun requestLocation() {
         if(checkLocationPermission()) {
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                5000,
-                10f,
-                locationListener
-            )
-        }else{
-            // Default Coordinates
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    5000,
+                    10f,
+                    locationListener
+                )
+            } else {
+                // Default Coordinates when location is turned off
+                locationListenerCallback?.invoke(Location("").also {
+                    it.latitude = -6.89122
+                    it.longitude = 107.61114
+                })
+            }
+        } else {
+            // Default Coordinates when permission is not granted
             locationListenerCallback?.invoke(Location("").also {
                 it.latitude = -6.89122
                 it.longitude = 107.61114
             })
         }
-
     }
 
     fun getLocation(callback: (Location) -> Unit) {
