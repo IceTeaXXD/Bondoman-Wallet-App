@@ -171,6 +171,7 @@ Perbaikan dari login sudah memberikan no suggestion dengan tampilan layar yang d
     <img src="./docs/login.png" width="32%" style="max-width:100%;" />
     <img src="./docs/login_ns.png" width="32%" style="max-width:100%;" />
 </div>
+
 ### Suggestion Add Transaction
 Dipermasalahkan ukuran input yang statik dari teks dan elemen.
 Perbaikan dari Add Transaction sudah memberikan no suggestion selain pada elemen Google Maps yang tidak bisa diganti. Tampilan layar yang diperbaiki sebagai berikut.
@@ -189,13 +190,15 @@ Perbaikan dari Scan Result sudah memberikan no suggestion dengan tampilan layar 
     <img src="./docs/scanresult.jpg" width="32%" style="max-width:100%;" />
     <img src="./docs/scanresult_ns.jpg" width="32%" style="max-width:100%;" />
 </div>
+
 ### Suggestion Update Transaction
 Dipermasalahkan touch size yang terlalu kecil untuk elemen yang ada dalam layar. Perbaikan dari Update Transaction sudah memberikan no suggestion selain pada elemen Google Maps yang tidak bisa diganti. Tampilan layar yang diperbaiki sebagai berikut.
 <div align="center" style="display: flex; justify-content: center;">
     <img src="./docs/updateacc.png" width="32%" style="max-width:100%;" />
     <img src="./docs/updateTransaction.png" width="32%" style="max-width:100%;" />
     <img src="./docs/updateTransaction_ns.png" width="32%" style="max-width:100%;" />
-</div>>
+</div>
+
 ### Suggestion Graph
 Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama. Perbaikan dari Graph sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
@@ -204,6 +207,7 @@ Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang b
     <img src="./docs/graph.jpg" width="32%" style="max-width:100%;" />
     <img src="./docs/graph_ns.jpg" width="32%" style="max-width:100%;" />
 </div>
+
 ### Suggestion Scan
 Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang berbeda dan id yang sama. Terdapat juga masalah kontras pada judul layar. Perbaikan dari Scan  sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
@@ -212,6 +216,7 @@ Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang b
     <img src="./docs/scan.jpg" width="32%" style="max-width:100%;" />
     <img src="./docs/scan_ns.jpg" width="32%" style="max-width:100%;" />
 </div>
+
 ### Suggestion Twibbon
 Dipermasalahkan elemen yang ukurannya statik, kontras warna, dan id elemen yang sama untuk beberapa elemen lainnya. Perbaikan dari Twibbon sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
@@ -219,7 +224,8 @@ Dipermasalahkan elemen yang ukurannya statik, kontras warna, dan id elemen yang 
     <img src="./docs/twibbonacc.png" width="32%" style="max-width:100%;" />
     <img src="./docs/twibbon.jpg" width="32%" style="max-width:100%;" />
     <img src="./docs/twibbon_ns.jpg" width="32%" style="max-width:100%;" />
-</div>>
+</div>
+
 ### Suggestion Setting
 Pada umumnya dipermasalahkan elemen yang ukurannya statik sehingga tidak dapat dilakukan scaling pada layar dengan ukuran yang bermacam-macam. Perbaikan dari Setting sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
@@ -228,6 +234,7 @@ Pada umumnya dipermasalahkan elemen yang ukurannya statik sehingga tidak dapat d
     <img src="./docs/setting.jpg" width="32%" style="max-width:100%;" />
     <img src="./docs/setting_ns.jpg" width="32%" style="max-width:100%;" />
 </div>
+
 ### Suggestion Transaction
 Dipermasalahkan ukuran touch target, tidak adanya alt-text pada tombol delete, value yang sama untuk beberapa elemen lainnya, dan kontras warna. Perbaikan dari Transaction sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
 
