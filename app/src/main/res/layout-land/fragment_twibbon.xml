@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Twibbon Image Description"
-                android:src="@drawable/jason" />
+                android:src="@drawable/povrorojongrang" />
         </androidx.camera.view.PreviewView>
 
         <Button
