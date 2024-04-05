@@ -166,6 +166,11 @@ Sebagian besar mempermasalahkan text contrast dari elemen-elemen yang ada pada h
 
 <img src="./docs/loginacc.png" width="50%" height="50%">
 
+### Perbaikan Login
+Perbaikan dari login sudah memberikan no suggestion dengan tampilan layar yang diperbaiki sebagai berikut
+
+<img src="./docs/loginpage.png" width="50%" height="50%"> 
+
 ### Suggestion Add Transaction
 Dipermasalahkan ukuran input yang statik dari teks dan elemen.
 
@@ -192,6 +197,11 @@ Dipermasalahkan ukuran yang statik sehingga tidak bisa discale pada layar yang b
 
 <img src="./docs/scanacc.png" width="50%" height="50%">
 
+### Perbaikan Scan
+Diperbaiki halaman hingga tidak ada suggestion sebagai berikut
+
+<img src="./docs/scanfix.jpg" width="50%" height="50%">
+
 ### Suggestion Twibbon
 Dipermasalahkan elemen yang ukurannya statik, kontras warna, dan id elemen yang sama untuk beberapa elemen lainnya.
 
@@ -202,10 +212,19 @@ Pada umumnya dipermasalahkan elemen yang ukurannya statik sehingga tidak dapat d
 
 <img src="./docs/settingacc.png" width="50%" height="50%">
 
+### Perbaikan Setting
+Diperbaiki halaman setting hingga tidak ada suggestion
+
+<img src="./docs/settingfix.jpg" width="50%" height="50%">
+
 ### Suggestion Transaction
 Dipermasalahkan ukuran touch target, tidak adanya alt-text pada tombol delete, value yang sama untuk beberapa elemen lainnya, dan kontras warna.
 
 <img src="./docs/tranacc.png" width="50%" height="50%">
+
+### Perbaikan Transaction
+Diperbaiki halaman transaction hingga tidak ada suggestion
+
 
 ## Alokasi Waktu
 | NIM | Waktu Persiapan (Jam) | Waktu Pengerjaan (Jam) |
