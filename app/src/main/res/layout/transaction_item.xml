@@ -23,7 +23,8 @@
         android:layout_gravity="end|center_vertical"
         android:layout_alignParentEnd="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_trash" />
+        android:src="@drawable/ic_trash"
+        android:contentDescription="@string/delete_button"/>
 
     <TextView
         android:id="@+id/tvKategori"
@@ -64,14 +65,15 @@
         android:src="@drawable/ic_map_marker"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/price"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/location_symbol" />
 
     <TextView
         android:id="@+id/Location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/locationSymbol"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_toStartOf="@+id/locationSymbol"
         android:text="@string/location_name"
         android:textColor="@color/white" />

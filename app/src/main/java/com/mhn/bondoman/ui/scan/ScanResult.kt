@@ -43,7 +43,6 @@ class ScanResult : Fragment() {
 
         gpsService = LocationAdapter.getInstance(requireActivity())
         getLocation()
-        val recyclerView = binding.rvScanResponse
         viewModel.scanResultData.observe(viewLifecycleOwner, Observer {resultData ->
             resultData.let {
                 it.items.let {

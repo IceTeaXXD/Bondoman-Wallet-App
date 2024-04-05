@@ -40,6 +40,7 @@
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="100dp"
                         android:hint="@string/title_name"
                         android:inputType="text"
@@ -58,6 +59,7 @@
                         android:id="@+id/etNominal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="60dp"
                         android:ems="10"
                         android:hint="@string/nominal"
@@ -68,7 +70,8 @@
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/etKategori"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/spinnerborder"
                     android:ems="10"
@@ -82,12 +85,14 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="48dp"
                     android:layout_marginTop="30dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLokasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="20dp"
                         android:ems="10"
                         android:hint="@string/location_name"

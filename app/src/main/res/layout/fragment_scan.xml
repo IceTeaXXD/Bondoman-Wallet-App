@@ -50,7 +50,7 @@
                 android:layout_height="64dp"
                 android:backgroundTint="@color/white"
                 android:background="@drawable/rounded_item_camera"
-                android:contentDescription="@string/media_btn"
+                android:contentDescription="@string/switch_camera_button"
                 android:src="@drawable/ic_camera_switch"
                 android:elevation="1dp"
                 app:tint="@color/black" />

@@ -39,6 +39,7 @@
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="100dp"
                         android:ems="10"
                         android:hint="@string/title_name"
@@ -51,6 +52,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="48dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/titleLayout">
 
@@ -58,6 +60,7 @@
                         android:id="@+id/etNominal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="60dp"
                         android:ems="10"
                         android:hint="@string/nominal"
@@ -69,12 +72,14 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="48dp"
                     android:layout_marginTop="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLokasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginTop="20dp"
                         android:ems="10"
                         android:hint="@string/location_name"

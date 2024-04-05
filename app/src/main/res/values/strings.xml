@@ -46,4 +46,7 @@
     <string name="switch_camera_button">Switch Camera</string>
     <string name="twibbon_image">Twibbon Image</string>
     <string name="floating_add_transaction_button">Floating Add Transaction</string>
+    <string name="delete_button">Delete Button</string>
+    <string name="location_symbol">Location Symbol</string>
+    <string name="update_location">Update Location</string>
 </resources>

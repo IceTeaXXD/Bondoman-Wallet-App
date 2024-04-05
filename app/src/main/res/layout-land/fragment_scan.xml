@@ -45,7 +45,7 @@
                 android:layout_height="64dp"
                 android:background="@drawable/rounded_item_camera"
                 android:backgroundTint="@color/white"
-                android:contentDescription="@string/media_btn"
+                android:contentDescription="@string/switch_camera_button"
                 android:elevation="1dp"
                 android:src="@drawable/ic_camera_switch"
                 app:tint="@color/black" />
@@ -89,7 +89,7 @@
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.camera.view.PreviewView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
